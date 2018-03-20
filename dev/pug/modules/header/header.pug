@@ -1,0 +1,72 @@
+mixin header(name)
+  - name = name || ''
+  header(class="header " + name, id="head")
+    .header__img 
+      img(src="img/general/head_phone.png", alt="image")
+    .header__top-line
+      a.logo(href="#") ПРО
+        span.logo__accent ДОМОФОН
+      +menuHover()
+    
+    .header__content
+      .header__part
+        h1.heading Умный домофон в каждый дом
+        .header__subtitle Мы активно внедряем и сопровождаем системы контроля доступа в многоквартирных домах.
+        .header__btn-wrap
+          a.btn.btn--def.btn--alert(href="#") Как пользоваться
+          a(href="#").action-link Оплатить онлайн
+
+
+mixin header_min(name)
+  - name = name || ''
+  header(class="header header--auto " + name, id="head")
+    .header__top-line
+      a.logo(href="#") ПРО
+        span.logo__accent ДОМОФОН
+      +menuHover()
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//- 

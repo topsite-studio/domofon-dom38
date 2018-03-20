@@ -1,0 +1,91 @@
+extends ../layout/main
+
+block head 
+  - var title = 'Главная'
+  - var bodyClass = ''
+block content  
+  +header()
+
+  section.advantages
+    .container
+      .row
+        .col
+          h2.subheading Наши преимущества
+      .advantages__item
+        .advantages__item-img
+          img(src="img/content/advant_1.png", alt="image")
+        .advantages__item-desc
+          h3.subheading-level-three Стараемся услышать каждого
+          p.advantages__item-content Профессиональный контактный центр принимает ежедневно звонки населения по вопросам эксплуатации автоматически <span class="tooltips" data-tooltips="<b>Автоматически Запирающие Устройства</b> — комплект оборудования, расположенный на подъездных дверях многоквартирного дома (доводчик, кнопка выхода, магнитный замок, блоки электроники, блоки питания, блок вызова и пр.).">АЗУ</span>, а так же заявки на выполнение ремонтных работ.
+      .advantages__item
+        .advantages__item-img
+          img(src="img/content/advant_2.png", alt="image")
+        .advantages__item-desc
+          h3.subheading-level-three Заботимся об экономии Вашего времени
+          p.advantages__item-content  Договора на техническое обслуживание <span class="tooltips" data-tooltips="<b>Автоматически Запирающие Устройства2</b> — комплект оборудования, расположенный на подъездных дверях многоквартирного .">АЗУ</span> производится в дистанционном режиме. Отсутствие необходимости посещения нашего офиса по любым вопросам экономит массу времени наших <span class="tooltips" data-tooltips="<b>Профессиональный контактный центр принимает ежедневно звонки</b> Профессиональный контактный центр принимает ежедневно звонки">клиентов</span>.
+
+      .advantages__item
+        .advantages__item-img
+          img(src="img/content/advant_3.png", alt="image")
+        .advantages__item-desc
+          h3.subheading-level-three Заняты хлопотами по новой квартире
+          p.advantages__item-content  Договора на техническое обслуживание <span class="tooltips" data-tooltips="<b>Автоматически Запирающие Устройства2</b> — комплект оборудования, расположенный на подъездных дверях многоквартирного .">АЗУ</span> производится в дистанционном режиме. Отсутствие необходимости посещения нашего офиса по любым вопросам экономит массу времени наших <span class="tooltips" data-tooltips="<b>Профессиональный контактный центр принимает ежедневно звонки</b> Профессиональный контактный центр принимает ежедневно звонки">клиентов</span>.
+      .advantages__item
+        .advantages__item-img
+          img(src="img/content/advant_4.png", alt="image")
+        .advantages__item-desc
+          h3.subheading-level-three Мы позаботились о местах продажи
+          p.advantages__item-content  Договора на техническое обслуживание <span class="tooltips" data-tooltips="<b>Автоматически Запирающие Устройства2</b> — комплект оборудования, расположенный на подъездных дверях многоквартирного .">АЗУ</span> производится в дистанционном режиме. Отсутствие необходимости посещения нашего офиса по любым вопросам экономит массу времени наших <span class="tooltips" data-tooltips="<b>Профессиональный контактный центр принимает ежедневно звонки</b> Профессиональный контактный центр принимает ежедневно звонки">клиентов</span>.
+      .advantages__item
+        .advantages__item-img
+          img(src="img/content/advant_5.png", alt="image")
+        .advantages__item-desc
+          h3.subheading-level-three Современные способы оплаты
+          p.advantages__item-content Услуг позволят максимально быстро и надежно оплатить услуги нашей компании.
+
+      .advantages__item
+        .advantages__item-img
+          img(src="img/content/advant_6.png", alt="image")
+        .advantages__item-desc
+          .advantages__item-head
+            h3.subheading-level-three Удобное управление лицевым счетом 
+            a(href="#").btn.btn--sm
+              +svg('download') 
+              | Скачать приложение
+          p.advantages__item-content Изменять список услуг, список номеров телефонов членов семьи, контроль баланса лицевого счета и расходы с него из личного кабинета на сайте, распространенных<span class="tooltips" data-tooltips="<b>Изменять список услуг</b>, список номеров телефонов членов семьи, контроль баланса лицевого счета и расходы с"> месенджеров</span>  или <span class="tooltips" data-tooltips="<b>Изменять список услуг</b>, список номеров телефонов членов семьи, контроль баланса лицевого счета и расходы с"> мобильном приложении.</span>
+      
+
+      .advantages__item
+        .advantages__item-img
+          img(src="img/content/advant_7.png", alt="image")
+        .advantages__item-desc
+          h3.subheading-level-three Дистанционно управлять доступом в подъезд
+          p.advantages__item-content Cобственные микроконтроллерные разработки позволяют использовать для этого привычные смартфоны. Телефонным звонком на номер <a class="advantages__item-link" href="tel:79500532966">+79500532966</a>, Кнопкой "Open" из Telegram, или <span class="tooltips" data-tooltips="<b>Cобственные микроконтроллерные</b>разработки позволяют использовать для этого привычные смартфоны.">Android-приложением</span> можно открыть подъездную дверь находясь на значительно от нее расстоянии.
+
+      .advantages__item
+        .advantages__item-img
+          img(src="img/content/advant_8.png", alt="image")
+        .advantages__item-desc
+          .advantages__item-head
+            h3.subheading-level-three Использование смартфона в качестве ключа 
+            a(href="#").btn.btn--sm
+              +svg('download') 
+              | Скачать приложение
+          p.advantages__item-content Изменять список услуг, список номеров телефонов членов семьи, контроль баланса лицевого счета и расходы с него из личного кабинета на сайте, распространенных <span class="tooltips" data-tooltips="<b>Изменять список услуг</b>, список номеров телефонов членов семьи, контроль баланса лицевого счета и расходы с"> месенджеров</span>  или <span class="tooltips" data-tooltips="<b>Изменять список услуг</b>, список номеров телефонов членов семьи, контроль баланса лицевого счета и расходы с"> мобильном приложении.</span>
+      .advantages__item
+        .advantages__item-img
+          img(src="img/content/advant_9.png", alt="image")
+        .advantages__item-desc
+          .advantages__item-head
+            h3.subheading-level-three Погодоведомое оборудование
+            a(href="#").btn.btn--sm
+              +svg('download') 
+              | Скачать приложение
+          p.advantages__item-content Инновационные доработки дверных доводчиков позволяют им одинаково комфортно  <span class="tooltips" data-tooltips="<b>Изменять список услуг</b>, список номеров телефонов членов семьи, контроль баланса лицевого счета и расходы с">работать</span> в любом температурном диапазоне.
+
+      
+
+
+
+
+

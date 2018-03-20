@@ -1,0 +1,54 @@
+mixin form_default(formClass,formId)
+  - formClass = formClass || ''
+  - formId = formId || ''
+  form(class='form ' + formClass, id=''+formId, action='#', enctype='multipart/form-data')
+    // Hidden Required Fields
+    input(name='form_subject', value='' + formTitle, type='hidden')
+    // END Hidden Required Fields
+    .form__title 
+    .form__subtitle 
+    ul.form__list
+      li.form__item
+        input(type='text', required='', name='name', placeholder='name')
+      li.form__item
+        input(type='email', required='', name='mail', placeholder='mail')
+      li.form__item
+        input(type='tel', required='', name='phone', placeholder='phone')
+      li.form__item
+        input(type="file", name="userfile[]", multiple)
+      li.form__item.form__item--btn
+        button(type='submit').btn Send
+          span.form-load
+            svg.lds-spinner(width='200px', height='200px', xmlns='http://www.w3.org/2000/svg', xmlns:xlink='http://www.w3.org/1999/xlink', viewbox='0 0 100 100', preserveaspectratio='xMidYMid', style='background: rgba(0, 0, 0, 0) none repeat scroll 0% 0%;')
+              g(transform='rotate(0 50 50)')
+                rect(x='47', y='4.5', rx='30.080000000000002', ry='2.88', width='6', height='23', fill='')
+                animate(attributename='opacity', values='1;0', times='0;1', dur='1s', begin='-0.9s', repeatcount='indefinite')
+              g(transform='rotate(36 50 50)')
+                rect(x='47', y='4.5', rx='30.080000000000002', ry='2.88', width='6', height='23', fill='')
+                animate(attributename='opacity', values='1;0', times='0;1', dur='1s', begin='-0.8s', repeatcount='indefinite')
+              g(transform='rotate(72 50 50)')
+                rect(x='47', y='4.5', rx='30.080000000000002', ry='2.88', width='6', height='23', fill='')
+                animate(attributename='opacity', values='1;0', times='0;1', dur='1s', begin='-0.7s', repeatcount='indefinite')
+              g(transform='rotate(108 50 50)')
+                rect(x='47', y='4.5', rx='30.080000000000002', ry='2.88', width='6', height='23', fill='')
+                animate(attributename='opacity', values='1;0', times='0;1', dur='1s', begin='-0.6s', repeatcount='indefinite')
+              g(transform='rotate(144 50 50)')
+                rect(x='47', y='4.5', rx='30.080000000000002', ry='2.88', width='6', height='23', fill='')
+                animate(attributename='opacity', values='1;0', times='0;1', dur='1s', begin='-0.5s', repeatcount='indefinite')
+              g(transform='rotate(180 50 50)')
+                rect(x='47', y='4.5', rx='30.080000000000002', ry='2.88', width='6', height='23', fill='')
+                animate(attributename='opacity', values='1;0', times='0;1', dur='1s', begin='-0.4s', repeatcount='indefinite')
+              g(transform='rotate(216 50 50)')
+                rect(x='47', y='4.5', rx='30.080000000000002', ry='2.88', width='6', height='23', fill='')
+                animate(attributename='opacity', values='1;0', times='0;1', dur='1s', begin='-0.3s', repeatcount='indefinite')
+              g(transform='rotate(252 50 50)')
+                rect(x='47', y='4.5', rx='30.080000000000002', ry='2.88', width='6', height='23', fill='')
+                animate(attributename='opacity', values='1;0', times='0;1', dur='1s', begin='-0.2s', repeatcount='indefinite')
+              g(transform='rotate(288 50 50)')
+                rect(x='47', y='4.5', rx='30.080000000000002', ry='2.88', width='6', height='23', fill='')
+                animate(attributename='opacity', values='1;0', times='0;1', dur='1s', begin='-0.1s', repeatcount='indefinite')
+              g(transform='rotate(324 50 50)')
+                rect(x='47', y='4.5', rx='30.080000000000002', ry='2.88', width='6', height='23', fill='')
+                animate(attributename='opacity', values='1;0', times='0;1', dur='1s', begin='0s', repeatcount='indefinite')
+
+    .form__police

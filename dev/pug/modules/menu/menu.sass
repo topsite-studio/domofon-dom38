@@ -1,0 +1,142 @@
+/* menu style */
+.header__list-open
+  position: relative
+  display: none
+.header__nav-wrap
+  width: 100%
+  padding-left: 70px
+  +lg-block()
+    text-align: right
+.header__list
+  display: flex
+  // background: #000
+.header__list-item
+  position: relative
+
+.header__list-sublist-wrap
+  position: absolute
+  top: 100%
+  left: 0
+  z-index: 10
+  display: none
+
+.header__list-open-submenu
+  display: none
+  +size(20)
+  cursor: pointer
+.header__list-open-svg
+  width: 100%
+  height: 100%
+  transition: all 0.40s
+.header__list-open-submenu--open
+  .header__list-open-svg
+    transform: rotate(180deg)
+
+.hamburger
+  display: flex
+  padding: 0
+.hamburger-box
+  width: 40px
+.hamburger-inner, .hamburger-inner::after, .hamburger-inner::before
+  width: 100%
+  height: 4px //def value
+  margin-top: 0
+  background-color: #fff
+  border-radius: 4px //def value
+
+
+.header__list-link
+  display: block
+  padding-left: 15px
+  padding-right: 15px
+  // background: #000
+.header__list-item--user
+  font-weight: 700
+  +lg-block()
+    width: 50%
+    float: left
+  +sm-block()
+    width: 100%
+    float: none
+  .svg
+    +size(14)
+    margin-right: 8px
+    fill: #fff
+    transition: $tr
+  &:hover
+    .svg
+      fill: #b32121
+.item-user__content
+  display: flex
+  align-items: center
+  border-bottom: 1px dashed rgba(255, 255, 255, 0.4)
+  +sm-block()
+    display: inline-flex
+.header__list-item--cust
+  margin-left: auto
+  padding-right: 25px
+  +lg-block()
+    padding-right: 0
+.header__list-item--active
+  .header__list-link
+    color: #3293d4
+    border-radius: 10px
+    background: #fff
+
+
+/*===============================================
+  ============= menu click style ================
+  =============================================*/
+
+
+
+
+/*===============================================
+  ============= menu hover style ================
+  =============================================*/
+.header__list-item
+  &:hover
+    .header__list-sublist-wrap
+      display: block
+
+.header__list
+  +lg-block()
+    padding: 0 10px
+    padding-bottom: 10px
+  +sm-block()
+    max-width: 100%
+
+
+@media only screen and (max-width : 1440px)
+  #openup
+    display: inline-flex
+    align-items: center
+    justify-content: flex-end
+  .header__list
+    display: none
+    position: absolute
+    top: 100%
+    right: 0
+    z-index: 10
+    text-align: right
+    max-width: 345px
+    width: 100%
+    background: #4758a5
+  /*===============================================
+    ============= menu hover style ================
+    =============================================*/
+  .header__list-item
+    // display: inline-flex
+    justify-content: space-between
+    align-items: center
+    //width: calc((100% / 4) - 4px)
+    &:hover
+      .header__list-sublist-wrap
+        display: none
+  .header__list-link
+    padding-top: 5px
+    padding-bottom: 5px
+    
+  .header__list-open-submenu
+    display: block
+/* 1100px end */

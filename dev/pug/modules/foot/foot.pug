@@ -1,0 +1,29 @@
+mixin foot()
+  footer.foot 
+    a.to-top(href="#head")
+      +svg('up-arrow')
+    .foot__content
+      .foot__item.foot__item--police 
+        | про домофон  © 2018
+        a(href="#").police-link Политика конфиденциальности
+      .foot__item.foot__item--media
+        a(href="#").media__link.media__link--vb
+          picture.media__link-image
+            source(srcset='img/general/vb_l.png', media='(max-width: 768px)')
+            source(srcset='img/general/vb.png')
+            img(src="img/general/vb.png", alt="image")
+
+          //- img(src="img/general/vb.png", alt="image").media__mobile-ico.media__mobile-ico--def
+          //- img(src="img/general/vb_l.png", alt="image").media__mobile-ico.media__mobile-ico--mob
+          span.media__mobile-title Бот Viber 
+        a(href="#").media__link.media__link--tg
+          picture.media__link-image
+            source(srcset='img/general/tg_l.png', media='(max-width: 768px)')
+            source(srcset='img/general/tg.png')
+            img(src="img/general/tg.png", alt="image")
+
+          //- img(src="img/general/tg.png", alt="image").media__mobile-ico.media__mobile-ico--def
+          //- img(src="img/general/tg_l.png", alt="image").media__mobile-ico.media__mobile-ico--mob
+          span.media__mobile-title Бот Telegram
+      .foot__item.foot__item--develop
+        a(href="#").develop__link: img(src="img/content/f_logo.png", alt="image").develop__logo

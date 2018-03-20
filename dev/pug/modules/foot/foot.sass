@@ -1,0 +1,158 @@
+/* foot style */ 
+.foot 
+  position: relative
+  margin-top: 100px
+  padding: 50px 0
+  color: #fff
+  background-color: #4758a5
+
+.foot__content
+  display: flex
+  align-items: center
+  justify-content: space-between
+  +md-block()
+    flex-direction: column
+    justify-content: center
+    text-align: center
+.foot__item 
+  margin: 0 50px
+  width: 33%
+  +md-block()
+    width: 100%
+    order: 2
+.foot__item--media
+  display: flex
+  justify-content: center
+  +md-block()
+    order: 1
+  +xs-block()
+    flex-wrap: wrap
+.media__mobile-title
+  display: none
+  +sm-block()
+    display: block
+    margin-left: 15px
+    color: #ffffff;
+    font-size: 18px;
+    font-weight: 500;
+    border-bottom: 1px dashed 
+.media__mobile-ico
+  flex-shrink: 0
+.media__link
+  margin: 5px
+  +sm-block()
+    display: flex
+    width: 50%
+    align-items: center
+    padding-left: 10%
+  +xs-block()
+    padding-left: 0
+    width: 100%
+    max-width: 225px
+
+// .media__mobile-ico--def
+  +sm-block()
+    display: none
+// .media__mobile-ico--mob
+  display: none
+  +sm-block()
+    display: block
+
+.foot__item--police 
+  color: #ffffff
+  font-size: 18px
+  line-height: 28px
+  text-transform: uppercase
+  +md-block()
+    order: 3
+    margin-top: 20px
+.police-link
+  display: block
+  color: #c0bebe
+  font-size: 14px
+  font-weight: 300
+  text-transform: none
+  border-bottom: 1px solid dashed
+
+
+
+.foot__item--develop
+  text-align: right
+  +md-block()
+    margin-top: 20px
+    text-align: center
+
+
+
+.to-top
+  position: absolute
+  top: -100px
+  right: 50px
+  +size(50)
+  cursor: pointer
+  border-radius: 50%
+  background: #4758a5
+  transition: $tr
+  box-shadow: 0 0 8px 0 rgba(0, 0, 0, 0.5)
+  user-select: none
+  .svg
+    +absolute-center()
+    +size(20)
+    fill: #fff
+
+  &:hover
+    background: darken(#4758a5, 10%)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

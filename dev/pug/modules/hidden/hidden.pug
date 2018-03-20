@@ -1,0 +1,15 @@
+mixin hidden()
+  .hidden
+    form(class='form form-popup' id="modal_pas" action='#', enctype='multipart/form-data')
+      // Hidden Required Fields
+      input(name='form_subject', value='Вход' + formTitle, type='hidden')
+      // END Hidden Required Fields
+      .form__title Получение пароля
+      .form__subtitle Введите номер телефона, указанный при регистрации, на этот номер будет отправлено смс с новым паролем
+      .form__item
+       label.form__label Телефон:
+          input(type='tel', name='phone', class="phone", placeholder='').form__input
+      .form__item.form__item--captcha  captcha here 
+
+      .form__item.form__item--btn
+        button(type='submit').btn.btn--lg.btn--alert Отправить

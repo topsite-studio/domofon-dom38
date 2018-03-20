@@ -1,0 +1,82 @@
+mixin menuClick()
+  nav.header__nav-wrap
+    a#openup.header__list-open(href='#')
+      | Меню
+      span.hamburger.hamburger--collapse
+        span.hamburger-box
+          span.hamburger-inner
+    ul.header__list
+      li.header__list-item
+        a.header__list-link(href="#")
+          | Menu item 1
+        .header__list-open-submenu
+          +svg('down','header__list-open-svg')
+        .header__list-sublist-wrap
+          ul.header__list-sublist
+            li.header-sublist__item
+              a.header-sublist__link(href='#') Submenu item 1
+            li.header-sublist__item
+              a.header-sublist__link(href='#') Submenu item 2
+      li.header__list-item
+        a.header__list-link(href='#')
+          | Menu item 2
+        .header__list-open-submenu
+          +svg('down','header__list-open-svg')
+        .header__list-sublist-wrap
+          ul.header__list-sublist
+            li.header-sublist__item
+              a.header-sublist__link(href='#') Submenu item 1
+            li.header-sublist__item
+              a.header-sublist__link(href='#') Submenu item 2
+            li.header-sublist__item
+              a.header-sublist__link(href='#') Submenu item 3
+      li.header__list-item
+        a.header__list-link(href='#')
+          | Menu item 3
+        .header__list-open-submenu
+          +svg('down','header__list-open-svg')
+        .header__list-sublist-wrap
+          ul.header__list-sublist
+            li.header-sublist__item
+              a.header-sublist__link(href='#') Submenu item 1
+            li.header-sublist__item
+              a.header-sublist__link(href='#') Submenu item 2
+            li.header-sublist__item
+              a.header-sublist__link(href='#') Submenu item 3
+            li.header-sublist__item
+              a.header-sublist__link(href='#') Submenu item 4
+      li.header__list-item
+        a.header__list-link(href='#') Menu item 4 
+ 
+
+mixin menuHover()
+  nav.header__nav-wrap
+    a#openup.header__list-open(href='#')
+      span.hamburger.hamburger--collapse
+        span.hamburger-box
+          span.hamburger-inner
+    ul.header__list
+      li.header__list-item
+        a.header__list-link(href="index.html") Главная
+      li.header__list-item.header__list-item--active
+        a.header__list-link(href='index2.html') Как пользоваться
+      li.header__list-item
+        a.header__list-link(href='index3.html') Вопрос-ответ 
+      li.header__list-item
+        a.header__list-link(href='index4.html') Пункты продажи ключей
+      li.header__list-item
+        a.header__list-link(href='index7.html') Где оплатить 
+      li.header__list-item
+        a.header__list-link(href='index2.html') О компании
+      li.header__list-item
+        a.header__list-link(href='index5.html') Контакты
+      li.header__list-item.header__list-item--user.header__list-item--cust
+        a.header__list-link(href='index6.html') 
+          span.item-user__content  
+            +svg('user')
+            | Вход   
+      li.header__list-item.header__list-item--user
+        a.header__list-link(href='index7.html') 
+          span.item-user__content 
+            +svg('mastercard')
+            | Оплатить

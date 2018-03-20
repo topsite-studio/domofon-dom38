@@ -1,0 +1,132 @@
+@import "mixin"
+//все шрифты подключаем по примеру
+
+// Thin/Hairline     - 100
+// Extra/Ultra Light - 200
+// Light             - 300
+// Normal/book       - 400
+// Medium            - 500
+// Semi/Demi Bold    - 600
+// Bold              - 700
+// Extra/Ultra Bold  - 800
+// Black/Heavy       - 900
+
+//to use font mixin
+// +font-face('myFont', '../font/path/', 400, normal, $asset-pipeline: false, $file-formats: eot ttf svg woff woff2)
+
+// знак рубля
+//&#8381;
+
+//знак стрелки ">"
+//&gt;
+
+// @font-face
+//   font-family: RobotoBold
+//   src: url(../font/RobotoBold.eot)
+//   src: url(../font/RobotoBold.ttf)
+//   src: url(../font/RobotoBold.wolf)
+
+//+font-face("Circe", "../font/circe/Circe-Light/Circe-Light", 300, $file-formats: eot woff ttf svg)
+//+font-face("Circe", "../font/circe/Circe-Regular/Circe-Regular", 400, $file-formats: eot woff ttf svg)
+//+font-face("Circe", "../font/circe/Circe-Bold/Circe-Bold", 700, $file-formats: eot woff ttf svg)
+
+//+font-face("Roboto Condensed", "../font/roboto-condensed/RobotoCondensed-Light", 300, $file-formats: eot woff ttf svg)
+//+font-face("Roboto Condensed", "../font/roboto-condensed/RobotoCondensed-Regular", 400, $file-formats: eot woff ttf svg)
+//+font-face("Roboto Condensed", "../font/roboto-condensed/RobotoCondensed-Bold", 700, $file-formats: eot woff ttf svg)
+
+//+font-face("slick", "../font/slick/slick", $file-formats: eot woff ttf svg)
+
+//+font-face('OpenSans', '../font/OpenSans/OpenSans-Light', 300, normal, $file-formats: eot woff woff2 ttf)
+//+font-face('OpenSans', '../font/OpenSans/OpenSans-Regular', 400, normal, $file-formats: eot woff woff2 ttf)
+//+font-face('OpenSans', '../font/OpenSans/OpenSans-SemiBold', 600, normal, $file-formats: eot woff woff2 ttf)
+//+font-face('OpenSans', '../font/OpenSans/OpenSans-Bold', 700, normal, $file-formats: eot woff woff2 ttf)
+//+font-face('OpenSans', '../font/OpenSans/OpenSans-ExtraBold', 800, normal, $file-formats: eot woff woff2 ttf)
+
+//+font-face("Exo 2.0", '../font/Exo_2/Exo2-ExtraLight', 200, normal, $file-formats: eot woff woff2 ttf)
+//+font-face("Exo 2.0", '../font/Exo_2/Exo2-Light', 300, normal, $file-formats: eot woff woff2 ttf)
+//+font-face("Exo 2.0", '../font/Exo_2/Exo2-Regular', 400, normal, $file-formats: eot woff woff2 ttf)
+//+font-face("Exo 2.0", '../font/Exo_2/Exo2-Medium', 500, normal, $file-formats: eot woff woff2 ttf)
+//+font-face("Exo 2.0", '../font/Exo_2/Exo2-SemiBold', 600, normal, $file-formats: eot woff woff2 ttf)
+//+font-face("Exo 2.0", '../font/Exo_2/Exo2-Bold', 700, normal, $file-formats: eot woff woff2 ttf)
+//+font-face("Exo 2.0", '../font/Exo_2/Exo2-Black', 900, normal, $file-formats: eot woff woff2 ttf)
+
+// +font-face("Gilroy", '../font/Gilroy/Gilroy-Light', 300, normal, $file-formats: eot woff woff2 ttf)
+// +font-face("Gilroy", '../font/Gilroy/Gilroy-ExtraBold', 800, normal, $file-formats: eot woff woff2 ttf)
+
+// +font-face("Avenir Next Cyr - Heavy", '../font/AvenirNextCyr/AvenirNextCyr-Heavy', 900, normal, $file-formats: eot woff woff2 ttf)
+
+//+font-face("Roboto", '../font/Roboto/Roboto-Thin', 100, normal, $file-formats: eot woff woff2 ttf)
+//+font-face("Roboto", '../font/Roboto/Roboto-ThinItalic', 100, italic, $file-formats: eot woff woff2 ttf)
++font-face("Roboto", '../font/Roboto/Roboto-Light', 300, normal, $file-formats: eot woff woff2 ttf)
++font-face("Roboto", '../font/Roboto/Roboto-LightItalic', 300, italic, $file-formats: eot woff woff2 ttf)
++font-face("Roboto", '../font/Roboto/Roboto-Regular', 400, normal, $file-formats: eot woff woff2 ttf)
++font-face("Roboto", '../font/Roboto/Roboto-Italic', 400, italic, $file-formats: eot woff woff2 ttf)
++font-face("Roboto", '../font/Roboto/Roboto-Medium', 500, normal, $file-formats: eot woff woff2 ttf)
++font-face("Roboto", '../font/Roboto/Roboto-MediumItalic', 500, italic, $file-formats: eot woff woff2 ttf)
++font-face("Roboto", '../font/Roboto/Roboto-Bold', 700, normal, $file-formats: eot woff woff2 ttf)
++font-face("Roboto", '../font/Roboto/Roboto-BoldItalic', 700, italic, $file-formats: eot woff woff2 ttf)
+//+font-face("Roboto", '../font/Roboto/Roboto-Black', 900, normal, $file-formats: eot woff woff2 ttf)
+//+font-face("Roboto", '../font/Roboto/Roboto-BlackItalic', 900, italic, $file-formats: eot woff woff2 ttf)
+
+// +font-face("Georgia", '../font/Georgia/Georgia', 400, italic, $file-formats: eot woff woff2 ttf)
+
+//+font-face('HelveticaNeue', '../font/HelveticaNeue/HelveticaNeueLight', 300, normal, $file-formats: eot woff woff2 ttf)
+//+font-face('HelveticaNeue', '../font/HelveticaNeue/HelveticaNeue', 400, normal, $file-formats: eot woff woff2 ttf)
+//+font-face('HelveticaNeue', '../font/HelveticaNeue/HelveticaNeueBold', 700, normal, $file-formats: eot woff woff2 ttf)
+
+//+font-face('Museo Sans Cyrl', '../font/Museo-Sans-Cyr/MuseoSansCyrl-100', 100, normal, $file-formats: eot woff woff2 ttf)
+//+font-face('Museo Sans Cyrl', '../font/Museo-Sans-Cyr/MuseoSansCyrl-300', 300, normal, $file-formats: eot woff woff2 ttf)
+//+font-face('Museo Sans Cyrl', '../font/Museo-Sans-Cyr/MuseoSansCyrl-500', 500, normal, $file-formats: eot woff woff2 ttf)
+//+font-face('Museo Sans Cyrl', '../font/Museo-Sans-Cyr/MuseoSansCyrl-700', 700, normal, $file-formats: eot woff woff2 ttf)
+//+font-face('Museo Sans Cyrl', '../font/Museo-Sans-Cyr/MuseoSansCyrl-900', 900, normal, $file-formats: eot woff woff2 ttf)
+
+//+font-face('Geometria', '../font/Geometria/Geometria', 400, normal, $file-formats: eot woff woff2 ttf)
+//+font-face('Geometria', '../font/Geometria/Geometria-Medium', 500, normal, $file-formats: eot woff woff2 ttf)
+//+font-face('Geometria', '../font/Geometria/Geometria-Bold', 700, normal, $file-formats: eot woff woff2 ttf)
+//+font-face('Geometria', '../font/Geometria/Geometria-ExtraBold', 800, normal, $file-formats: eot woff woff2 ttf)
+
+//+font-face('Lora', '../font/Lora/lora-regular', 400, normal, $file-formats: eot woff woff2 ttf)
+//+font-face('Lora', '../font/Lora/lora-bold', 700, normal, $file-formats: eot woff woff2 ttf)
+
+//+font-face('Proxima Nova', '../font/ProximaNova/ProximaNova-Light', 300, normal, $file-formats: eot woff woff2 ttf)
+//+font-face('Proxima Nova', '../font/ProximaNova/ProximaNova-Regular', 400, normal, $file-formats: eot woff woff2 ttf)
+//+font-face('Proxima Nova', '../font/ProximaNova/ProximaNova-Bold', 700, normal, $file-formats: eot woff woff2 ttf)
+
+// +font-face('Cambria', '../font/Cambria/Cambria-Regular', 400, normal, $file-formats: eot woff woff2 ttf)
+// +font-face('Cambria', '../font/Cambria/Cambria-Bold', 700, normal, $file-formats: eot woff woff2 ttf)
+//
+// +font-face('FuturaPT', '../font/FuturaPT/FuturaPT-Light', 300, normal, $file-formats: eot woff woff2 ttf)
+// +font-face('FuturaPT', '../font/FuturaPT/FuturaPT-Book', 400, normal, $file-formats: eot woff woff2 ttf)
+// +font-face('FuturaPT', '../font/FuturaPT/FuturaPT-Medium', 500, normal, $file-formats: eot woff woff2 ttf)
+// +font-face('FuturaPT', '../font/FuturaPT/FuturaPT-Demi', 600, normal, $file-formats: eot woff woff2 ttf)
+// +font-face('FuturaPT', '../font/FuturaPT/FuturaPT-Bold', 700, normal, $file-formats: eot woff woff2 ttf)
+// +font-face('FuturaPT', '../font/FuturaPT/FuturaPT-ExtraBold', 800, normal, $file-formats: eot woff woff2 ttf)
+// +font-face('FuturaPT', '../font/FuturaPT/FuturaPT-Heavy', 900, normal, $file-formats: eot woff woff2 ttf)
+//
+// +font-face('FuturaPTCond', '../font/FuturaPT/FuturaPTCond-Book', 400, normal, $file-formats: eot woff woff2 ttf)
+// +font-face('FuturaPTCond', '../font/FuturaPT/FuturaPTCond-Medium', 500, normal, $file-formats: eot woff woff2 ttf)
+// +font-face('FuturaPTCond', '../font/FuturaPT/FuturaPTCond-Bold', 700, normal, $file-formats: eot woff woff2 ttf)
+// +font-face('FuturaPTCond', '../font/FuturaPT/FuturaPTCond-ExtraBold', 800, normal, $file-formats: eot woff woff2 ttf)
+//
+// +font-face('Lato', '../font/Lato/Lato-Thin', 100, normal, $file-formats: eot woff woff2 ttf)
+// +font-face('Lato', '../font/Lato/Lato-ThinItalic', 100, italic, $file-formats: eot woff woff2 ttf)
+// +font-face('Lato', '../font/Lato/Lato-Hairline', 200, normal, $file-formats: eot woff woff2 ttf)
+// +font-face('Lato', '../font/Lato/Lato-HairlineItalic', 200, italic, $file-formats: eot woff woff2 ttf)
+// +font-face('Lato', '../font/Lato/Lato-Light', 300, normal, $file-formats: eot woff woff2 ttf)
+// +font-face('Lato', '../font/Lato/Lato-LightItalic', 300, italic, $file-formats: eot woff woff2 ttf)
+// +font-face('Lato', '../font/Lato/Lato-Regular', 400, normal, $file-formats: eot woff woff2 ttf)
+// +font-face('Lato', '../font/Lato/Lato-Italic', 400, italic, $file-formats: eot woff woff2 ttf)
+// +font-face('Lato', '../font/Lato/Lato-Medium', 500, normal, $file-formats: eot woff woff2 ttf)
+// +font-face('Lato', '../font/Lato/Lato-MediumItalic', 500, italic, $file-formats: eot woff woff2 ttf)
+// +font-face('Lato', '../font/Lato/Lato-Semibold', 600, normal, $file-formats: eot woff woff2 ttf)
+// +font-face('Lato', '../font/Lato/Lato-SemiboldItalic', 600, italic, $file-formats: eot woff woff2 ttf)
+// +font-face('Lato', '../font/Lato/Lato-Bold', 700, normal, $file-formats: eot woff woff2 ttf)
+// +font-face('Lato', '../font/Lato/Lato-BoldItalic', 700, italic, $file-formats: eot woff woff2 ttf)
+// +font-face('Lato', '../font/Lato/Lato-Black', 800, normal, $file-formats: eot woff woff2 ttf)
+// +font-face('Lato', '../font/Lato/Lato-BlackItalic', 800, italic, $file-formats: eot woff woff2 ttf)
+// +font-face('Lato', '../font/Lato/Lato-Heavy', 900, normal, $file-formats: eot woff woff2 ttf)
+// +font-face('Lato', '../font/Lato/Lato-HeavyItalic', 900, italic, $file-formats: eot woff woff2 ttf)
+
+
+
+//

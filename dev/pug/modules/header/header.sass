@@ -1,0 +1,124 @@
+/* head style */ 
+ 
+.header
+  position: relative
+  z-index: 3
+  min-height: 500px
+  margin-bottom: 80px
+  +lgs-block()
+    background: url(../img/general/head_bg.jpg)
+    background-repeat: no-repeat
+    background-position: center top
+    background-size: cover
+  &::before,&::after
+    content: ''
+    position: absolute
+    top: 0
+    bottom: 0    
+    z-index: -1
+    +lgs-block()
+      display: none
+  &::before
+    left: 0
+    width: 100%
+    background: url(../img/general/head_bg.jpg)
+    background-repeat: no-repeat
+    background-position: left top
+    background-size: cover
+  &::after
+    right: 0
+    max-width: 345px
+    width: 100%
+    background: #4758a5
+    +sm-block()
+      max-width: 100%
+.header--auto
+  min-height: auto
+
+.header__img
+  position: absolute
+  right: 0
+  bottom: -62px
+  z-index: 3
+
+.header__top-line
+  position: relative
+  display: flex
+  align-items: center
+  padding: 40px 50px
+  color: $f
+  font-size: 14px
+  font-weight: 400
+  line-height: 28px
+  +lgs-block()
+    background: #4758a5
+  +sm-block()
+    padding-left: 15px
+    padding-right: 15px
+.logo
+  color: #ffffff
+  font-size: 19px
+  line-height: 1
+  font-weight: 300
+  text-transform: uppercase
+.logo__accent
+  display: block
+  font-weight: 700
+
+.header__content
+  margin-top: 100px
+  padding-bottom: 50px
+
+.header__subtitle
+  margin-top: 20px
+  color: #ffffff
+  font-size: 18px
+  font-weight: 300
+  line-height: 28px
+
+
+.header__list-link
+  transition: $tr
+
+.header__list-item
+  &:hover
+    color: #b32121
+
+
+
+.header__part
+  position: relative
+  z-index: 5
+  max-width: 713px
+  width: 100%
+  padding-left: 10%
+  +sm-block()
+    max-width: 100%
+    padding-left: 15px
+    padding-right: 15px
+
+
+
+.header__btn-wrap
+  display: flex
+  align-items: center
+  margin-top: 20px
+  +xxs-block()
+    flex-direction: column
+
+.action-link
+  margin-left: 20px
+  font-size: 14px
+  font-weight: 500
+  border-bottom: 1px dashed 
+  &:hover,&:focus
+    border-color: $blue
+  +xxs-block()
+    margin-left: 0
+    margin-top: 15px
+  color: #fff
+  &:hover,&:focus
+    color: #fff
+
+
+//

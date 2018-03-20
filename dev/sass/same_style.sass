@@ -1,0 +1,299 @@
+body
+  position: relative
+  min-width: 300px
+  font-family: $baseFontFamily
+  font-size: $baseFontSize+px
+  font-weight: 400
+  color: $baseColor
+  line-height: 1.2
+  //line-height: 1.2 //if line height "auto" in Photoshop
+
+*::placeholder
+  color: inherit
+  opacity: 1
+  transition: $tr
+*:focus::placeholder
+  opacity: 0
+*::selection
+  background-color: #3498db
+  color: #fff
+ 
+// body input:focus:required:invalid,
+// body textarea:focus:required:invalid
+//   color: #666
+// body input:required:valid,
+// body textarea:required:valid
+//   color: #666
+
+*
+  box-sizing: border-box
+  outline: none !important
+
+//.clearfix
+  *zoom: 1
+  &::before, &::after
+    content: ""
+    display: table
+  &::after
+    clear: both
+
+//.img-responsive
+  display: block
+  max-width: 100%
+  height: auto
+svg
+  display: inline-block
+img
+  max-width: 100%
+  height: auto
+br
+  line-height: 0
+  font-size: 0
+a, input, button
+  text-decoration: none
+  color: inherit
+  outline: none
+  border: none
+  box-sizing: border-box
+  background: transparent
+  user-select: none
+  &:hover
+    outline: none
+    color: inherit
+    text-decoration: none
+  &:focus
+    outline: none
+    color: inherit
+    text-decoration: none
+  &:active
+    outline: none
+    color: inherit
+    text-decoration: none
+input,textarea
+  border: 1px solid #000
+select
+  outline: none
+button
+  cursor: pointer
+label
+  cursor: pointer
+  user-select: none //запрещает выделения при клике
+  //&:active
+    //user-select: none //Подпись, выделяемая при клике извне
+
+textarea
+  resize: none //запрещает изменения размера мишью
+  outline: none
+ul
+  list-style-type: none
+  margin: 0
+  padding: 0
+h1,h2,h3,h4,h5,h6
+  margin: 0
+  font-weight: normal
+  line-height: 1
+.heading
+  color: #ffffff
+  font-size: 36px
+  font-weight: 700
+  line-height: 1
+.subheading
+  text-align: center
+  font-size: 28px
+  font-weight: 500 
+  line-height: 32px
+.subheading-level-three
+  font-size: 22px
+  font-weight: 700
+  
+.advantages__item-head
+  display: flex
+  align-items: center
+  align-items: flex-start
+  justify-content: flex-start
+  +sm-block()
+    justify-content: center
+  +smx-block()
+    flex-wrap: wrap
+
+.h4
+  font-size: 18px
+  font-weight: 700
+  line-height: 28px
+
+
+
+
+
+
+
+.hidden
+  display: none
+
+// фикс бага ?? с случайной анимацией перелистывания цифр
+//.flip-clock-wrapper ul.play li.flip-clock-active
+  animation: none
+
+.btn
+  display: inline-flex
+  justify-content: center
+  align-items: center
+  min-width: 100px
+  background: lightgrey
+  transition: $tr
+
+
+.btn--def
+  min-width: 165px
+  height: 40px
+  padding-left: 10px
+  padding-right: 10px
+  border-radius: 5px
+
+.btn--alert
+  color: #ffffff
+  font-size: 14px
+  font-weight: 500
+  line-height: 1
+  background: #d82f2f
+  &:hover
+    color: #fff
+    background: darken(#d82f2f,10%)
+.btn--pas
+  color: #ffffff
+  background: #3292d3
+  &:hover
+    color: #fff
+    background: darken(#3292d3,10%)
+.btn--lg
+  min-width: 205px
+  height: 50px
+  padding-left: 10px
+  padding-right: 10px
+  font-size: 16px
+  letter-spacing: 1.5px
+  border-radius: 5px
+
+.btn--sm
+  width: 160px
+  height: 25px
+  margin-left: 20px
+  color: #ffffff
+  font-size: 12px
+  font-weight: 400
+  line-height: 1 
+  font-weight: 400
+  border-radius: 10px
+  background: $blue
+  transition: $tr
+  &:hover
+    color: #fff
+    background: #d82f2f
+    .svg
+  +sm-block()
+    position: absolute
+    bottom: 0
+    left: 0
+    right: 0
+    max-width: 291px
+    width: 100%
+    height: 41px
+    border-radius: 10px
+    font-size: 22px
+    margin: auto
+
+  +smx-block()
+    // margin-left: 0
+    // margin-top: 20px
+  .svg
+    +size(10)
+    margin-right: 5px
+    fill: #fff
+    +sm-block()
+      +size(20)
+      margin-right: 10px
+
+
+button[type='submit']
+  .form-load
+    width: 0
+    height: 20px
+    line-height: 0
+    font-size: 0
+    overflow: hidden
+    .lds-spinner
+      width: 100%
+      height: 100%
+      fill: currentColor
+
+//.counter
+  margin-top: 20px
+  padding-bottom: 50px
+  font-size: 57px
+  font-weight: 300
+  line-height: 1
+  letter-spacing: 0.4px
+  color: #ffffff
+  span
+    position: relative
+    display: inline-block
+    &:not(:last-child)
+      margin-right: 55px
+      &::before
+        content: ':'
+        position: absolute
+        top: 0px
+        right: -41px
+        font-family: FuturaNewMedium
+        animation: blinking 1s infinite cubic-bezier(1,-1.29, 1, 1)
+    &::after
+      position: absolute
+      top: 100%
+      left: 0
+      right: 0
+      padding-top: 10px
+      color: #ffffff
+      text-align: center
+      font-size: 19px
+      letter-spacing: 0.4px
+
+    &:nth-child(1)
+      &::after
+        content: 'Days'
+    &:nth-child(2)
+      &::after
+        content: 'Hours'
+    &:nth-child(3)
+      &::after
+        content: 'Minutes'
+    &:nth-child(4)
+      &::after
+        content: 'Seconds'
+
+
+//@keyframes blinking
+  0%
+    opacity: 1
+  50%
+    opacity: 0
+  100%
+    opacity: 0
+// count style end
+
+
+
+
+
+
+// span.tooltips(data-tooltips='')
+
+
+
+
+
+
+
+
+
+
+

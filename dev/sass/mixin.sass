@@ -1,0 +1,111 @@
+//font face like bourbon
+
+//only font mixin
+//https://gist.github.com/jonathantneal/d0460e5c2d5d7f9bc5e6
+@import "scss_mixin/mixins.scss" 
+@import "../../node_modules/object-fit-images/preprocessors/mixin.sass"
+ 
+
+//mixin-source
+// =font-face($font-family, $file-path, $weight: normal, $style: normal, $asset-pipeline: false )
+//   @font-face
+//     font-family: $font-family
+//     font-weight: $weight
+//     font-style: $style
+//     @if $asset-pipeline == true
+//       src: font-url('#{$file-path}.eot')
+//       src: font-url('#{$file-path}.eot?#iefix') format('embedded-opentype'), font-url('#{$file-path}.woff') format('woff'), font-url('#{$file-path}.ttf') format('truetype'), font-url('#{$file-path}.svg##{$font-family}') format('svg')
+//     @else
+//       src: url('#{$file-path}.eot')
+//       src: url('#{$file-path}.eot?#iefix') format('embedded-opentype'), url('#{$file-path}.woff') format('woff'), url('#{$file-path}.ttf') format('truetype'), url('#{$file-path}.svg##{$font-family}') format('svg')
+
+//mixin-usage
+
+// use in CMS
+//+font-face("SourceName", '../font/Source/source', normal, italic)
+
+//simple use
+// +font-face("SourceName", '../font/Source/source', normal, normal, $asset-pipeline: true)
+
+
+
+=absolute-center()
+  position: absolute
+  top: 50%
+  left: 50%
+  transform: translate(-50%,-50%)
+
+=absolute-vertical()
+  position: absolute
+  top: 50%
+  transform: translateY(-50%)
+  
+=position($position, $t: null, $r: null, $b: null, $l: null)
+  position: $position
+  top: $t
+  right: $r
+  bottom: $b
+  left: $l
+
+
+@function rem($n)
+  @return $n / $baseFontSize * 1rem
+
+//sprite usage
+// +sprite($sprite)
+
+=size($a, $b: false)
+  width: $a+px
+  @if $b
+    height: $b+px
+  @else
+    height: $a+px
+//
+ 
+//to use sprite mixin
+// +sprite($image_name)
+
+//обрезаем текст и добавляем троеточие вконце
+=elipsis()
+  text-overflow: ellipsis
+  overflow: hidden
+  white-space: nowrap
+
+//line height
+=lh($lineHeight,$fontSize)
+  line-height: $lineHeight/$fontSize
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//

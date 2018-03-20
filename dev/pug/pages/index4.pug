@@ -1,0 +1,132 @@
+extends ../layout/main
+
+block head 
+  - var title = 'Пункты продажи ключей'
+  - var bodyClass = ''
+block content  
+  +header_min()
+  
+  .container
+    .row
+      .col
+        h2.subheading Список пунктов продажи ключей
+  
+
+  section.map
+    .container
+      .row
+        .col
+          .map__iframe
+            <div id="YMapsID" style="width: 100%; height: 420px;"></div>
+            //- <iframe src="https://yandex.ua/map-widget/v1/-/CBesvETjpB" width="560" height="400" frameborder="0"></iframe>
+
+
+  section.info-table
+    .container
+      .row
+        .col
+          table.table
+            tr.table__row-title
+              th Наименование
+              th Адрес
+              th Режим работы
+              th Карта
+            tr.table__row-content
+              td(data-title="Наименование").table__td Маг. "Городок"
+              td(data-title="Адрес").table__td Пискунова ул, 150/1
+              td(data-title="Режим работы").table__td Ежед., 09:00 - 24:00
+              td(data-title="Карта").table__td
+                a.table__link(data-fancybox, href='img/general/head_phone.png') Посмотреть схему проезда
+            tr.table__row-content
+              td(data-title="Наименование").table__td Маг. "ОРХИДЕЯ"
+              td(data-title="Адрес").table__td Дивная, 2
+              td(data-title="Режим работы").table__td Ежед., 10:00 - 21:00
+              td(data-title="Карта").table__td
+                a.table__link(data-fancybox, href='img/general/head_phone.png') Посмотреть схему проезда
+            tr.table__row-content
+              td(data-title="Наименование").table__td Маг. "Городок"
+              td(data-title="Адрес").table__td Пискунова ул, 150/1
+              td(data-title="Режим работы").table__td Ежед., 09:00 - 24:00
+              td(data-title="Карта").table__td
+                a.table__link(data-fancybox, href='img/general/head_phone.png') Посмотреть схему проезда
+            tr.table__row-content
+              td(data-title="Наименование").table__td Маг. "ОРХИДЕЯ"
+              td(data-title="Адрес").table__td Дивная, 2
+              td(data-title="Режим работы").table__td Ежед., 10:00 - 21:00
+              td(data-title="Карта").table__td
+                a.table__link(data-fancybox, href='img/general/head_phone.png') Посмотреть схему проезда
+            tr.table__row-content
+              td(data-title="Наименование").table__td Маг. "Городок"
+              td(data-title="Адрес").table__td Пискунова ул, 150/1
+              td(data-title="Режим работы").table__td Ежед., 09:00 - 24:00
+              td(data-title="Карта").table__td
+                a.table__link(data-fancybox, href='img/general/head_phone.png') Посмотреть схему проезда
+            tr.table__row-content
+              td(data-title="Наименование").table__td Маг. "ОРХИДЕЯ"
+              td(data-title="Адрес").table__td Дивная, 2
+              td(data-title="Режим работы").table__td Ежед., 10:00 - 21:00
+              td(data-title="Карта").table__td
+                a.table__link(data-fancybox, href='img/general/head_phone.png') Посмотреть схему проезда
+
+block script
+  <script src="https://api-maps.yandex.ru/2.1/?lang=ru_RU"></script>
+  script.
+    var myMap;
+    ymaps.ready(function () {
+    // Создание экземпляра карты и его привязка к контейнеру с
+    // заданным id ("map").
+    myMap = new ymaps.Map("YMapsID", {
+    // При инициализации карты обязательно нужно указать
+    // её центр и коэффициент масштабирования.
+    center: [56.342436, 43.941972],
+    // Масштаб
+    zoom: 17
+    });
+    //Маркер
+    var myPlacemark = new ymaps.Placemark([56.342436, 43.941972], {}, {
+    //- preset: 'islands#greenDotIcon'
+    });
+    myMap.geoObjects.add(myPlacemark); // Размещение геообъекта на карте.
+    });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//- 

@@ -1,0 +1,540 @@
+/* lead-up style */
+//retina
+// https://github.com/strues/retinajs
+// для использования доставляем дата атрибут data-rjs="3", в бекграундах используем миксин
+// +retina('../img/general/', 3, cover, center center no-repeat)
+//@import "../libs/retina/_retina.sass"
+
+@import "smart-grid"
+@import "variabls"
+@import "mixin"
+@import "font"
+@import "sprite"
+//@include retina-sprites($retina-groups) //раскоменить для ретины
+@import "same_style"
+
+// @import "pixel-glass"
+
+/* lead-up style end */
+
+/* blocks style */
+
+/* head */
+@import "../pug/modules/header/header"
+
+/* foot */
+@import "../pug/modules/foot/foot"
+
+/* forms */
+@import "../pug/modules/forms/forms"
+
+/* menu */
+@import "../pug/modules/menu/menu"
+
+/* blocks style end*/
+
+
+//.fotorama__arr, .fotorama__fullscreen-icon, .fotorama__video-close, .fotorama__video-play
+  background-image: url('../img/general/fotorama.png')
+  background-repeat: no-repeat
+
+body
+  background: url(../img/general/bg.jpg)
+  background-repeat: no-repeat
+  background-position: center 0
+  background-size: cover
+.wrapper
+  min-height: calc(100vh - 256px)
+
+
+//smartgrid settings 
+.container
+  +container()
+.row
+  +row()
+.col
+  +col()
+  +cols(12)
+
+/* page style */
+
+
+
+.advantages
+  // padding-top: 60px
+  // padding-bottom: 60px
+  overflow: hidden
+  .subheading
+    margin-bottom: 55px
+.advantages__item
+  position: relative
+  +row()
+  +sm-block() 
+    margin-bottom: 65px
+    text-align: center
+  align-items: center
+  margin-bottom: 40px
+  &:nth-child(odd)
+    flex-direction: row-reverse
+    .advantages__item-img
+      &::before
+        right: auto
+        left: calc(100% + 35px)
+
+  &::before
+    content: ''
+    +sm-block()
+      position: absolute
+
+      bottom: 0
+      left: 0
+      right: 0
+      margin: auto
+      max-width: 202px;
+      width: 100%
+      height: 3px;
+      background-color: #e6e5e5;
+
+
+.advantages__item-img
+  // position: relative
+  +col()
+  +cols(3)
+  +cols-sm(12)
+  font-size: 0
+  &::before
+    content: ''
+    position: absolute
+    top: 50%
+    right: calc(100% + 35px)
+    width: 10000%
+    height: 2px
+    background-color: #e6e5e5
+
+.advantages__item-desc
+  position: relative
+  +col()
+  +cols(9)
+  +cols-sm(12)
+  +sm-block()
+    margin-top: 25px
+    padding-bottom: 65px
+.advantages__item-content
+  margin-bottom: 0
+  font-size: 18px
+  font-weight: 300
+  line-height: 28px
+.tooltips
+  // position: relative
+  display: inline-block
+  padding-top: 0px
+  color: $blue
+  font-weight: 500
+  border-bottom: 1px dashed $blue
+.advantages__item-link
+  font-weight: 500
+
+.tooltip
+  z-index: 20
+  max-width: 370px
+  width: 100%
+  margin: 15px
+  padding: 20px
+  text-align: left
+  font-size: 15px
+  font-weight: 300
+  line-height: 18px
+  border-radius: 10px
+  background-color: #ffffff
+  box-shadow: 4px 6px 21px 4px rgba(0, 0, 0, 0.15)
+  b
+    font-weight: 500
+
+.tooltip-arrow
+  position: absolute
+  top: 100%
+  left: 50%
+  // transform: translateX(-50%)
+  width: 0;
+  height: 0;
+  border-style: solid;
+  border-width: 20px 15px 0 15px;
+  border-color: #ffffff transparent transparent transparent;
+
+
+.tooltip[x-placement^="bottom"] .tooltip-arrow,
+.popper[x-placement^="bottom"] .popper__arrow
+  top: auto
+  bottom: 100%
+  border-width: 0 15px 20px 15px;
+  border-color: transparent transparent #ffffff transparent;
+
+
+
+
+
+
+.instruction
+  padding-top: 70px
+
+
+.instruction__content
+  width: 100%
+  max-width: 1220px
+  margin: 0 auto
+.instruction__item
+  position: relative
+  display: flex
+  flex-wrap: wrap
+  align-items: center
+  padding-bottom: 65px
+  +smx-block()
+    flex-direction: column-reverse
+  &::before
+    content: ''
+    position: absolute
+    top: 31px
+    bottom: 0
+    left: 50%
+    width: 1px
+    background: #cfcfcf
+    +smx-block()
+      left: 22px
+      display: none
+  &:last-child
+    &::after
+      content: ''
+      position: absolute
+      left: 50%
+      bottom: 0
+      width: 32px
+      height: 32px
+      border-radius: 50%
+      border: 1px solid #cfcfcf
+      transform: translateX(-50%) translateY(100%)
+      +smx-block()
+        display: none
+  &:nth-child(even)
+    flex-direction: row-reverse
+    +smx-block()
+      flex-direction: column-reverse
+    .instruction__manual
+      text-align: left
+
+    .instruction__title
+      &::before
+        content: ''
+        right: auto
+        left: -57px
+
+
+
+.instruction__part
+  position: relative
+  width: 50%
+  padding-left: 40px
+  padding-right: 40px
+  +smx-block()
+    width: 100%
+    padding-left: 15px
+    padding-right: 15px
+.instruction__manual
+  text-align: right
+  +smx-block()
+    text-align: left
+.instruction__figure
+  text-align: center
+
+.instruction__img
+  font-size: 0
+  // background: #000
+  +smx-block()
+    margin-bottom: 30px
+
+
+
+.instruction__desc 
+  color: #555555
+  font-size: 14px
+  font-weight: 300
+  line-height: 22px
+.instruction__desc-title
+  display: block
+  color: #3e3e3e
+  font-weight: 500
+.tooltips,.instruction__desc-link
+  color: #3292d2
+  font-weight: 500
+  border-bottom: 1px dashed
+.instruction__desc-link[href^="tel"]
+  color: #454545
+  font-weight: 500
+  font-size: 14px
+  border-bottom: none
+.instruction__desc-alert
+  color: #d82f2f
+  font-weight: 500
+  font-style: normal
+  text-transform: uppercase
+
+
+
+.instruction__code
+  display: inline-block
+  padding: 10px 15px
+  color: #4555a0
+  font-size: 14px
+  font-weight: 300
+  line-height: 22px
+  border-radius: 10px
+  background-color: #ffffff
+  border-bottom: none
+
+
+.tooltips
+  cursor: pointer
+
+.instruction__title
+  position: relative
+  &::before
+    content: ''
+    position: absolute
+    top: -2px
+    right: -57px
+    width: 32px
+    height: 32px
+    border-radius: 50%
+    border: 1px solid #cfcfcf
+    +smx-block()
+      display: none
+      left: 0
+      right: auto
+
+
+
+
+.accordion
+  padding-top: 50px
+  padding-bottom: 20px
+// necessary style
+.accordion__content
+  display: none
+.accordion__title
+  position: relative
+  display: flex
+  align-items: center
+  justify-content: space-between
+  cursor: pointer
+.accordion__svg
+  flex-shrink: 0
+  display: block
+  font-size: 0
+  line-height: 0
+  transition: all .25s linear
+.svg__down
+  display: block
+  width: 15px
+  height: 15px
+  fill: #fff
+.accordion__item--active
+  .accordion__svg
+    transform: rotate(180deg)
+  .accordion__content
+    display: block
+// necessary style end
+
+.accordion__title
+  padding: 10px
+  color: #fff
+  background: #51abec
+  border-bottom: 1px solid #fff
+.accordion__content
+  padding: 15px 30px
+
+
+
+
+
+
+
+
+
+.map
+  padding: 50px 0
+
+.map__iframe
+  iframe
+    width: 100%
+
+
+
+
+.info-table
+  padding-bottom: 20px
+
+.table
+  width: 100%
+  table-layout: fixed
+  font-size: 15px
+  border-spacing: 0
+.table__row-title
+  th
+    padding: 10px 0
+    text-align: left
+    border-bottom: 1px solid rgba(0, 0, 0, 0.2)
+  +sm-block()
+    display: none
+
+.table__row-content
+  +sm-block()
+    display: block
+    margin-bottom: 20px
+    border-bottom: 1px solid rgba(0, 0, 0, 0.2)
+
+.table__td
+  padding: 10px 0
+  border-bottom: 1px solid rgba(0, 0, 0, 0.2)
+  +sm-block()
+    display: block
+    margin-bottom: 20px
+    padding: 0
+    border-bottom: none
+    // background: green
+  &::before
+    content: attr(data-title)": "
+    display: none
+    margin-bottom: 5px
+    font-size: 16px
+    font-weight: bold
+    +sm-block()
+      display: block
+.table__link
+  color: #3292d2
+  font-weight: 500
+  border-bottom: 1px dashed
+
+
+
+
+
+
+.info-block
+  padding-bottom: 40px
+  .subheading
+    margin-bottom: 40px
+.info-block__item
+  +row()
+  margin-bottom: 20px
+  line-height: 1.5
+.info-block__action
+  +col()
+  +cols(3)
+  +cols-sm(12)
+  +sm-block()
+    margin-top: 15px
+    font-weight: bold
+.info-block__desc
+  +col()
+  +cols(9)
+  +cols-sm(12)
+
+
+
+ 
+
+.connection
+  padding-bottom: 20px
+  .subheading
+    margin-bottom: 50px
+
+
+.connection__list
+  +row()
+
+.connection__item
+  +col()
+  +cols(6)
+  +cols-smx(12)
+.form__label
+  display: block  
+  color: #000
+  .form__label-req
+    font-weight: bold
+    color: red
+.form__item
+  font-weight: 300
+.form__input,.form__textarea
+  display: block
+  width: 100%
+  height: 40px
+  margin-top: 5px
+  padding: 0 20px
+  border-radius: 10px
+  border-color: rgba(69, 85, 160, 0.3)
+  background: #fff
+  color: #4555a0
+.form__textarea 
+  padding: 20px
+  height: 218px
+.connection__item--btn
+  +col()
+  +cols(12)
+  +cols-smx(12)
+.form__input--num 
+  appearance: normal
+  -webkit-appearance: normal
+  -moz-appearance: normal
+.form__item
+  margin-bottom: 25px
+  
+.desc
+  span
+    color: red
+    font-weight: bold
+
+
+.form__item--btn
+  a.btn
+    margin-left: 15px
+    +xsl-block()
+      margin-left: 0
+
+
+
+.form-popup
+  position: relative
+  max-width: 360px
+  padding: 20px
+  border-radius: 10px
+
+.form__title
+  margin-bottom: 20px
+  text-align: center
+  font-weight: 500
+  font-size: 25px
+
+
+.form__subtitle
+  margin-bottom: 20px
+  font-size: 18px
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* page style end */
+
+/*media style*/
+@import "media"

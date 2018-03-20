@@ -1,0 +1,65 @@
+extends ../layout/main
+
+block head 
+  - var title = 'Оплата'
+  - var bodyClass = ''
+block content  
+  +header_min()
+  
+  //- .container
+    .row
+      .col
+        h2.subheading Договор
+  
+  section.connection
+    .container
+      form(class='form ' action='#', enctype='multipart/form-data')
+        // Hidden Required Fields
+        input(name='form_subject', value='Вход' + formTitle, type='hidden')
+        // END Hidden Required Fields
+        .form__item 
+         label.form__label Договор:
+            input(type='text', name='Договор',  placeholder='').form__input.form__input--num
+
+        .form__item.form__item--captcha  captcha here 
+ 
+      .form__item.form__item--btn
+        button(type='submit').btn.btn--lg.btn--alert Вход
+
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//- 

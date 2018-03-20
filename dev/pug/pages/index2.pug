@@ -1,0 +1,249 @@
+extends ../layout/main
+
+block head 
+  - var title = 'Инструкция по использованию'
+  - var bodyClass = ''
+block content  
+  +header_min()
+  
+  .container
+    .row
+      .col
+        h2.subheading Инструкция по использованию
+
+  section.instruction
+    .instruction__content
+      .instruction__item
+        .instruction__part.instruction__manual
+          h4.h4.instruction__title Как заключить договор? 
+          p.instruction__desc 
+            b.instruction__desc-title Необходимость заключения договора
+            | Итак, Вы оказались обладателем квартиры в многоквартирном доме, Вам необходимо заключить договор на сопровождение автоматически запирающих устройств (домофонов). С договором можно ознакомиться 
+            a.instruction__desc-link(href="#") по ссылке.
+          p.instruction__desc 
+            b.instruction__desc-title Два варианта регистрации договора
+            | В настоящий момент мы используем несколько вариантов регистрации договора: по 
+            span.tooltips(data-tooltips='Далеко-далеко за словесными горами в стране, гласных и согласных живут рыбные тексты. Жаренные, точках переписывается о предупредила?') паролю 
+            | и по 
+            span.tooltips(data-tooltips='Далеко-далеко за словесными горами в стране, гласных и согласных живут рыбные тексты. Жаренные, точках переписывается о предупредила?') ключу новосёла. 
+            | О том как это сделать описано в следующих пунктах инструкции.
+        .instruction__part.instruction__figure
+          .instruction__img: img(src="img/content/inst_1.png", alt="image")
+
+      .instruction__item
+        .instruction__part.instruction__manual
+          h4.h4.instruction__title Что важно знать?
+          p.instruction__desc 
+            b.instruction__desc-title Согласие на СМС
+            | Отправляя СМС-запросы в наш адрес, Вы соглашаетесь получать СМС-сообщения информацией и прочими уведомления от ПРО ДОМОФОН. Номер телефона, с которого Вы отправите СМС сообщения с регистрационными параметрами будет зарегистрирован в качестве контактного. В личном кабинете Вы можете отключить СМС уведомления от системы.
+
+          p.instruction__desc 
+            b.instruction__desc-title Обратите внимание!
+            | Изначально пароли и ключи внесены во все подъезды жилого комплекса и могут открыть любую дверь, но, при первом их использовании система запоминает адрес, где они были приложены или набраны впервые, и именно этот подъезд они продолжат открывать в дальнейшем.
+        .instruction__part.instruction__figure
+          .instruction__img: img(src="img/content/inst_2.png", alt="image")
+ 
+      .instruction__item
+        .instruction__part.instruction__manual
+          h4.h4.instruction__title Как зарегистрировать договор по паролю?
+          p.instruction__desc 
+            b.instruction__desc-title Регистрация договора по паролю
+            | Практикуется при смене собственника квартиры, когда новый владелец не имеет возможности получить ключ новосела. Для получения ключа новосела.
+          p.instruction__desc 
+            b.instruction__desc-title Что требуется для регистрации?
+            | Для этого Вам необходимо обратиться в офис Управляющей организации с предоставлением документов, подтверждающих Ваше право входить в подъезд. 
+          p.instruction__desc 
+            b.instruction__desc-title Как пользоваться
+            | Под защитной полосой располагается Код Доступа, при помощи которого осуществляется вход в подъезд Вашего дома.  <br> <i class="instruction__desc-alert">ВНИМАНИЕ:</i> Перед использование пароля <i class="instruction__desc-alert">ОБЯЗАТЕЛЬНО</i> на номер телефона <a class="instruction__desc-link" href="tel:+79500532966"> +79500532966</a> отправить СМС сообщение с содержанием:
+          p.instruction__desc 
+            span.instruction__code КодДоступа пробел НомерКвартиры
+        .instruction__part.instruction__figure
+          .instruction__img: img(src="img/content/inst_3.png", alt="image")
+
+      .instruction__item
+        .instruction__part.instruction__manual
+          h4.h4.instruction__title Что такое ключ новосёла?
+          p.instruction__desc 
+            b.instruction__desc-title Способы доступа в подъезд с ключем новосёла
+            | Сама карта является ключом доступа в подъезд. Поднесите ключ к считывателю и дверь откроется. Также под защитным слоем находится КодДоступа, позволяющий предоставить доступ посетителям. Сотрите защитный слой и наберите 5 цифр на клавиатуре вызывной панели - дверь откроется. Срок действия пароля - 2 месяца с момента использования.
+          p.instruction__desc 
+            b.instruction__desc-title Активация кода доступа
+            | С целью защиты данного ключа от утери, необходима процедура его активации. <br> <i class="instruction__desc-alert">ВНИМАНИЕ:</i> Перед использование пароля <i class="instruction__desc-alert">ОБЯЗАТЕЛЬНО</i> на номер телефона <a class="instruction__desc-link" href="tel:+79500532966"> +79500532966</a> отправить СМС сообщение с содержанием:
+          p.instruction__desc 
+            span.instruction__code КодДоступа пробел НомерКвартиры
+        .instruction__part.instruction__figure
+          .instruction__img: img(src="img/content/inst_4.png", alt="image")
+
+      .instruction__item
+        .instruction__part.instruction__manual
+          h4.h4.instruction__title Как оплатить услуги?
+          p.instruction__desc 
+            b.instruction__desc-title Для заключения договора на тех. сопровождение СКУД-ДОМОФОН
+            | Вам достаточно внести авансовый платеж в размере 500 руб. (рекомендованная сумма на несколько мес. вперед).
+          p.instruction__desc 
+            b.instruction__desc-title Интернет (мгновеная оплата)
+            | Оплата 
+            a.instruction__desc-link(href="#") по ссылке. 
+            | Введите номер договра, проверьте адрес и оплатите картой
+          p.instruction__desc 
+            b.instruction__desc-title Банкоматы и отделения Сбербанка (до 3-х рабочих дней)
+            | Также возможна оплата через систему Сбербанк Online.
+          p.instruction__desc 
+            b.instruction__desc-title Система ГОРОД (мгновенная оплата)
+            | Через терминалы и кассы системы, а так же через сайт 
+            a.instruction__desc-link(href="#") uplati.ru.
+          p.instruction__desc 
+            b.instruction__desc-title Получение реквизитов для оплаты
+            | Отправьте  на <a class="instruction__desc-link" href="tel:+79500532966"> +79500532966</a>  с контактного телефона СМС содержанием:
+          p.instruction__desc 
+            span.instruction__code *3
+        .instruction__part.instruction__figure
+          .instruction__img: img(src="img/content/inst_5.png", alt="image")
+
+      .instruction__item
+        .instruction__part.instruction__manual
+          h4.h4.instruction__title Как приобрести/привязать доп. ключи
+          p.instruction__desc
+            b.instruction__desc-title Приобретения дополнительных ключей
+            | Приобрести магнитные ключи и прикрепить их к договору посредством СМС. Ключ будет готов к использованию в течении часа. Ближайший адрес продажи ключей Вам поступит в СМС или в объявлениях в подъезде.
+          p.instruction__desc
+            b.instruction__desc-title Внимание!
+            | Магнитные ключи действуют <i class="instruction__desc-alert">ТОЛЬКО </i> после заключения договора. Для жителей, выбравших БЕЗДОГОВОРНЫЙ вариант взаимодействия такие ключи не подходят. Обратитесь в офис компании с документами на право собствености и  паспортом для получения карт-ключей.
+          p.instruction__desc
+            b.instruction__desc-title Привязка ключей
+            | После заключения договора необходимо ответить на любую из СМС, отправленных системой с номерами ключей через запятую или пробел. Отправляйте СМС только с зарегистрированного телефона. После успешной привязки Вам будет отправлено СМС с перечнем привязанным ключей.
+        .instruction__part.instruction__figure
+          .instruction__img: img(src="img/content/inst_6.png", alt="image")
+
+      .instruction__item
+        .instruction__part.instruction__manual
+          h4.h4.instruction__title Дистанционное управление через Viber
+          p.instruction__desc
+            b.instruction__desc-title Регистрация в системе с зарегистрированного телефона
+            | Для надежного общения с нашей системой и дистанционого управления подъездной дверью из популярного мессенджера — пройдите регистрацию с зарегистрированного телефона, нажав на значок Viber (справа) или
+            a.instruction__desc-link(href="#") по ссылке
+            |  и следуя предложенной Вам инструкции.
+          p.instruction__desc
+            b.instruction__desc-title Как управлять дверью через Viber?
+            | Для дистанционого управления с помощью Viber Вам нужно открыть страницу диалога с нашей системой и нажать на кнопку «Открыть дверь» или отправить собщение «откр».
+        .instruction__part.instruction__figure
+          .instruction__img 
+            a.instruction__desc-link(href="#"): img(src="img/content/inst_7.png", alt="image")
+
+      .instruction__item
+        .instruction__part.instruction__manual
+          h4.h4.instruction__title Android-смартфон и приложение
+          p.instruction__desc
+            b.instruction__desc-title Установка приложения
+            | Для установки приложения перейдите 
+            a.instruction__desc-link(href="#") по ссылке,
+            | нажмите на иконку приложения (слева) или воспользуйтесь QR-кодом, скачайте приложения <br>
+            | с Play Market. Подойдет любой смартфон с OS Android.
+          p.instruction__desc
+            b.instruction__desc-title Управление приложением
+            | Управляйте договором, оплачивайте услуги, заказывайте техническую подержку и ремонт при необходимости и управляйте доступом в подъезд напрямую с телефона.
+          p.instruction__desc
+            img(src="img/content/qr-code.jpg", alt="image")
+        .instruction__part.instruction__figure
+          .instruction__img 
+            a.instruction__desc-link(href="#"): img(src="img/content/inst_8.png", alt="image")
+
+      .instruction__item
+        .instruction__part.instruction__manual
+          h4.h4.instruction__title Список доступных СМС - команд
+          p.instruction__desc
+            b.instruction__desc-title Проверка баланса и другие команды
+            | Проверить баланс договора и получить прочую информацию Вы можете ответив на любую из СМС, отправленных нашей системой, со знаком вопроса. В ответ Вам поступит список доступных команд.
+          p.instruction__desc
+            b.instruction__desc-title Внимание! <br>
+            | При отрицательном балансе работа внутриквартирного переговорного устройства (трубки) прекращается. Также служба тех. подержки не сможет ответить на Ваши вопросы. Электронные ключи по количеству собственников открывает дверь даже при отрицательном балансе.
+        .instruction__part.instruction__figure
+          .instruction__img 
+            img(src="img/content/inst_9.png", alt="image")
+
+      .instruction__item
+        .instruction__part.instruction__manual
+          h4.h4.instruction__title Дополнительная информация
+          p.instruction__desc
+            b.instruction__desc-title Инструкция для Вас сложна или Вы не «дружите» с интернетом?
+            | Просто перезвоните по телефону службы технической поддержки в рабочее время (Понедельник-Пятница с 10.00:18.00, обед: 14:00 - 15:00) или посетите наш офис по адресу: г. Иркутск, ул. Декабрьских Событий, д. 100, оф. 311 (Деловой центр "МЕГАПОЛИС", пл. Декабристов, слева от ПФ, белая остекленная лестница наверх.)
+          p.instruction__desc
+            b.instruction__desc-title Техническая поддержка
+            | Мы будем рады улучшить нашу систему и процесс взаимодействия. Все предложения Вы можете отправлять по адресу электронной почты: <br>
+            a.instruction__desc-link(href="mailto:domofon@dom38.ru") domofon@dom38.ru<br>
+            | При неверной работе домофона или каким-либо вопросам, связанным с его работой Вы можете обратиться в службу технической поддержки по телефону: <br>
+            a.instruction__desc-link(href="tel:+79500532966") +7 9500 532 966, 
+            a.instruction__desc-link(href="tel:83952484800") 8(3952)48-48-00
+
+        .instruction__part.instruction__figure
+          .instruction__img 
+            img(src="img/content/inst_10.png", alt="image")
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//- 

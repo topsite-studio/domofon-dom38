@@ -1,0 +1,68 @@
+extends ../layout/main
+
+block head 
+  - var title = 'Вход'
+  - var bodyClass = ''
+block content  
+  +header_min()
+  
+  .container
+    .row
+      .col
+        h2.subheading Вход
+  
+  section.connection
+    .container
+      form(class='form ' action='#', enctype='multipart/form-data')
+        // Hidden Required Fields
+        input(name='form_subject', value='Вход' + formTitle, type='hidden')
+        // END Hidden Required Fields
+        .form__item
+         label.form__label Телефон:
+            input.form__input(type='tel', name='phone', class="phone", placeholder='')
+        .form__item
+          label.form__label Пароль:
+            input.form__input(type='password', name='password', placeholder='')
+        .form__item.form__item--captcha  captcha here 
+ 
+      .form__item.form__item--btn
+        button(type='submit').btn.btn--lg.btn--alert Вход
+        a(href="#" data-fancybox="modal" data-src="#modal_pas").btn.btn--lg.btn--pas  Получить пароль
+
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//- 

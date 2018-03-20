@@ -1,0 +1,35 @@
+include ../modules/include/include.pug
+
+doctype html
+html(lang="ru-RU") 
+  head
+    block head
+    +head()
+  body.thank-page
+    //+header()
+    block content  
+    //+foot()
+    script.
+      //furntion to auto download file
+      //- $(function() {
+      //-   $('a[data-auto-download]').each(function(){
+      //-     var $this = $(this);
+      //-     setTimeout(function() {
+      //-       window.location = $this.attr('href');
+      //-     }, 2000); 
+      //-   });
+      //- });
+      
+      //function to return main page
+      var curId = localStorage.getItem('form');
+      var currentPage = localStorage.getItem('currentPage');
+      setTimeout(function(){
+        //- window.location.href = 'index.html#' + curId;
+        window.location.href = currentPage;
+      }, 3000);
+
+    //- call auto download file
+    //- a(data-auto-download='', href='application/file.zip')
+
+    +script()
+    block script
