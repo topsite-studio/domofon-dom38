@@ -1,2 +1,3 @@
-mixin gcaptcha(sitekey)
-  .g-recaptcha(data-sitekey=sitekey)
+mixin gcaptcha(sitekey, dataCallback)
+  - var callbackFunction = (dataCallback) ? dataCallback : null
+  .g-recaptcha(data-sitekey=sitekey, data-callback=callbackFunction)

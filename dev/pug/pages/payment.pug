@@ -8,6 +8,12 @@ block head-script
   //- Тут по инструкции был GET-параметр onload=vcRecaptchaApiLoaded и render=explicit
   script(src="//www.google.com/recaptcha/api.js", async, defer)  
   script(src="//widget.vp.ru/vpjs1.1/common.js")
+  script.
+    function recaptchaCallback () {
+      var forma = document.querySelector("[data-form='payment']")
+      forma.elements.submit.disabled = false
+      return false
+    }
 
 block content  
   +header_min()
@@ -19,54 +25,13 @@ block content
   
   section.connection
     .container
-      form(class='form ' action='#', enctype='multipart/form-data')
-        // Hidden Required Fields
-        input(name='form_subject', value='Вход' + formTitle, type='hidden')
-        // END Hidden Required Fields
+      form(class='form', data-form='payment')
         .form__item 
-         label.form__label Договор:
-            input(type='text', name='Договор',  placeholder='').form__input.form__input--num
+          label.form__label Договор:
+            input(type='text', name='contract', required).form__input.form__input--num
 
         .form__item.form__item--captcha
-          +gcaptcha('6LflygQTAAAAAMZ9uYeT3vLGEbgx-pcGgm4phTrS')
+          +gcaptcha('6LflygQTAAAAAMZ9uYeT3vLGEbgx-pcGgm4phTrS', 'recaptchaCallback')
  
-      .form__item.form__item--btn
-        button(type='submit').btn.btn--lg.btn--alert Вход
-
- 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-//- 
+        .form__item.form__item--btn
+          button(type='submit', disabled, name='submit').btn.btn--lg.btn--alert Вход
