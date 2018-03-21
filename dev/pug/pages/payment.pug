@@ -3,6 +3,12 @@ extends ../layout/main
 block head 
   - var title = 'Оплата'
   - var bodyClass = ''
+
+block head-script
+  //- Тут по инструкции был GET-параметр onload=vcRecaptchaApiLoaded и render=explicit
+  script(src="//www.google.com/recaptcha/api.js", async, defer)  
+  script(src="//widget.vp.ru/vpjs1.1/common.js")
+
 block content  
   +header_min()
   
@@ -21,7 +27,8 @@ block content
          label.form__label Договор:
             input(type='text', name='Договор',  placeholder='').form__input.form__input--num
 
-        .form__item.form__item--captcha  captcha here 
+        .form__item.form__item--captcha
+          +gcaptcha('6LflygQTAAAAAMZ9uYeT3vLGEbgx-pcGgm4phTrS')
  
       .form__item.form__item--btn
         button(type='submit').btn.btn--lg.btn--alert Вход
