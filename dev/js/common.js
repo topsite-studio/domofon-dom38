@@ -100,21 +100,26 @@
   })
   // menu on hover end
 
-  var formResult
-  $('[data-form=payment]').submit(function (event) {
+  function contractLogin (event) {
     event.preventDefault()
-    var form = $(this)
+    var form = $(this)[0]
 
     $.ajax({
+      type: 'POST',
       url: 'https://domofon.dom38.ru/api/contracts/find-for-pay/',
-      method: 'POST',
       data: {
-        'response': form[0].elements['g-recaptcha-response'].value,
-        'number': form[0].elements.contract.value
+        'response': form.elements['g-recaptcha-response'].value,
+        'number': form.elements.contract.value
       },
-      success: function (result) {
-        formResult = result
-        openPaymentModal(formResult)
+      dataType: 'json',
+      success: function (data, textStatus) {
+        console.info(data)
+        alert(textStatus)
+        if (textStatus === 'success') {
+          showContractInfo(data)
+        } else {
+          alert('error!')
+        }
       },
       error: function (xhr, ajaxOptions, thrownError) {
         alert('Результат: ошибка! Номер ошибки: ' + xhr.status)
@@ -125,21 +130,71 @@
         })
       }
     })
+    // var contractData = $.getJSON('//domofon.dom38.ru/api/contracts/find-for-pay', {
+    //   response: form.elements['g-recaptcha-response'].value,
+    //   number: form.elements.contract.value
+    // })
+    // console.log(contractData)
     return false
-  })
+  }
 
-  function openPaymentModal (result) {
-    var $scope = {
-      total: 0,
+  /**
+   * Функция для показа данных по договору
+   * @param {object} result Данные по договору в json-формате, полученные через API domofon.dom38.ru
+   */
+  function showContractInfo (result) {
+    // Упорядочиваем все данные
+    var scope = {
       contract: result.contract,
-      company: result.company,
-      services: result.services.filter(function (service) {
-        return !service.includable
-      })
+      services: {
+        total: 0,
+        items: result.services
+      }
     }
-    $scope.services.forEach(function (service) {
-      $scope.total += service.amount
+
+    // Обьявляем переменные всех объектов, куда будем выводить данные
+    var contract = {
+      login: document.querySelector('#contract-input'),
+      info: document.querySelector('#contract-info'),
+      num: document.querySelector('#contract-number'),
+      address: document.querySelector('#address'),
+      services: document.querySelector('#contract-services'),
+      resultValue: document.querySelector('#result-value'),
+      payButton: document.querySelector('#pay-button')
+    }
+
+    // Удаляем форму ввода номера договора
+    contract.login.remove()
+
+    // Выводим все данные в блок показа данных (пока только сам номер договора)
+    contract.num.innerText = scope.contract.number
+    contract.address.innerHTML = scope.contract.address + ', кв. ' + scope.contract.flat
+
+    // Показываем блок показа данных
+    contract.info.hidden = false
+
+    contract.payButton.addEventListener('click', function () {
+      openPaymentModal(result)
     })
+  }
+
+  /**
+   * Функция открытия модалки с модулем оплаты
+   * @param {object} result Данные по договору в json-формате, полученные через API domofon.dom38.ru
+   */
+  function openPaymentModal (data) {
+    var $scope = data
+    // var $scope = {
+    //   total: 0,
+    //   contract: data.contract,
+    //   company: data.company,
+    //   services: data.services.filter(function (service) {
+    //     return !service.includable
+    //   })
+    // }
+    // $scope.services.forEach(function (service) {
+    //   $scope.total += service.amount
+    // })
 
     VP.widget.modal({
       url: '//vp.ru/common-modal/' +
@@ -153,4 +208,6 @@
         '&utm_campaign=domofon.dom38.ru'
     })
   }
+
+  $('[data-form=payment]').submit(contractLogin)
 }(window.$, window.grecaptcha, window.alert, window.Tooltip, window.svg4everybody, window.objectFitImages, window.VP))

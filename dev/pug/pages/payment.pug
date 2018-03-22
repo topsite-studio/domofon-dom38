@@ -24,8 +24,9 @@ block content
         h2.subheading Договор
   
   section.connection
-    .container
-      form(class='form', data-form='payment')
+    .container#app
+      pre#preprepre
+      form(class='form', data-form='payment')#contract-input
         .form__item 
           label.form__label Договор:
             input(type='text', name='contract', required).form__input.form__input--num
@@ -34,4 +35,29 @@ block content
           +gcaptcha('6LflygQTAAAAAMZ9uYeT3vLGEbgx-pcGgm4phTrS', 'recaptchaCallback')
  
         .form__item.form__item--btn
-          button(type='submit', disabled, name='submit').btn.btn--lg.btn--alert Вход
+          button(type='submit', disabled, name='submit')#check-contract.btn.btn--lg.btn--alert Вход
+
+      // Раздел просмотра данных по договору находится в разработке!
+      section.contract(hidden)#contract-info
+        .contract-info
+          dl.term-list
+            .term-list__row
+              dt.term-list__term #[strong Номер договора]
+              dd.term-list__value: span#contract-number
+            .term-list__row
+              dt.term-list__term #[strong Адрес]
+              dd.term-list__value: span#address
+          
+          // Этот блок ещё в разработке
+          table.contract-info__table.table
+            tbody#contract-services
+              tr: td(colspan='2') Услуга 1 - 500 руб.
+              tr: td(colspan='2') Услуга 2 - 500 руб.
+              tr: td(colspan='2') Услуга 3 - 500 руб.
+            
+            tfoot
+              tr
+                td Итого:
+                td: span#result-value 1500 руб.
+          // Как и эта кнопочка
+          button(type='button').btn.btn--lg.btn--success#pay-button Оплатить
