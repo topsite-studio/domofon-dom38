@@ -1,0 +1,19 @@
+.term-list
+  $term-width: 160px
+  display: flex
+  flex-direction: column
+  position: relative
+
+  &__row
+    display: inline-flex
+    width: 100%
+    flex-direction: row
+
+  &__term
+    width: $term-width
+    padding: 10px
+
+  &__value
+    width: calc(100% - #{$term-width})
+    padding: 10px
+    margin: 0

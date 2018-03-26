@@ -38,7 +38,7 @@ block content
           button(type='submit', disabled, name='submit')#check-contract.btn.btn--lg.btn--alert Вход
 
       // Раздел просмотра данных по договору находится в разработке!
-      section.contract(hidden)#contract-info
+      section.contract#contract-info(hidden)
         .contract-info
           dl.term-list
             .term-list__row
@@ -49,15 +49,11 @@ block content
               dd.term-list__value: span#address
           
           // Этот блок ещё в разработке
-          table.contract-info__table.table
-            tbody#contract-services
-              tr: td(colspan='2') Услуга 1 - 500 руб.
-              tr: td(colspan='2') Услуга 2 - 500 руб.
-              tr: td(colspan='2') Услуга 3 - 500 руб.
-            
-            tfoot
-              tr
-                td Итого:
-                td: span#result-value 1500 руб.
-          // Как и эта кнопочка
-          button(type='button').btn.btn--lg.btn--success#pay-button Оплатить
+          .draft
+            h3.subheading.draft__heading Стоимость ежемесячного тех. обслуживания
+            ul.draft__contents#contract-services
+              //- содержимое чека будет здесь
+            footer.draft__footer
+              p.draft__item #[strong Итого:] #[span#result-value 0] руб.
+
+          button(type='button').btn.btn--lg.btn--alert#pay-button Оплатить

@@ -170,6 +170,17 @@
     contract.num.innerText = scope.contract.number
     contract.address.innerHTML = scope.contract.address + ', кв. ' + scope.contract.flat
 
+    for (var i = 0; i < scope.services.items.length; i++) {
+      var service = scope.services.items[i]
+      var draftItem = document.createElement('li')
+      draftItem.className = 'draft__item'
+      draftItem.innerText = service.name + ': ' + service.amount + ' руб.'
+      contract.services.appendChild(draftItem)
+      scope.services.total += service.amount
+    }
+
+    contract.resultValue.innerText = scope.services.total
+
     // Показываем блок показа данных
     contract.info.hidden = false
 
@@ -183,25 +194,25 @@
    * @param {object} result Данные по договору в json-формате, полученные через API domofon.dom38.ru
    */
   function openPaymentModal (data) {
-    var $scope = data
-    // var $scope = {
-    //   total: 0,
-    //   contract: data.contract,
-    //   company: data.company,
-    //   services: data.services.filter(function (service) {
-    //     return !service.includable
-    //   })
-    // }
-    // $scope.services.forEach(function (service) {
-    //   $scope.total += service.amount
-    // })
+    // var $scope = ,data
+    var $scope = {
+      total: 0,
+      contract: data.contract,
+      company: data.company,
+      services: data.services.filter(function (service) {
+        return !service.includable
+      })
+    }
+    $scope.services.forEach(function (service) {
+      $scope.total += service.amount
+    })
 
     VP.widget.modal({
       url: '//vp.ru/common-modal/' +
         '?action=provider' +
         '&guid=' + ($scope.company.guid || 'scel') +
-        '&acc=' + ($scope.contract.number) +
-        '&amount=500' +
+        '&acc=' + $scope.contract.number +
+        '&amount=' + $scope.total +
         '&service=1' +
         '&utm_source=widget' +
         '&utm_medium=' + (($scope.company.guid || 'scel')) + '_full' +
