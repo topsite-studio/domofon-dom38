@@ -100,6 +100,9 @@
   })
   // menu on hover end
 
+  /**
+  * Функция для отправки POST-запрос к API домофона
+  */
   function contractLogin (event) {
     event.preventDefault()
     var form = $(this)[0]
@@ -139,9 +142,9 @@
   }
 
   /**
-   * Функция для показа данных по договору
-   * @param {object} result Данные по договору в json-формате, полученные через API domofon.dom38.ru
-   */
+  * Функция для показа данных по договору
+  * @param {object} result Данные по договору в json-формате, полученные через API domofon.dom38.ru
+  */
   function showContractInfo (result) {
     // Упорядочиваем все данные
     var scope = {
@@ -190,9 +193,9 @@
   }
 
   /**
-   * Функция открытия модалки с модулем оплаты
-   * @param {object} result Данные по договору в json-формате, полученные через API domofon.dom38.ru
-   */
+  * Функция открытия модалки с модулем оплаты
+  * @param {object} result Данные по договору в json-формате, полученные через API domofon.dom38.ru
+  */
   function openPaymentModal (data) {
     // var $scope = ,data
     var $scope = {
@@ -220,5 +223,55 @@
     })
   }
 
-  $('[data-form=payment]').submit(contractLogin)
+  if ($('[data-form=payment]')[0]) {
+    $('[data-form=payment]').submit(contractLogin)
+  }
+
+  function keystoresMap () {
+    var myMap
+    var ymaps = window.ymaps
+    ymaps.ready(function () {
+      var geolocation = getCurrentLocation()
+      console.log(geolocation)
+      if (!geolocation) {
+        console.error('Пользователь запретил использовать его местоположение на сайте.')
+      } else {
+        console.info('geolocation = OK')
+        myMap = new ymaps.Map('keystores-map', {
+          center: [geolocation.lat, geolocation.lon],
+          zoom: 17
+        })
+        var myPlacemark = new ymaps.Placemark([56.342436, 43.941972], {}, {
+        })
+        myMap.geoObjects.add(myPlacemark) // Размещение геообъекта на карте.
+      }
+
+      function getCurrentLocation () {
+        var result
+        if (navigator.geolocation) {
+          navigator.geolocation.getCurrentPosition(function (position) {
+            result = {
+              lat: position.coords.latitude,
+              lon: position.coords.longitude,
+              acc: position.coords.accuracy
+            }
+            return result
+          })
+        } else {
+          return null
+        }
+      }
+    })
+  }
+
+  var keystoresMapObject = document.querySelector('#keystores-map')
+
+  if (keystoresMapObject) {
+    console.log('Запускаем карту работяги')
+    document.addEventListener('DOMContentLoaded', keystoresMap)
+  }
+
+  if (document.querySelector('.page--keystores')) {
+
+  }
 }(window.$, window.grecaptcha, window.alert, window.Tooltip, window.svg4everybody, window.objectFitImages, window.VP))
