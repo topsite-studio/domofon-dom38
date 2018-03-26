@@ -1,0 +1,11 @@
+include ../accordion/lib
+
+mixin faq()
+  mixin question(question)
+    +item(question)
+      if block
+        block
+  
+  +accordion()
+    if block
+      block

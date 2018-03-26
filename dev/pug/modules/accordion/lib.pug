@@ -1,0 +1,16 @@
+mixin accordion()
+  mixin item(title)
+    .accordion__item
+      .accordion__title!= title
+        .accordion__svg
+          +svg('down')
+      .accordion__content
+        if block
+          block
+
+  .accordion
+    .container
+      .row
+        .col
+          if block
+            block
