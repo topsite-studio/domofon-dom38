@@ -48,6 +48,7 @@
     "gulp-group-css-media-queries": "^1.2.2",
     "gulp-image": "^4.3.0",
     "gulp.spritesmith": "^6.9.0",
+    "http2": "^3.3.7",
     "jquery-form-styler": "^2.0.1",
     "normalize.css": "^8.0.0",
     "object-fit-images": "^3.2.3",
