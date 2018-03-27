@@ -309,15 +309,51 @@
     function showStations (list) {
       for (var i = 0; i < list.length; i++) {
         var item = list[i]
+        // Если координаты пункта обнародованы
         if (item.published) {
+          // Добавляем пункт продажи на карту
           var placemark = new ymaps.Placemark([item.lat, item.lon], {
-            balloonContentHeader: item.name,
+            balloonContentHeader: item.params.hint,
             balloonContentBody: '<address><p>' + item.address + '</p></address>',
             balloonContentFooter: '<em>' + item.lat + ', ' + item.lon + '</em>',
             closeButton: false
           })
           map.geoObjects.add(placemark)
+
+          // Добавляем пункт продажи в таблицу
+          addRowToTable({
+            title: item.params.name,
+            address: item.address,
+            schedule: item.params.wrktime,
+            coords: null
+          })
         }
+      }
+      function addRowToTable (info) {
+        var storesList = document.querySelector('#stores-list')
+        var tr = document.createElement('tr')
+        tr.classList = 'table__row-content'
+        var title = document.createElement('td')
+        title.classList = 'table__td'
+        title.dataset.title = 'Наименование'
+        title.innerText = info.title != 'undefined' ? info.title : ''
+        tr.appendChild(title)
+        var address = document.createElement('td')
+        address.classList = 'table__td'
+        address.dataset.title = 'Адрес'
+        address.innerText = info.address != 'undefined' ? info.address : ''
+        tr.appendChild(address)
+        var schedule = document.createElement('td')
+        schedule.classList = 'table__td'
+        schedule.dataset.title = 'Режим работы'
+        schedule.innerText = info.schedule != 'undefined' ? info.schedule : ''
+        tr.appendChild(schedule)
+        var mapLink = document.createElement('td')
+        mapLink.classList = 'table__td'
+        mapLink.dataset.title = 'Карта'
+        mapLink.innerHTML = "<a class='table__link' href='" + (info.coords || 'img/general/head_phone.png') + "' data-fancybox>Посмотреть схему проезда</a>"
+        tr.appendChild(mapLink)
+        storesList.appendChild(tr)
       }
     }
   }
