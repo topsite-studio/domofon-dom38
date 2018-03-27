@@ -1,4 +1,4 @@
-(function ($, grecaptcha, alert, Tooltip, svg4everybody, objectFitImages, VP) {
+(function ($, grecaptcha, alert, Tooltip, svg4everybody, objectFitImages, VP, console) {
   'use strict'
 
   svg4everybody()
@@ -230,6 +230,17 @@
   function keystoresMap () {
     var myMap
     var ymaps = window.ymaps
+
+    var $scope = {
+      me: {
+        lat: 52.259991556571,
+        lon: 104.28508262634,
+        hint: 'Я тут!',
+        icon: 'assets/images/me.png',
+        draggable: true,
+        boundedZoom: false
+      }
+    }
     ymaps.ready(function () {
       var geolocation = ymaps.geolocation
 
@@ -260,7 +271,53 @@
         result.geoObjects.options.set('preset', 'islands#blueCircleIcon')
         myMap.geoObjects.add(result.geoObjects)
       })
+
+      reorderFeeStations(myMap)
     })
+  }
+
+  function reorderFeeStations (map) {
+    /*
+      Пример объекта:
+      __v: 0
+      _id: "5788577c11d5f1d615db4c58"
+      address: "г Иркутск, ул Рабочего Штаба, д. 9"
+      comment: "Пункт оплаты не найден на сайте"
+      coords: Object { lat: 52.301544, lon: 104.297089 }
+      id: "5788577c11d5f1d615db4c58"
+      lat: 52.301544
+      lon: 104.297089
+      name: "ПОДРАЗДЕЛЕНИЕ БАНКА"
+      params: Object { jtype: "OibItt", id: 952156, code: "952156", … }
+      published: false
+      type: "sberbank"
+    */
+    var stations = {
+      sberbank: null,
+      gorod: null
+    }
+    $.getJSON('https://domofon.dom38.ru/api/fee-stations/sberbank', function (data) {
+      stations.sberbank = data
+      showStations(stations.sberbank)
+    })
+    $.getJSON('https://domofon.dom38.ru/api/fee-stations/uplati', function (data) {
+      stations.gorod = data
+      showStations(stations.gorod)
+    })
+
+    function showStations (list) {
+      for (var i = 0; i < list.length; i++) {
+        var item = list[i]
+        if (item.published) {
+          var placemark = new ymaps.Placemark([item.lat, item.lon], {
+            balloonContentHeader: item.name,
+            balloonContentBody: '<address><p>' + item.address + '</p></address>',
+            balloonContentFooter: '<em>' + item.lat + ', ' + item.lon + '</em>'
+          })
+          map.geoObjects.add(placemark)
+        }
+      }
+    }
   }
 
   var keystoresMapObject = document.querySelector('#keystores-map')
@@ -273,4 +330,4 @@
   if (document.querySelector('.page--keystores')) {
 
   }
-}(window.$, window.grecaptcha, window.alert, window.Tooltip, window.svg4everybody, window.objectFitImages, window.VP))
+}(window.$, window.grecaptcha, window.alert, window.Tooltip, window.svg4everybody, window.objectFitImages, window.VP, window.console))
