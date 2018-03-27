@@ -231,36 +231,35 @@
     var myMap
     var ymaps = window.ymaps
     ymaps.ready(function () {
-      var geolocation = getCurrentLocation()
-      console.log(geolocation)
-      if (!geolocation) {
-        console.error('Пользователь запретил использовать его местоположение на сайте.')
-      } else {
-        console.info('geolocation = OK')
-        myMap = new ymaps.Map('keystores-map', {
-          center: [geolocation.lat, geolocation.lon],
-          zoom: 17
-        })
-        var myPlacemark = new ymaps.Placemark([56.342436, 43.941972], {}, {
-        })
-        myMap.geoObjects.add(myPlacemark) // Размещение геообъекта на карте.
-      }
+      var geolocation = ymaps.geolocation
 
-      function getCurrentLocation () {
-        var result
-        if (navigator.geolocation) {
-          navigator.geolocation.getCurrentPosition(function (position) {
-            result = {
-              lat: position.coords.latitude,
-              lon: position.coords.longitude,
-              acc: position.coords.accuracy
-            }
-            return result
-          })
-        } else {
-          return null
-        }
-      }
+      myMap = new ymaps.Map('keystores-map', {
+        center: [geolocation.lat, geolocation.lon],
+        zoom: 17
+      })
+
+      var myLocation = new ymaps.Placemark([56.342436, 43.941972])
+      myMap.geoObjects.add(myLocation)
+
+      geolocation.get({
+        provider: 'yandex',
+        mapStateAutoApply: true
+      }).then(function (result) {
+        result.geoObjects.options.set('preset', 'islands#redCircleIcon')
+        result.geoObjects.get(0).properties.set({
+          balloonContentBody: 'Мое местоположение'
+        })
+        myMap.geoObjects.add(result.geoObjects)
+      })
+
+      geolocation.get({
+        provider: 'browser',
+        mapStateAutoApply: true
+      }).then(function (result) {
+        // Если браузер не поддерживает эту функциональность, метка не будет добавлена на карту.
+        result.geoObjects.options.set('preset', 'islands#blueCircleIcon')
+        myMap.geoObjects.add(result.geoObjects)
+      })
     })
   }
 
