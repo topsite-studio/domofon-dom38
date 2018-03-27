@@ -244,6 +244,7 @@
     ymaps.ready(function () {
       var geolocation = ymaps.geolocation
 
+      // TODO: Настроить объединение всех пунктов продаж в кластеры
       myMap = new ymaps.Map('keystores-map', {
         center: [geolocation.lat, geolocation.lon],
         zoom: 17
@@ -312,7 +313,8 @@
           var placemark = new ymaps.Placemark([item.lat, item.lon], {
             balloonContentHeader: item.name,
             balloonContentBody: '<address><p>' + item.address + '</p></address>',
-            balloonContentFooter: '<em>' + item.lat + ', ' + item.lon + '</em>'
+            balloonContentFooter: '<em>' + item.lat + ', ' + item.lon + '</em>',
+            closeButton: false
           })
           map.geoObjects.add(placemark)
         }
