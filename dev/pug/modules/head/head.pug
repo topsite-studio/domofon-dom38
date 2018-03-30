@@ -13,6 +13,9 @@ mixin head()
   link(rel='apple-touch-icon', sizes='72x72', href='img/favicon/apple-touch-icon-72x72.jpg')
   link(rel='apple-touch-icon', sizes='114x114', href='img/favicon/apple-touch-icon-114x114.jpg')
   //- favicon block end
+  
+  - var today = new Date()
+  - var anticache = "?"+ today.getDate() +"-"+ (today.getMonth() + 1) +"-"+ today.getFullYear() +"-"+ today.getHours() +"-"+ today.getMinutes()
 
   // Chrome, Firefox OS and Opera
   meta(name='theme-color', content='#000')
@@ -26,11 +29,10 @@ mixin head()
     script(src='https://oss.maxcdn.com/respond/1.4.2/respond.min.js')
 
   //- load css
-  //- link(rel='stylesheet', href='css/libs.css?v_1')
-  link(rel='stylesheet', href='css/hamburgers.css?v_1')
+  link(rel='stylesheet', href='css/libs.css'+anticache)
   //- link(rel="stylesheet", href="https://cdn.jsdelivr.net/npm/tooltipster@4.2.6/dist/css/tooltipster.bundle.css?v_1")
   //- link(rel="stylesheet", href="https://cdn.jsdelivr.net/npm/tooltipster@4.2.6/dist/css/plugins/tooltipster/sideTip/themes/tooltipster-sideTip-shadow.min.css?v_1")
   link(rel="stylesheet", href="https://cdn.jsdelivr.net/npm/normalize.css@8.0.0/normalize.min.css")
   link(rel='stylesheet', href='https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.2.5/jquery.fancybox.min.css?v_1')
-  link(rel="stylesheet", href="css/main.css?v_1")
+  link(rel="stylesheet", href="css/main.css"+anticache)
   //-load css

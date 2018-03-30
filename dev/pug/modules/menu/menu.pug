@@ -50,26 +50,27 @@ mixin menuClick()
  
 
 mixin menuHover()
+  mixin item(title, link, isActive)
+    li.header__list-item&attributes(attributes)(class=isActive ? 'header__list-item--active' : null)
+      if !isActive
+        a.header__list-link(href=link)!=title
+      else
+        span.header__list-link!=title
+
   nav.header__nav-wrap
     a#openup.header__list-open(href='#')
       span.hamburger.hamburger--collapse
         span.hamburger-box
           span.hamburger-inner
     ul.header__list
-      li.header__list-item
-        a.header__list-link(href="index.html") Главная
-      li.header__list-item.header__list-item--active
-        a.header__list-link(href='instruction.html') Как пользоваться
-      li.header__list-item
-        a.header__list-link(href='faq.html') Вопрос-ответ 
-      li.header__list-item
-        a.header__list-link(href='key-retailers.html') Пункты продажи ключей
-      li.header__list-item
-        a.header__list-link(href='payment.html') Где оплатить 
-      li.header__list-item
-        a.header__list-link(href='#') О компании
-      li.header__list-item
-        a.header__list-link(href='contacts.html') Контакты
+      +item('Главная', 'index.html', pageCode === 'main')
+      +item('Как пользоваться', 'instruction.html', pageCode === 'instruction')
+      +item('Вопрос-ответ', 'faq.html', pageCode === 'faq')
+      +item('Пункты продажи ключей', 'key-retailers.html', pageCode === 'key-retailers')
+      +item('Где оплатить', 'payment.html', pageCode === 'payment')
+      +item('О компании', 'about.html', pageCode === 'about')
+      +item('Контакты', 'contacts.html', pageCode === 'contacts')
+
       li.header__list-item.header__list-item--user.header__list-item--cust
         a.header__list-link(href='login.html') 
           span.item-user__content  
