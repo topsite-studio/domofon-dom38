@@ -227,41 +227,25 @@
     $('[data-form=payment]').submit(contractLogin)
   }
 
-  function keystoresMap () {
+  if (document.querySelector('.page--wheretopay')) {
+    document.addEventListener('DOMContentLoaded', whereToPay)
+  }
+
+  if (document.querySelector('.page--keyretailers')) {
+    console.log('key retailers map')
+    document.addEventListener('DOMContentLoaded', keyretail)
+  }
+
+  function whereToPay () {
     var myMap
     var ymaps = window.ymaps
 
-    var $scope = {
-      me: {
-        lat: 52.259991556571,
-        lon: 104.28508262634,
-        hint: 'Я тут!',
-        icon: 'assets/images/me.png',
-        draggable: true,
-        boundedZoom: false
-      }
-    }
     ymaps.ready(function () {
       var geolocation = ymaps.geolocation
 
-      // TODO: Настроить объединение всех пунктов продаж в кластеры
-      myMap = new ymaps.Map('keystores-map', {
+      myMap = new ymaps.Map('map', {
         center: [geolocation.lat, geolocation.lon],
         zoom: 17
-      })
-
-      var myLocation = new ymaps.Placemark([56.342436, 43.941972])
-      myMap.geoObjects.add(myLocation)
-
-      geolocation.get({
-        provider: 'yandex',
-        mapStateAutoApply: true
-      }).then(function (result) {
-        result.geoObjects.options.set('preset', 'islands#redCircleIcon')
-        result.geoObjects.get(0).properties.set({
-          balloonContentBody: 'Мое местоположение'
-        })
-        myMap.geoObjects.add(result.geoObjects)
       })
 
       geolocation.get({
@@ -269,7 +253,7 @@
         mapStateAutoApply: true
       }).then(function (result) {
         // Если браузер не поддерживает эту функциональность, метка не будет добавлена на карту.
-        result.geoObjects.options.set('preset', 'islands#blueCircleIcon')
+        result.geoObjects.options.set('preset', 'islands#redCircleIcon')
         myMap.geoObjects.add(result.geoObjects)
       })
 
@@ -307,6 +291,11 @@
     })
 
     function showStations (list) {
+      var arr = []
+      var clusterer = new ymaps.Clusterer({
+        preset: 'islands#invertedBlueClusterIcons',
+        groupByCoordinates: false
+      })
       for (var i = 0; i < list.length; i++) {
         var item = list[i]
         // Если координаты пункта обнародованы
@@ -318,7 +307,7 @@
             balloonContentFooter: '<em>' + item.lat + ', ' + item.lon + '</em>',
             closeButton: false
           })
-          map.geoObjects.add(placemark)
+          arr.push(placemark)
 
           // Добавляем пункт продажи в таблицу
           addRowToTable({
@@ -329,6 +318,11 @@
           })
         }
       }
+      console.log('Вот и перебрали все точки. Теперь выводим их в кластеризатор')
+      clusterer.add(arr)
+      console.log('А теперь добавляем кластеризатор на карту')
+      map.geoObjects.add(clusterer)
+
       function addRowToTable (info) {
         var storesList = document.querySelector('#stores-list')
         var tr = document.createElement('tr')
@@ -336,17 +330,17 @@
         var title = document.createElement('td')
         title.classList = 'table__td'
         title.dataset.title = 'Наименование'
-        title.innerText = info.title != 'undefined' ? info.title : ''
+        title.innerText = info.title !== 'undefined' ? info.title : ''
         tr.appendChild(title)
         var address = document.createElement('td')
         address.classList = 'table__td'
         address.dataset.title = 'Адрес'
-        address.innerText = info.address != 'undefined' ? info.address : ''
+        address.innerText = info.address !== 'undefined' ? info.address : ''
         tr.appendChild(address)
         var schedule = document.createElement('td')
         schedule.classList = 'table__td'
         schedule.dataset.title = 'Режим работы'
-        schedule.innerText = info.schedule != 'undefined' ? info.schedule : ''
+        schedule.innerText = info.schedule !== 'undefined' ? info.schedule : ''
         tr.appendChild(schedule)
         var mapLink = document.createElement('td')
         mapLink.classList = 'table__td'
@@ -358,14 +352,7 @@
     }
   }
 
-  var keystoresMapObject = document.querySelector('#keystores-map')
-
-  if (keystoresMapObject) {
-    console.log('Запускаем карту работяги')
-    document.addEventListener('DOMContentLoaded', keystoresMap)
-  }
-
-  if (document.querySelector('.page--keystores')) {
-
+  function keyretail () {
+    console.log('active!')
   }
 }(window.$, window.grecaptcha, window.alert, window.Tooltip, window.svg4everybody, window.objectFitImages, window.VP, window.console))
