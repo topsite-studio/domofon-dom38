@@ -4,8 +4,12 @@ mixin header(name)
     .header__img 
       img(src="img/general/head_phone.png", alt="image")
     .header__top-line
-      a.logo(href="#") ПРО
-        span.logo__accent ДОМОФОН
+      if pageCode === 'main'
+        span.logo ПРО
+          span.logo__accent ДОМОФОН
+      else
+        a.logo(href="/index.html") ПРО
+          span.logo__accent ДОМОФОН
       +menuHover()
     
     .header__content
