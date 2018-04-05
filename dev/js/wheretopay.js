@@ -26,7 +26,12 @@
       }).then(function (result) {
         // Если браузер не поддерживает эту функциональность, метка не будет добавлена на карту.
         result.geoObjects.options.set('preset', 'islands#redCircleIcon')
+        userLocation = result
+        console.log({
+          userLocation: userLocation
+        })
         myMap.geoObjects.add(result.geoObjects)
+        calculateDistance(myMap, userLocation)
       })
 
       reorderFeeStations(myMap, userLocation)
@@ -123,5 +128,11 @@
         storesList.appendChild(tr)
       }
     }
+  }
+
+  function calculateDistance (map, userLocation) {
+    // var dot = map.ICoordPoint(104, 52)
+    // var distance = userLocation.GeoPoint.distance(dot)
+    console.info('test calculateDistance()')
   }
 }(window.ymaps, window.$))
