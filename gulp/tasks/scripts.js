@@ -122,8 +122,7 @@ module.exports = function() {
         dead_code: true,
         conditionals: true,// optimize if else
         booleans: true,
-        join_vars: true,//join consecutive var statements
-        drop_console: true
+          drop_console: false
       },
       output: {
         beautify: true
