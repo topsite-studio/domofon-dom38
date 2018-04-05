@@ -4,6 +4,9 @@ block head
   - var title = 'Пункты оплаты'
   - var bodyClass = 'page page--wheretopay'
   - var pageCode = 'wheretopay'
+  
+  script(src="https://api-maps.yandex.ru/2.1/?lang=ru_RU&load=package.standard")
+
 block content
   +header_min()
   
@@ -27,8 +30,7 @@ block content
               tr.table__row-title
                 th Наименование
                 th Адрес
-                th Режим работы
-                th Карта
+                th Расстояние
             tbody#stores-list
               //- tr.table__row-content
                 td(data-title="Наименование").table__td Маг. "Городок"
@@ -66,6 +68,3 @@ block content
                 td(data-title="Режим работы").table__td Ежед., 10:00 - 21:00
                 td(data-title="Карта").table__td
                   a.table__link(data-fancybox, href='img/general/head_phone.png') Посмотреть схему проезда
-
-block script
-  script(src="https://api-maps.yandex.ru/2.1/?lang=ru_RU&load=package.standard")

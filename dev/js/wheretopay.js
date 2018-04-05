@@ -14,8 +14,11 @@
 
       myMap = new ymaps.Map('map', {
         center: [geolocation.lat, geolocation.lon],
-        zoom: 17
+        zoom: 17,
+        controls: ['zoomControl']
       })
+
+      var userLocation = null
 
       geolocation.get({
         provider: 'browser',
@@ -26,10 +29,11 @@
         myMap.geoObjects.add(result.geoObjects)
       })
 
-      reorderFeeStations(myMap)
+      reorderFeeStations(myMap, userLocation)
     })
   }
-  function reorderFeeStations (map) {
+
+  function reorderFeeStations (map, userLocation) {
     /*
       Пример объекта:
       __v: 0
@@ -81,8 +85,8 @@
           addRowToTable({
             title: item.params.name,
             address: item.address,
-            schedule: item.params.wrktime,
-            coords: null
+            lat: item.lat,
+            lon: item.lon
           })
         }
       }
@@ -95,26 +99,27 @@
         var storesList = document.querySelector('#stores-list')
         var tr = document.createElement('tr')
         tr.classList = 'table__row-content'
+
         var title = document.createElement('td')
         title.classList = 'table__td'
         title.dataset.title = 'Наименование'
         title.innerText = info.title !== 'undefined' ? info.title : ''
         tr.appendChild(title)
+
         var address = document.createElement('td')
         address.classList = 'table__td'
         address.dataset.title = 'Адрес'
         address.innerText = info.address !== 'undefined' ? info.address : ''
         tr.appendChild(address)
-        var schedule = document.createElement('td')
-        schedule.classList = 'table__td'
-        schedule.dataset.title = 'Режим работы'
-        schedule.innerText = info.schedule !== 'undefined' ? info.schedule : ''
-        tr.appendChild(schedule)
-        var mapLink = document.createElement('td')
-        mapLink.classList = 'table__td'
-        mapLink.dataset.title = 'Карта'
-        mapLink.innerHTML = "<a class='table__link' href='" + (info.coords || 'img/general/head_phone.png') + "' data-fancybox>Посмотреть схему проезда</a>"
-        tr.appendChild(mapLink)
+
+        var distance = document.createElement('td')
+        distance.classList = 'table__td'
+        distance.dataset.lat = info.lat
+        distance.dataset.lon = info.lon
+        distance.dataset.title = 'Расстояние'
+        distance.innerHTML = 'Неизвестно'
+        tr.appendChild(distance)
+
         storesList.appendChild(tr)
       }
     }
