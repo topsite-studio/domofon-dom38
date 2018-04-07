@@ -95,6 +95,16 @@
               groupByCoordinates: false
             })
 
+            function comparingWay (a, b) {
+              var distance = {
+                a: (userLocation !== null) ? ymaps.coordSystem.geo.getDistance(userLocation.position, [a.lat, a.lon]) : 0,
+                b: (userLocation !== null) ? ymaps.coordSystem.geo.getDistance(userLocation.position, [b.lat, b.lon]) : 0
+              }
+              return distance.a - distance.b
+            }
+
+            stations.sort(comparingWay)
+
             stations.map(function (item) {
               var distance = (userLocation !== null) ? parseInt(ymaps.coordSystem.geo.getDistance(userLocation.position, [item.lat, item.lon])) + ' м' : ''
               // console.log(placemark.geometry.getCoordinates())
