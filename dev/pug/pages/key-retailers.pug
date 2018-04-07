@@ -4,6 +4,10 @@ block head
   - var title = 'Пункты продажи ключей'
   - var bodyClass = 'page page--keyretailers'
   - var pageCode = 'key-retailers'
+
+block head-script
+  script(src="https://api-maps.yandex.ru/2.1/?lang=ru_RU&load=package.standard")
+    
 block content
   +header_min()
   
@@ -66,6 +70,3 @@ block content
                 td(data-title="Режим работы").table__td Ежед., 10:00 - 21:00
                 td(data-title="Карта").table__td
                   a.table__link(data-fancybox, href='img/general/head_phone.png') Посмотреть схему проезда
-
-block script
-  script(src="https://api-maps.yandex.ru/2.1/?lang=ru_RU&load=package.standard")
