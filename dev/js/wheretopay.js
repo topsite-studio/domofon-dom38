@@ -6,19 +6,74 @@
   }
 
   function whereToPay () {
-    var myMap
-    var ymaps = window.ymaps
+    ymaps.ready(init)
 
-    ymaps.ready(function () {
+    function reorderFeeStations (map, userLocation, data) {
+      var geoObjects = []
+
+      data.map(function (item) {
+        // Если координаты пункта обнародованы
+        if (item.published) {
+          // Добавляем пункт продажи на карту
+          var placemark = new ymaps.GeoObject({
+            geometry: {
+              type: 'Point',
+              coordinates: [item.lat, item.lon]
+            },
+            properties: {
+              balloonContentHeader: item.params.hint,
+              balloonContentBody: '<address><p>' + item.address + '</p></address>',
+              balloonContentFooter: '<em>' + item.lat + ', ' + item.lon + '</em>',
+              closeButton: false
+            }
+          })
+          geoObjects.push(placemark)
+        }
+      })
+
+      return geoObjects
+    }
+
+    function addRowToTable (info) {
+      var storesList = document.querySelector('#stores-list')
+      var tr = document.createElement('tr')
+      tr.className = 'table__row-content'
+
+      var title = document.createElement('td')
+      title.className = 'table__td'
+      title.dataset.title = 'Наименование'
+      title.innerText = info.title !== 'undefined' ? info.title : ''
+      tr.appendChild(title)
+
+      var address = document.createElement('td')
+      address.className = 'table__td'
+      address.dataset.title = 'Адрес'
+      address.innerText = info.address !== 'undefined' ? info.address : ''
+      tr.appendChild(address)
+
+      var distance = document.createElement('td')
+      distance.className = 'table__td table__td--distance'
+      distance.dataset.lat = info.lat
+      distance.dataset.lon = info.lon
+      distance.dataset.title = 'Расстояние'
+      distance.dataset.distance = info.distance
+      distance.innerText = info.distance
+      tr.appendChild(distance)
+
+      storesList.appendChild(tr)
+    }
+
+    function init () {
       var geolocation = ymaps.geolocation
 
-      myMap = new ymaps.Map('map', {
+      var myMap = new ymaps.Map('map', {
         center: [geolocation.lat, geolocation.lon],
         zoom: 17,
         controls: ['zoomControl']
       })
 
-      var userLocation = null
+      var stations = []
+      var userLocation
 
       geolocation.get({
         provider: 'browser',
@@ -26,113 +81,37 @@
       }).then(function (result) {
         // Если браузер не поддерживает эту функциональность, метка не будет добавлена на карту.
         result.geoObjects.options.set('preset', 'islands#redCircleIcon')
-        userLocation = result
-        console.log({
-          userLocation: userLocation
+        userLocation = result.geoObjects
+        myMap.geoObjects.add(userLocation)
+
+        $.getJSON('https://domofon.dom38.ru/api/fee-stations/sberbank', function (sberbank) {
+          stations = stations.concat(sberbank)
+          $.getJSON('https://domofon.dom38.ru/api/fee-stations/uplati', function (uplati) {
+            stations = stations.concat(uplati)
+
+            var placemarks = reorderFeeStations(myMap, userLocation, stations)
+            var clusterer = new ymaps.Clusterer({
+              preset: 'islands#invertedBlueClusterIcons',
+              groupByCoordinates: false
+            })
+
+            stations.map(function (item) {
+              var distance = (userLocation !== null) ? parseInt(ymaps.coordSystem.geo.getDistance(userLocation.position, [item.lat, item.lon])) + ' м' : ''
+              // console.log(placemark.geometry.getCoordinates())
+              // Добавляем пункт продажи в таблицу
+              addRowToTable({
+                title: item.params.name,
+                address: item.address,
+                lat: item.lat,
+                lon: item.lon,
+                distance: distance
+              })
+            })
+            clusterer.add(placemarks)
+            myMap.geoObjects.add(clusterer)
+          })
         })
-        myMap.geoObjects.add(result.geoObjects)
-        calculateDistance(myMap, userLocation)
       })
-
-      reorderFeeStations(myMap, userLocation)
-    })
-  }
-
-  function reorderFeeStations (map, userLocation) {
-    /*
-      Пример объекта:
-      __v: 0
-      _id: "5788577c11d5f1d615db4c58"
-      address: "г Иркутск, ул Рабочего Штаба, д. 9"
-      comment: "Пункт оплаты не найден на сайте"
-      coords: Object { lat: 52.301544, lon: 104.297089 }
-      id: "5788577c11d5f1d615db4c58"
-      lat: 52.301544
-      lon: 104.297089
-      name: "ПОДРАЗДЕЛЕНИЕ БАНКА"
-      params: Object { jtype: "OibItt", id: 952156, code: "952156", … }
-      published: false
-      type: "sberbank"
-    */
-    var stations = {
-      sberbank: null,
-      gorod: null
     }
-    $.getJSON('https://domofon.dom38.ru/api/fee-stations/sberbank', function (data) {
-      stations.sberbank = data
-      showStations(stations.sberbank)
-    })
-    $.getJSON('https://domofon.dom38.ru/api/fee-stations/uplati', function (data) {
-      stations.gorod = data
-      showStations(stations.gorod)
-    })
-
-    function showStations (list) {
-      var arr = []
-      var clusterer = new ymaps.Clusterer({
-        preset: 'islands#invertedBlueClusterIcons',
-        groupByCoordinates: false
-      })
-      for (var i = 0; i < list.length; i++) {
-        var item = list[i]
-        // Если координаты пункта обнародованы
-        if (item.published) {
-          // Добавляем пункт продажи на карту
-          var placemark = new ymaps.Placemark([item.lat, item.lon], {
-            balloonContentHeader: item.params.hint,
-            balloonContentBody: '<address><p>' + item.address + '</p></address>',
-            balloonContentFooter: '<em>' + item.lat + ', ' + item.lon + '</em>',
-            closeButton: false
-          })
-          arr.push(placemark)
-
-          // Добавляем пункт продажи в таблицу
-          addRowToTable({
-            title: item.params.name,
-            address: item.address,
-            lat: item.lat,
-            lon: item.lon
-          })
-        }
-      }
-      console.log('Вот и перебрали все точки. Теперь выводим их в кластеризатор')
-      clusterer.add(arr)
-      console.log('А теперь добавляем кластеризатор на карту')
-      map.geoObjects.add(clusterer)
-
-      function addRowToTable (info) {
-        var storesList = document.querySelector('#stores-list')
-        var tr = document.createElement('tr')
-        tr.classList = 'table__row-content'
-
-        var title = document.createElement('td')
-        title.classList = 'table__td'
-        title.dataset.title = 'Наименование'
-        title.innerText = info.title !== 'undefined' ? info.title : ''
-        tr.appendChild(title)
-
-        var address = document.createElement('td')
-        address.classList = 'table__td'
-        address.dataset.title = 'Адрес'
-        address.innerText = info.address !== 'undefined' ? info.address : ''
-        tr.appendChild(address)
-
-        var distance = document.createElement('td')
-        distance.classList = 'table__td'
-        distance.dataset.lat = info.lat
-        distance.dataset.lon = info.lon
-        distance.dataset.title = 'Расстояние'
-        distance.innerHTML = 'Неизвестно'
-        tr.appendChild(distance)
-
-        storesList.appendChild(tr)
-      }
-    }
-  }
-
-  function calculateDistance (map, userLocation) {
-    // var dot = map.ICoordPoint(104, 52)
-    // var distance = userLocation.GeoPoint.distance(dot)
-    console.info('test calculateDistance()')
   }
 }(window.ymaps, window.$))
