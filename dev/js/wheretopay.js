@@ -6,9 +6,10 @@
   }
 
   function whereToPay () {
+    var myMap
     ymaps.ready(init)
 
-    function reorderFeeStations (map, userLocation, data) {
+    function reorderFeeStations (map, data) {
       var geoObjects = []
 
       data.map(function (item) {
@@ -89,7 +90,7 @@
           $.getJSON('https://domofon.dom38.ru/api/fee-stations/uplati', function (uplati) {
             stations = stations.concat(uplati)
 
-            var placemarks = reorderFeeStations(myMap, userLocation, stations)
+            var placemarks = reorderFeeStations(myMap, stations)
             var clusterer = new ymaps.Clusterer({
               preset: 'islands#invertedBlueClusterIcons',
               groupByCoordinates: false
