@@ -166,9 +166,15 @@
                 distance: distance
               })
             })
+
             $('.map__btn[data-category]').click(function () {
-              filter($(this).data('category'), stations)
+              if ($(this).hasClass('map__btn--active') === false) {
+                $('.map__btn--active').removeClass('map__btn--active')
+                $(this).toggleClass('map__btn--active')
+                filter($(this).data('category'), stations)
+              }
             })
+
             clusterer.add(placemarks)
             myMap.geoObjects.add(clusterer)
           })
