@@ -69,13 +69,16 @@
     function filter (category, data) {
       console.groupCollapsed('filter(button, data)')
       console.log('Фильтруем! Категория: ' + category)
+
+      var filteredData
       var tableRows = document.querySelectorAll('.table__row-content')
+
       for (var i = 0; i < tableRows.length; i++) {
         var row = tableRows[i]
-        row.hidden = (row.dataset.category === category)
+        row.hidden = category === 'all' ? false : (row.dataset.category === category)
       }
 
-      var filteredData = data.filter(function (item) {
+      filteredData = category === 'all' ? data : data.filter(function (item) {
         return (item.type === category)
       })
       console.log(filteredData)
@@ -96,6 +99,9 @@
           })
           break
         default:
+          filteredCluster.options.set({
+            preset: 'islands#invertedBlueClusterIcons'
+          })
           break
       }
       filteredCluster.add(filteredPlacemarks)
