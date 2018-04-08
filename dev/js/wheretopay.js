@@ -10,6 +10,7 @@
     ymaps.ready(init)
 
     function reorderFeeStations (map, data) {
+      map.geoObjects.removeAll()
       var geoObjects = []
 
       data.map(function (item) {
@@ -39,6 +40,7 @@
       var storesList = document.querySelector('#stores-list')
       var tr = document.createElement('tr')
       tr.className = 'table__row-content'
+      tr.dataset.category = info.category
 
       var title = document.createElement('td')
       title.className = 'table__td'
@@ -64,10 +66,49 @@
       storesList.appendChild(tr)
     }
 
+    function filter (category, data) {
+      console.groupCollapsed('filter(button, data)')
+      console.log('Фильтруем! Категория: ' + category)
+      var tableRows = document.querySelectorAll('.table__row-content')
+      for (var i = 0; i < tableRows.length; i++) {
+        var row = tableRows[i]
+        row.hidden = (row.dataset.category === category)
+      }
+
+      var filteredData = data.filter(function (item) {
+        return (item.type === category)
+      })
+      console.log(filteredData)
+
+      var filteredPlacemarks = reorderFeeStations(myMap, filteredData)
+      var filteredCluster = new ymaps.Clusterer({
+        groupByCoordinates: false
+      })
+      switch (category) {
+        case 'sberbank':
+          filteredCluster.options.set({
+            preset: 'islands#invertedGreenClusterIcons'
+          })
+          break
+        case 'gorod':
+          filteredCluster.options.set({
+            preset: 'islands#invertedOrangeClusterIcons'
+          })
+          break
+        default:
+          break
+      }
+      filteredCluster.add(filteredPlacemarks)
+      myMap.geoObjects.add(filteredCluster)
+
+      console.groupEnd()
+      return true
+    }
+
     function init () {
       var geolocation = ymaps.geolocation
 
-      var myMap = new ymaps.Map('map', {
+      myMap = new ymaps.Map('map', {
         center: [geolocation.lat, geolocation.lon],
         zoom: 17,
         controls: ['zoomControl']
@@ -114,9 +155,13 @@
                 title: item.params.name,
                 address: item.address,
                 lat: item.lat,
+                category: item.type,
                 lon: item.lon,
                 distance: distance
               })
+            })
+            $('.map__btn[data-category]').click(function () {
+              filter($(this).data('category'), stations)
             })
             clusterer.add(placemarks)
             myMap.geoObjects.add(clusterer)
