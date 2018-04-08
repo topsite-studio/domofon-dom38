@@ -1,0 +1,36 @@
+.map
+  padding: 50px 0
+  &__iframe
+    position: relative
+    iframe
+      width: 100%
+
+
+  &__filter
+    position: absolute
+    right: 0
+    top: 0
+    z-index: 10
+    padding: 5px
+
+
+  &__btn
+    $sberbank-brand-color: #1a9f29
+    $uplati-brand-color: #d57e2b
+    padding: 5px 10px
+    border-radius: .2em
+
+    &:focus
+      color: #fff
+      transition: 0s
+
+    &--sberbank
+      background-color: $sberbank-brand-color
+      &:hover,
+      &:focus
+        background-color: darken($sberbank-brand-color, 10)
+    &--uplati
+      background-color: $uplati-brand-color
+      &:hover,
+      &:focus
+        background-color: darken($uplati-brand-color, 10)
