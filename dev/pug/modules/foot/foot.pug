@@ -4,10 +4,11 @@ mixin foot()
       +svg('up-arrow')
     .foot__content
       .foot__item.foot__item--police 
-        | про домофон  © 2018
-        a(href="#").police-link Политика конфиденциальности
+        | про домофон &copy; 2018
+        a(href=docs.confidence).police-link Политика конфиденциальности
       .foot__item.foot__item--media
-        a(href="viber://pa?chatURI=pro_domofon&text=SendMe").media__link.media__link--vb
+        //noindex
+        a(href=contacts.bots.viberText).media__link.media__link--vb
           picture.media__link-image
             source(srcset='img/general/vb_l.png', media='(max-width: 768px)')
             source(srcset='img/general/vb.png')
@@ -16,7 +17,10 @@ mixin foot()
           //- img(src="img/general/vb.png", alt="image").media__mobile-ico.media__mobile-ico--def
           //- img(src="img/general/vb_l.png", alt="image").media__mobile-ico.media__mobile-ico--mob
           span.media__mobile-title Бот Viber 
-        a(href="https://t.me/ProDomofonBot").media__link.media__link--tg
+        ///noindex
+
+        //noindex
+        a(href=contacts.bots.telegram).media__link.media__link--tg
           picture.media__link-image
             source(srcset='img/general/tg_l.png', media='(max-width: 768px)')
             source(srcset='img/general/tg.png')
@@ -25,5 +29,8 @@ mixin foot()
           //- img(src="img/general/tg.png", alt="image").media__mobile-ico.media__mobile-ico--def
           //- img(src="img/general/tg_l.png", alt="image").media__mobile-ico.media__mobile-ico--mob
           span.media__mobile-title Бот Telegram
+        ///noindex
       .foot__item.foot__item--develop
-        a(href="#").develop__link: img(src="img/content/f_logo.png", alt="image").develop__logo
+        //noindex
+        a(href='//topsite38.ru/', target='_blank', rel='nofollow').develop__link: img(src="img/content/f_logo.png", alt="image").develop__logo
+        ///noindex
