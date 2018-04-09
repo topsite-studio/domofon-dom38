@@ -8,7 +8,7 @@ mixin header(name)
         span.logo ПРО
           span.logo__accent ДОМОФОН
       else
-        a.logo(href="/index.html") ПРО
+        a.logo(href="index.html") ПРО
           span.logo__accent ДОМОФОН
       +menuHover()
     
@@ -25,8 +25,12 @@ mixin header_min(name)
   - name = name || ''
   header(class="header header--auto " + name, id="head")
     .header__top-line
-      a.logo(href="#") ПРО
-        span.logo__accent ДОМОФОН
+      if pageCode === 'main'
+        span.logo ПРО
+          span.logo__accent ДОМОФОН
+      else
+        a.logo(href="index.html") ПРО
+          span.logo__accent ДОМОФОН
       +menuHover()
 
 
