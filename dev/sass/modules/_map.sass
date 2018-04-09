@@ -16,9 +16,11 @@
 
   &__btn
     $sberbank-brand-color: #1a9f29
-    $uplati-brand-color: #d57e2b
+    $uplati-brand-color: #3292d3
+    $all-brand-color: #d57e2b
     $sberbank-shadow-settings: 0 0 10px 0 $sberbank-brand-color
     $uplati-shadow-settings: 0 0 10px 0 $uplati-brand-color
+    $all-shadow-settings: 0 0 10px 0 $all-brand-color
     padding: 5px 10px
     border-radius: .2em
 
@@ -33,6 +35,7 @@
         background-color: darken($sberbank-brand-color, 10)
       &.map__btn--active
         box-shadow: $sberbank-shadow-settings
+
     &--uplati
       background-color: $uplati-brand-color
       &:hover,
@@ -40,3 +43,11 @@
         background-color: darken($uplati-brand-color, 10)
       &.map__btn--active
         box-shadow: $uplati-shadow-settings
+
+    &--all
+      background-color: $all-brand-color
+      &:hover,
+      &:focus
+        background-color: darken($all-brand-color, 10)
+      &.map__btn--active
+        box-shadow: $all-shadow-settings
