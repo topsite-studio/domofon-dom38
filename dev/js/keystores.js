@@ -73,15 +73,15 @@
 
       var myMap = new ymaps.Map('map', {
         center: [geolocation.lat, geolocation.lon],
-        zoom: 17,
-        controls: ['zoomControl']
+        zoom: 18,
+        controls: ['zoomControl', 'geolocationControl']
       })
 
       var userLocation
 
       geolocation.get({
         provider: 'browser',
-        mapStateAutoApply: true
+        mapStateAutoApply: false
       }).then(function (result) {
         // Если браузер не поддерживает эту функциональность, метка не будет добавлена на карту.
         result.geoObjects.options.set('preset', 'islands#redCircleIcon')
@@ -107,6 +107,9 @@
         })
 
         clusterer.add(placemarks)
+        myMap.setBounds(clusterer.getBounds(), {
+          checkZoomRange: true
+        })
         myMap.geoObjects.add(clusterer)
       })
     }
