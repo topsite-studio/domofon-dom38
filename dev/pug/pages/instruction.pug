@@ -80,7 +80,7 @@ block content
             b.instruction__desc-title Как начать пользоваться?
             | Под защитной полосой располагается Код Доступа, набрав который Вы сможете войти в подъезд вашего дома.
             br
-            | #[em.instruction__desc-alert ВНИМАНИЕ:] #[span.tooltips(data-tooltips=snoska.beforeGetIn) Перед входом в подъезд] по этому коду #[em.instruction__desc-alert ОБЯЗАТЕЛЬНО] отправить СМС-сообщение на номер #[a.instruction__desc-link(href="tel:"+contacts.phone.bot)= contacts.phone.bot] с содержанием:
+            | #[em.instruction__desc-alert ВНИМАНИЕ:] #[span.tooltips(data-tooltips=snoska.beforeGetIn) Перед входом в подъезд] по этому коду #[em.instruction__desc-alert ОБЯЗАТЕЛЬНО] отправить СМС-сообщение на номер #[a.link(href="tel:"+contacts.phone.bot)= contacts.phone.bot] с содержанием:
             code.instruction__code КодДоступа [пробел] НомерКвартиры
 
         .instruction__part.instruction__figure
@@ -95,7 +95,7 @@ block content
 
           p.instruction__desc 
             b.instruction__desc-title Как начать пользоваться?
-            | Перед входом в подъезд с использование КЛЮЧА НОВОСЕЛА или КодаДоступа отправьте СМС-сообщение на номер #[a.instruction__desc-link(href="tel:"+contacts.phone.bot)= contacts.phone.bot] с содержанием: 
+            | Перед входом в подъезд с использование КЛЮЧА НОВОСЕЛА или КодаДоступа отправьте СМС-сообщение на номер #[a.link(href="tel:"+contacts.phone.bot)= contacts.phone.bot] с содержанием: 
             code.instruction__code КодДоступа [пробел] НомерКвартиры
 
         .instruction__part.instruction__figure
@@ -220,8 +220,8 @@ block content
           p.instruction__desc
             b.instruction__desc-title Сделать заявку на вызов мастера
             | При неверной работе домофона Вы можете сделать с кнопок управления Viber, Android приложения или просто позвонив по телефонам 
-            a.instruction__desc-link(href="tel:"+contacts.phone.support1) #{contacts.phone.support1}, 
-            a.instruction__desc-link(href="tel:"+contacts.phone.support2) #{contacts.phone.support2}
+            a.link(href="tel:"+contacts.phone.support1) #{contacts.phone.support1}, 
+            a.link(href="tel:"+contacts.phone.support2) #{contacts.phone.support2}
 
         .instruction__part.instruction__figure
           .instruction__img 
