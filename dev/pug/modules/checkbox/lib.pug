@@ -1,0 +1,5 @@
+mixin checkbox(caption, name, value, isRequired)
+  label.checkbox
+    input.checkbox__input(type="checkbox", name=name, value=value, required=isRequired)
+    span.checkbox__icon
+    span.checkbox__caption!= caption

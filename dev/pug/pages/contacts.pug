@@ -9,6 +9,7 @@ block head-script
   script(src="https://api-maps.yandex.ru/2.1/?lang=ru_RU&load=package.standard")
 
 block content  
+  include ../modules/checkbox/pdn
   +header_min()
   
   .container
@@ -75,6 +76,7 @@ block content
               label.form__label Текст сообщения:   
                 textarea.form__textarea(name="textarea")  
           .form__item.form__item--btn.connection__item--btn
+            +pdn()
             p.desc 
               span *
               |  - поля обязательные к заполнению
