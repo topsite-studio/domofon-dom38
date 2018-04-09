@@ -115,8 +115,8 @@
       var geolocation = ymaps.geolocation
 
       myMap = new ymaps.Map('map', {
-        center: [geolocation.lat, geolocation.lon],
-        zoom: 17,
+        center: [52.266407, 104.281374],
+        zoom: 11,
         controls: ['zoomControl']
       })
 
@@ -179,6 +179,9 @@
 
             clusterer.add(placemarks)
             myMap.geoObjects.add(clusterer)
+            myMap.setBounds(clusterer.getBounds(), {
+              checkZoomRange: true
+            })
           })
         })
       })
