@@ -125,7 +125,7 @@
 
       geolocation.get({
         provider: 'browser',
-        mapStateAutoApply: true
+        mapStateAutoApply: false
       }).then(function (result) {
         // Если браузер не поддерживает эту функциональность, метка не будет добавлена на карту.
         result.geoObjects.options.set('preset', 'islands#redCircleIcon')
