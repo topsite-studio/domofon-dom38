@@ -117,7 +117,7 @@
       myMap = new ymaps.Map('map', {
         center: [52.266407, 104.281374],
         zoom: 11,
-        controls: ['zoomControl']
+        controls: ['zoomControl', 'geolocationControl']
       })
 
       var stations = []
