@@ -24,31 +24,31 @@ block content
 
   section.info-block
     .container
-      .row
+      //- .row
         .col
-          h2.subheading Title
+          h2.subheading Контакты
 
       .info-block__item
         .info-block__action  Адрес:
-        .info-block__desc Иркутск, ул. Красного Восстания, д.20 оф. 318
+        .info-block__desc Иркутск, ул. Декабрьских Событий, д. 100, оф. 311
+        .info-block__action 
+        .info-block__desc (пл. Декабристов, слева от Пенсионного Фонда РФ, Деловой центр МЕГАПОЛИС — наверх по остекленной лестнице)
 
       .info-block__item
-        .info-block__action По сотрудничеству 
-        .info-block__desc: a(href="tel:+73952973636") +7 (3952) 97-36-36
-        .info-block__action По поддержке  
-        .info-block__desc: a(href="tel:+73952973636") +7 (3952) 97-36-36
+        .info-block__action Контактный телефон 
+        .info-block__desc: a(href="tel:"+contacts.phone.bot) #{contacts.phone.bot} (Пн-Пт, с 10:00 до 18:00, обед с 14:00 до 15:00)
+
+        .info-block__action По вопросам неисправной работы системы ДОМОФОН
+        .info-block__desc: a(href="tel:"+contacts.phone.support2) #{contacts.phone.support2}
+        
   
       .info-block__item 
-        .info-block__action По сотрудничеству
-        .info-block__desc <a href="mailto:mail@topsite.studio">mail@topsite.studio</a>
-        .info-block__action По поддержке  
-        .info-block__desc <a href="mailto:help@topsite.studio">help@topsite.studio</a>
-        .info-block__action По продвижению
-        .info-block__desc <a href="mailto:marketing@topsite.studio">marketing@topsite.studio</a>
+        .info-block__action E-Mail
+        .info-block__desc: a(href="mailto:"+contacts.email) #{contacts.email}
   
       .info-block__item
         .info-block__action Режим работы:
-        .info-block__desc Время работы: Пн-Пт 10-19
+        .info-block__desc: time Пн-Пт: 10:00-14:00, 15:00-18:00
 
   section.connection
     .container
