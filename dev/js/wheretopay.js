@@ -137,6 +137,8 @@
           $.getJSON('https://domofon.dom38.ru/api/fee-stations/uplati', function (uplati) {
             stations = stations.concat(uplati)
 
+            document.querySelector('.map__filter').hidden = false
+
             var placemarks = reorderFeeStations(myMap, stations)
             var clusterer = new ymaps.Clusterer({
               preset: 'islands#invertedBlueClusterIcons',
