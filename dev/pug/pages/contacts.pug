@@ -56,28 +56,28 @@ block content
       .row
         .col
           h2.subheading Задать вопрос
-      form(class='form ' action='#', enctype='multipart/form-data')
-        // Hidden Required Fields
-        input(name='form_subject', value='Задать вопрос' + formTitle, type='hidden')
-        // END Hidden Required Fields
-        .form__list.connection__list
-          .connection__item 
-            .form__item
-              label.form__label Имя: <span class="form__label-req">*</span>
-                input.form__input(type='text', required='', name='name', placeholder='') 
-            .form__item
-              label.form__label Телефон:
-                input.form__input(type='tel', name='phone', placeholder='')
-            .form__item 
-              label.form__label Электронный адрес: <span class="form__label-req">*</span>
-                input.form__input(type='email', required='', name='mail', placeholder='')
-          .connection__item
-            .form__item
-              label.form__label Текст сообщения:   
-                textarea.form__textarea(name="textarea")  
-          .form__item.form__item--btn.connection__item--btn
-            +pdn()
-            p.desc 
-              span *
-              |  - поля обязательные к заполнению
-            button(type='submit').btn.btn--lg.btn--alert Отправить
+      form.form(data-type='mail')
+        input(type='hidden', name='handler', value='contacts')/
+        fieldset.form__fieldset
+          .form__list.connection__list
+            .connection__item 
+              .form__item
+                label.form__label Имя: <span class="form__label-req">*</span>
+                  input.form__input(type='text', required='', name='name', placeholder='') 
+              .form__item
+                label.form__label Телефон:
+                  input.form__input(type='tel', name='phone', placeholder='')
+              .form__item 
+                label.form__label Электронный адрес: <span class="form__label-req">*</span>
+                  input.form__input(type='email', required='', name='mail', placeholder='')
+            .connection__item
+              .form__item
+                label.form__label Текст сообщения:   
+                  textarea.form__textarea(name="textarea")  
+            .form__item.form__item--btn.connection__item--btn
+              +pdn()
+              p.desc 
+                span *
+                |  - поля обязательные к заполнению
+              button(type='submit').form__btn.btn.btn--lg.btn--alert Отправить
+        .result.form__result
