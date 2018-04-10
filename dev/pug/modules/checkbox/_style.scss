@@ -12,7 +12,9 @@ $checkbox-background-color: #fff;
   cursor: pointer;
 
   &__input {
-    visibility: hidden;
+    opacity: 0;
+    z-index: -10;
+    bottom: 0;
     position: absolute !important;
   }
 
