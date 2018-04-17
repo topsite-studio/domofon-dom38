@@ -120,7 +120,7 @@
         '?action=provider' +
         '&guid=' + ($scope.company.guid || 'scel') +
         '&acc=' + $scope.contract.number +
-        '&amount=' + $scope.total +
+        '&amount=500' +
         '&service=1' +
         '&utm_source=widget' +
         '&utm_medium=' + (($scope.company.guid || 'scel')) + '_full' +
