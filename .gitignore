@@ -1,11 +1,7 @@
 node_modules
-
 build
-
 .git
-
 .idea
-
 .gulp
-
 materials
+yarn-error.log
