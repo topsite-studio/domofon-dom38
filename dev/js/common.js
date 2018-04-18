@@ -14,16 +14,6 @@
     $this.parent().siblings('.accordion__item').removeClass('accordion__item--active')
   })
 
-  var toolTips = $('.tooltips')
-  toolTips.each(function (index, el) {
-    var toolData = $(this).data('tooltips')
-    new Tooltip(el, {
-      title: toolData,
-      placement: 'top',
-      html: true
-    })
-  })
-
   $('.to-top').on('click', function (event) {
     event.preventDefault()
     var id = $(this).attr('href')
