@@ -160,7 +160,7 @@
               // console.log(placemark.geometry.getCoordinates())
               // Добавляем пункт продажи в таблицу
               addRowToTable({
-                title: item.params.name,
+                title: item.name,
                 address: item.address,
                 lat: item.lat,
                 category: item.type,
