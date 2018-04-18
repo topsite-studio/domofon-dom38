@@ -20,7 +20,7 @@ block content
     .container
       .row
         .col
-          .map__iframe#map(style="width: 100%; height: 420px;")
+          .map__iframe#map
             .map__filter(hidden)
               button.map__btn.map__btn--all.btn.btn--pas(type='button', data-category='all') Все
               button.map__btn.map__btn--sberbank.btn.btn--pas(type='button', data-category='sberbank') Сбербанк
@@ -30,7 +30,7 @@ block content
     .container
       .row
         .col
-          table.table
+          table.table.table--places
             thead
               tr.table__row-title
                 th Наименование
