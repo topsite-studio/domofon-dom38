@@ -43,7 +43,7 @@
       tr.dataset.category = info.category
 
       var title = document.createElement('td')
-      title.className = 'table__td'
+      title.className = 'table__td table__td--title'
       title.dataset.title = 'Наименование'
       title.innerText = info.title !== 'undefined' ? info.title : ''
       tr.appendChild(title)
