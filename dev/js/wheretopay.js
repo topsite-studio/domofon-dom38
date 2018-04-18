@@ -155,7 +155,7 @@
 
             stations.sort(comparingWay)
 
-            stations.map(function (item) {
+            stations.map(function (item, index) {
               var distance = (userLocation !== null) ? parseInt(ymaps.coordSystem.geo.getDistance(userLocation.position, [item.lat, item.lon])) + ' м' : ''
               // console.log(placemark.geometry.getCoordinates())
               // Добавляем пункт продажи в таблицу
@@ -167,6 +167,10 @@
                 lon: item.lon,
                 distance: distance
               })
+
+              if (index === 0) {
+                document.querySelector('.table__row-content').classList.add('table__row-content--red')
+              }
             })
 
             $('.map__btn[data-category]').click(function () {

@@ -362,41 +362,44 @@ body
   table-layout: fixed
   font-size: 15px
   border-spacing: 0
-.table__row-title
-  th
-    padding: 10px 0
-    text-align: left
-    border-bottom: 1px solid rgba(0, 0, 0, 0.2)
-  +sm-block()
-    display: none
+  &__row-title
+    th
+      padding: 10px 0
+      text-align: left
+      border-bottom: 1px solid rgba(0, 0, 0, 0.2)
+    +sm-block()
+      display: none
 
-.table__row-content
-  +sm-block()
-    display: block
-    margin-bottom: 20px
-    border-bottom: 1px solid rgba(0, 0, 0, 0.2)
-
-.table__td
-  padding: 10px 0
-  border-bottom: 1px solid rgba(0, 0, 0, 0.2)
-  +sm-block()
-    display: block
-    margin-bottom: 20px
-    padding: 0
-    border-bottom: none
-    // background: green
-  &::before
-    content: attr(data-title)": "
-    display: none
-    margin-bottom: 5px
-    font-size: 16px
-    font-weight: bold
+  &__row-content
     +sm-block()
       display: block
-.table__link
-  color: #3292d2
-  font-weight: 500
-  border-bottom: 1px dashed
+      margin-bottom: 20px
+      border-bottom: 1px solid rgba(0, 0, 0, 0.2)
+
+    &--red
+      background-color: rgba(212,51,51,.25)
+
+  &__td
+    padding: 10px 5px
+    border-bottom: 1px solid rgba(0, 0, 0, 0.2)
+    +sm-block()
+      display: block
+      margin-bottom: 20px
+      padding: 0
+      border-bottom: none
+      // background: green
+    &::before
+      content: attr(data-title)": "
+      display: none
+      margin-bottom: 5px
+      font-size: 16px
+      font-weight: bold
+      +sm-block()
+        display: block
+  &__link
+    color: #3292d2
+    font-weight: 500
+    border-bottom: 1px dashed
 
 
 
