@@ -90,7 +90,7 @@
 
       if (list.length > 0) {
         button.hidden = false
-        for (var i = 0; i < list.length || i < tableRowsInPage; i++) {
+        for (var i = 0; i < list.length && i < tableRowsInPage; i++) {
           list[i].hidden = false
         }
       } else {
