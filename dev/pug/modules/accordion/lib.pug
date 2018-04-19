@@ -4,7 +4,7 @@ mixin accordion()
       .accordion__title!= title
         .accordion__svg
           +svg('down')
-      .accordion__content
+      .accordion__content.text
         if block
           block
 
