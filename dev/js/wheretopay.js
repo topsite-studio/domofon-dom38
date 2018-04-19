@@ -9,6 +9,9 @@
     var myMap
     ymaps.ready(init)
 
+    var loadMoreButton = document.getElementById('load-more')
+    var tableRowsInPage = 10
+
     function reorderFeeStations (map, data) {
       map.geoObjects.removeAll()
       var geoObjects = []
@@ -41,6 +44,7 @@
       var tr = document.createElement('tr')
       tr.className = 'table__row-content'
       tr.dataset.category = info.category
+      tr.hidden = info.isHidden
 
       var title = document.createElement('td')
       title.className = 'table__td table__td--title'
@@ -111,6 +115,27 @@
       return true
     }
 
+    /**
+     * Псевдоподгрузка строчек в таблицу
+     * @param  {[object Object]} event Событие клика
+     */
+    function pseudoLoadMore (event) {
+      event.preventDefault()
+      var button = event.target
+      var list = document.querySelectorAll('.table__row-content[hidden]')
+
+      if (list.length > 0) {
+        button.hidden = false
+        for (var i = 0; i < list.length && i < tableRowsInPage; i++) {
+          list[i].hidden = false
+        }
+      } else {
+        button.hidden = true
+      }
+
+      return true
+    }
+
     function init () {
       var geolocation = ymaps.geolocation
 
@@ -168,7 +193,8 @@
                 lat: item.lat,
                 category: item.type,
                 lon: item.lon,
-                distance: distance
+                distance: distance,
+                isHidden: index >= tableRowsInPage
               })
             })
 
@@ -179,6 +205,9 @@
                 filter($(this).data('category'), stations)
               }
             })
+
+            loadMoreButton.hidden = document.querySelectorAll('.table__row-content').length <= tableRowsInPage
+            loadMoreButton.addEventListener('click', pseudoLoadMore)
 
             clusterer.add(placemarks)
             myMap.geoObjects.add(clusterer)
