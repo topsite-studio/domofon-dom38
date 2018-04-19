@@ -1,6 +1,6 @@
 module.exports = function() {
   $.gulp.task('pug:dev', ()=>  {
-    return $.gulp.src('dev/pug/pages/*.pug')
+    return $.gulp.src('dev/pug/pages/**/*.pug')
       .pipe($.gp.pug({
       locals : {
         nav: JSON.parse($.fs.readFileSync('data/navigation.json', 'utf8')),

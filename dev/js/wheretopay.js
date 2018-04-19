@@ -43,7 +43,7 @@
       tr.dataset.category = info.category
 
       var title = document.createElement('td')
-      title.className = 'table__td'
+      title.className = 'table__td table__td--title'
       title.dataset.title = 'Наименование'
       title.innerText = info.title !== 'undefined' ? info.title : ''
       tr.appendChild(title)
@@ -155,18 +155,22 @@
 
             stations.sort(comparingWay)
 
-            stations.map(function (item) {
+            stations.map(function (item, index) {
               var distance = (userLocation !== null) ? parseInt(ymaps.coordSystem.geo.getDistance(userLocation.position, [item.lat, item.lon])) + ' м' : ''
               // console.log(placemark.geometry.getCoordinates())
               // Добавляем пункт продажи в таблицу
               addRowToTable({
-                title: item.params.name,
+                title: item.name,
                 address: item.address,
                 lat: item.lat,
                 category: item.type,
                 lon: item.lon,
                 distance: distance
               })
+
+              if (index === 0) {
+                document.querySelector('.table__row-content').classList.add('table__row-content--red')
+              }
             })
 
             $('.map__btn[data-category]').click(function () {

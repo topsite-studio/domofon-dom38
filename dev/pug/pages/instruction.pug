@@ -31,18 +31,28 @@ block content
     .instruction__content
       .instruction__item
         .instruction__part.instruction__manual
-          h4.h4.instruction__title Как заключить договор?
+          h4.h4.instruction__title Что такое домофон?
           p.instruction__desc
-            b.instruction__desc-title Необходимость заключения договора
-            | На подъездных дверях многоквартирного дома смонтирована система автоматически запирающих устройств, блокирующая беспрепятственный доступ посторонним.   
-            br
-            | Для бесперебойной работы этой системы необходима регулярная его регулировка и оперативный ремонт. В этих целях мы предлагаем собственниками/нанимателям заключить договор на техническое сопровождение автоматически запирающих устройств (домофонов). С текстом договора можно ознакомиться #[a.link(href=docs.dogovor) по ссылке].
+            | На подъездных дверях многоквартирного дома смонтирована система автоматически запирающих устройств, блокирующая беспрепятственный доступ посторонним.
           p.instruction__desc
             b.instruction__desc-title Обратите внимание!
             | Бытует #[strong ошибочное] мнение, что домофон располагается в квартире, поэтому некоторые собственники отказываются от заключения договора, т.к. «в квартире мне домофон не нужен». В квартире устанавливается не домофон, а лишь #[strong переговорное устройство] — пульт дистанционного управления домофоном. Обслуживание переговорного устройства — это дополнительная услуга, которая оплачивается собственником отдельно и ежемесячно. В настоящий момент стоимость этой услуги — 0 (ноль) рублей в месяц.
-            br
-            | #[strong Домофон] устанавливается на подъездных дверях многоквартирного дома.
 
+          p.instruction__desc 
+            b.instruction__desc-title Два варианта регистрации договора
+            | В настоящий момент мы используем два основных варианта дистанционной регистрации договора: #[a.link.link--dashed(href='#kak-zaregistrirovat-dogovor-po-parolyu', data-anchor) по паролю] и #[a.link.link--dashed(href='#chto-takoe-klyuch-novosyola', data-anchor) по ключу новосёла]. 
+            br
+            | О том, как это сделать, описано в следующих пунктах инструкции.
+        .instruction__part.instruction__figure
+          .instruction__img: img(src="img/content/inst_0.png", alt="image")
+
+
+      .instruction__item
+        .instruction__part.instruction__manual
+          h4.h4.instruction__title Как заключить договор?
+          p.instruction__desc
+            b.instruction__desc-title Необходимость заключения договора
+            | Для бесперебойной работы этой системы необходима регулярная его регулировка и оперативный ремонт. В этих целях мы предлагаем собственниками/нанимателям заключить договор на техническое сопровождение автоматически запирающих устройств (домофонов). С текстом договора можно ознакомиться #[a.link(href=docs.dogovor) по ссылке].
           p.instruction__desc 
             b.instruction__desc-title Два варианта регистрации договора
             | В настоящий момент мы используем два основных варианта дистанционной регистрации договора: #[a.link.link--dashed(href='#kak-zaregistrirovat-dogovor-po-parolyu', data-anchor) по паролю] и #[a.link.link--dashed(href='#chto-takoe-klyuch-novosyola', data-anchor) по ключу новосёла]. 
@@ -143,7 +153,7 @@ block content
           h4.h4.instruction__title Дополнительные договорные ключи?
           p.instruction__desc
             b.instruction__desc-title Где приобрести и как активировать
-            | С перечнем мест продаж #[span.tooltips(data-tooltips=snoska.contractKey) договорных ключей] Вы можете ознакомиться по #[a.link(href='key-retailers.html') ссылке]. После указания Вашего местоположения система отсортирует адреса по удаленности от Вас.
+            | С перечнем мест продаж #[span.tooltips(data-tooltips=snoska.contractKey) договорных ключей] Вы можете ознакомиться по #[a.link(href='key-retailers.html') ссылке]. После того, как Вы дадите согласие на определение Вашего местоположения, система отсортирует адреса по удаленности от Вас.
             br
             //noindex
             | Привязка ключей к договору производится отправкой номеров ключей коротким сообщением через #[span.tooltips(data-tooltips=snoska.sms) СМС]/#[a.link(href=contacts.bots.viber) Viber]/#[a.link(href=contacts.bots.telegram) Telegram]/#[span.tooltips(data-tooltips=snoska.androidApp) Android приложение]. 
@@ -161,7 +171,7 @@ block content
           p.instruction__desc
             b.instruction__desc-title Привязка Вашего Viber-аккаунта к ПРО ДОМОФОН
             //noindex
-            | Для надежного общения с системой ПРО ДОМОФОН и дистанционного управления подъездной дверью пройдите регистрацию в нашем VIBER-bot. С зарегистрированного телефона перейдите по ссылке #[span.tooltips(data-tooltips=contacts.bots.viberText) Viber] и следуйте поступающим инструкциям.
+            | Для надежного общения с системой ПРО ДОМОФОН и дистанционного управления подъездной дверью пройдите регистрацию в нашем VIBER-bot. С зарегистрированного телефона перейдите по ссылке #[a.link(href=contacts.bots.viberText) Viber] и следуйте поступающим инструкциям.
             ///noindex
           p.instruction__desc
             b.instruction__desc-title Как управлять дверью через Viber?
@@ -186,7 +196,7 @@ block content
             b.instruction__desc-title Управление приложением
             | Управляйте договором, оплачивайте услуги, заказывайте техническую поддержку и ремонт, управляйте доступом в подъезд с виджета программы.
           p.instruction__desc
-            img(src=contacts.apps.androidQR, alt="image")
+            img(src=contacts.apps.androidQR, alt="image").qr-code
 
         .instruction__part.instruction__figure
           .instruction__img 

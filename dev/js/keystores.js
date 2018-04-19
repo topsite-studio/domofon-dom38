@@ -42,7 +42,7 @@
       tr.className = 'table__row-content'
 
       var title = document.createElement('td')
-      title.className = 'table__td'
+      title.className = 'table__td table__td--title'
       title.dataset.title = 'Наименование'
       title.innerText = info.title !== 'undefined' ? info.title : ''
       tr.appendChild(title)
@@ -87,29 +87,43 @@
         result.geoObjects.options.set('preset', 'islands#redCircleIcon')
         userLocation = result.geoObjects
         myMap.geoObjects.add(userLocation)
-      })
 
-      $.getJSON('https://domofon.dom38.ru/api/keystores', function (data) {
-        console.log(data)
-        var placemarks = reorderKeyStores(data)
-        var clusterer = new ymaps.Clusterer({
-          preset: 'islands#invertedBlueClusterIcons',
-          groupByCoordinates: false
-        })
-
-        data.map(function (item) {
-          addRowToTable({
-            title: item.name,
-            address: item.city + ', ' + item.address,
-            worktime: item.worktime,
-            image: item.shortImageUrl
+        $.getJSON('https://domofon.dom38.ru/api/keystores', function (data) {
+          console.log(data)
+          var placemarks = reorderKeyStores(data)
+          var clusterer = new ymaps.Clusterer({
+            preset: 'islands#invertedBlueClusterIcons',
+            groupByCoordinates: false
           })
-        })
 
-        clusterer.add(placemarks)
-        myMap.geoObjects.add(clusterer)
-        myMap.setBounds(clusterer.getBounds(), {
-          checkZoomRange: true
+          function comparingWay (a, b) {
+            var distance = {
+              a: (userLocation !== null) ? ymaps.coordSystem.geo.getDistance(userLocation.position, [a.lat, a.lon]) : 0,
+              b: (userLocation !== null) ? ymaps.coordSystem.geo.getDistance(userLocation.position, [b.lat, b.lon]) : 0
+            }
+            return distance.a - distance.b
+          }
+
+          data.sort(comparingWay)
+
+          data.map(function (item, index) {
+            addRowToTable({
+              title: item.name,
+              address: item.city + ', ' + item.address,
+              worktime: item.worktime,
+              image: item.shortImageUrl
+            })
+
+            if (index === 0) {
+              document.querySelector('.table__row-content').classList.add('table__row-content--red')
+            }
+          })
+
+          clusterer.add(placemarks)
+          myMap.geoObjects.add(clusterer)
+          myMap.setBounds(clusterer.getBounds(), {
+            checkZoomRange: true
+          })
         })
       })
     }

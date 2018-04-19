@@ -17,7 +17,7 @@ body
 *::selection
   background-color: #3498db
   color: #fff
- 
+
 // body input:focus:required:invalid,
 // body textarea:focus:required:invalid
 //   color: #666
@@ -100,12 +100,12 @@ h1,h2,h3,h4,h5,h6
 .subheading
   text-align: center
   font-size: 28px
-  font-weight: 500 
+  font-weight: 500
   line-height: 32px
 .subheading-level-three
   font-size: 22px
   font-weight: 700
-  
+
 .advantages__item-head
   display: flex
   align-items: center
@@ -146,76 +146,82 @@ h1,h2,h3,h4,h5,h6
     opacity: 0.3
     cursor: not-allowed
 
+  &__icon
+    height: 1.5em
+    line-height: 1
+    &--loading
+      animation: 1s btn-icon-spin linear infinite
 
-.btn--def
-  min-width: 165px
-  height: 40px
-  padding-left: 10px
-  padding-right: 10px
-  border-radius: 5px
 
-.btn--alert
-  color: #ffffff
-  font-size: 14px
-  font-weight: 500
-  line-height: 1
-  background: #d82f2f
-  &:hover
-    color: #fff
-    background: darken(#d82f2f,10%)
-.btn--pas
-  color: #ffffff
-  background: #3292d3
-  &:hover
-    color: #fff
-    background: darken(#3292d3,10%)
-.btn--lg
-  min-width: 205px
-  height: 50px
-  padding-left: 10px
-  padding-right: 10px
-  font-size: 16px
-  letter-spacing: 1.5px
-  border-radius: 5px
+  &--def
+    min-width: 165px
+    height: 40px
+    padding-left: 10px
+    padding-right: 10px
+    border-radius: 5px
 
-.btn--sm
-  width: 160px
-  height: 25px
-  margin-left: 20px
-  color: #ffffff
-  font-size: 12px
-  font-weight: 400
-  line-height: 1 
-  font-weight: 400
-  border-radius: 10px
-  background: $blue
-  transition: $tr
-  &:hover
-    color: #fff
+  &--alert
+    color: #ffffff
+    font-size: 14px
+    font-weight: 500
+    line-height: 1
     background: #d82f2f
-    .svg
-  +sm-block()
-    position: absolute
-    bottom: 0
-    left: 0
-    right: 0
-    max-width: 291px
-    width: 100%
-    height: 41px
-    border-radius: 10px
-    font-size: 22px
-    margin: auto
+    &:hover
+      color: #fff
+      background: darken(#d82f2f,10%)
+  &--pas
+    color: #ffffff
+    background: #3292d3
+    &:hover
+      color: #fff
+      background: darken(#3292d3,10%)
+  &--lg
+    min-width: 205px
+    height: 50px
+    padding-left: 10px
+    padding-right: 10px
+    font-size: 16px
+    letter-spacing: 1.5px
+    border-radius: 5px
 
-  +smx-block()
-    // margin-left: 0
-    // margin-top: 20px
-  .svg
-    +size(10)
-    margin-right: 5px
-    fill: #fff
+  &--sm
+    width: 160px
+    height: 25px
+    margin-left: 20px
+    color: #ffffff
+    font-size: 12px
+    font-weight: 400
+    line-height: 1
+    font-weight: 400
+    border-radius: 10px
+    background: $blue
+    transition: $tr
+    &:hover
+      color: #fff
+      background: #d82f2f
+      .svg
     +sm-block()
-      +size(20)
-      margin-right: 10px
+      position: absolute
+      bottom: 0
+      left: 0
+      right: 0
+      max-width: 291px
+      width: 100%
+      height: 41px
+      border-radius: 10px
+      font-size: 22px
+      margin: auto
+
+    +smx-block()
+      // margin-left: 0
+      // margin-top: 20px
+    .svg
+      +size(10)
+      margin-right: 5px
+      fill: #fff
+      +sm-block()
+        +size(20)
+        margin-right: 10px
 
 
 button[type='submit']
@@ -229,6 +235,12 @@ button[type='submit']
       width: 100%
       height: 100%
       fill: currentColor
+
+@keyframes btn-icon-spin
+  from
+    transform: rotate(0)
+  to
+    transform: rotate(360deg)
 
 //.counter
   margin-top: 20px
@@ -290,14 +302,3 @@ button[type='submit']
 
 
 // span.tooltips(data-tooltips='')
-
-
-
-
-
-
-
-
-
-
-

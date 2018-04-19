@@ -123,7 +123,9 @@ body
   margin-bottom: 0
   font-size: 18px
   font-weight: 300
-  line-height: 28px
+  line-height: 1.55555
+
+
 .tooltips
   // position: relative
   display: inline-block
@@ -141,7 +143,7 @@ body
   margin: 15px
   padding: 20px
   text-align: left
-  font-size: 15px
+  font-size: inherit
   font-weight: 300
   line-height: 18px
   border-radius: 10px
@@ -360,41 +362,59 @@ body
   table-layout: fixed
   font-size: 15px
   border-spacing: 0
-.table__row-title
-  th
-    padding: 10px 0
-    text-align: left
-    border-bottom: 1px solid rgba(0, 0, 0, 0.2)
-  +sm-block()
-    display: none
 
-.table__row-content
-  +sm-block()
-    display: block
-    margin-bottom: 20px
-    border-bottom: 1px solid rgba(0, 0, 0, 0.2)
+  &--places
+    +media-xs-down()
+      width: calc(100% + 30px)
+      margin: 0 -15px
 
-.table__td
-  padding: 10px 0
-  border-bottom: 1px solid rgba(0, 0, 0, 0.2)
-  +sm-block()
-    display: block
-    margin-bottom: 20px
-    padding: 0
-    border-bottom: none
-    // background: green
-  &::before
-    content: attr(data-title)": "
-    display: none
-    margin-bottom: 5px
-    font-size: 16px
-    font-weight: bold
+  &__row-title
+    th
+      padding: 10px 0
+      text-align: left
+      border-bottom: 1px solid rgba(0, 0, 0, 0.2)
+    +sm-block()
+      display: none
+
+  &__row-content
     +sm-block()
       display: block
-.table__link
-  color: #3292d2
-  font-weight: 500
-  border-bottom: 1px dashed
+      margin-bottom: 10px
+      border-bottom: 1px solid rgba(0, 0, 0, 0.2)
+
+    &--red
+      background-color: rgba(212,51,51,.15)
+
+  &__td
+    padding: 10px 5px
+    border-bottom: 1px solid rgba(0, 0, 0, 0.2)
+    +sm-block()
+      display: block
+      margin-bottom: 5px
+      padding: 5px
+      border-bottom: none
+      // background: green
+    &::before
+      content: attr(data-title)": "
+      display: none
+      margin-bottom: 5px
+      font-size: 16px
+      font-weight: bold
+      // +sm-block()
+        display: block
+
+    &--title
+      font-weight: 700
+
+    .table--places &
+      // +media-xs-up()
+      &:not(.table__td--title)
+        font-size: .85em
+
+  &__link
+    color: #3292d2
+    font-weight: 500
+    border-bottom: 1px dashed
 
 
 
@@ -451,7 +471,19 @@ body
     font-weight: bold
 
 
+.tooltip-close
+  position: absolute
+  right: 5px
+  top:   2px
+  font-size: 30px
+  line-height: 1
+  width: auto
+  padding: 4px
 
+
+@media (min-width: 992px)
+  .tooltip-close
+    display: none
 
 
 
@@ -469,6 +501,7 @@ body
 @import "../pug/modules/checkbox/style"
 @import "modules/form"
 @import "modules/result"
+@import "modules/qr-code"
 
 
 /* page style end */
