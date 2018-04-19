@@ -153,22 +153,23 @@
               return distance.a - distance.b
             }
 
-            stations.sort(comparingWay)
+            var FINAL_DATA = stations.filter(function (item) {
+              return item.published
+            })
+            FINAL_DATA = FINAL_DATA.sort(comparingWay)
 
-            stations.map(function (item, index) {
-              if (item.published) {
-                var distance = (userLocation !== null) ? parseInt(ymaps.coordSystem.geo.getDistance(userLocation.position, [item.lat, item.lon])) + ' м' : ''
-                // console.log(placemark.geometry.getCoordinates())
-                // Добавляем пункт продажи в таблицу
-                addRowToTable({
-                  title: item.name,
-                  address: item.address,
-                  lat: item.lat,
-                  category: item.type,
-                  lon: item.lon,
-                  distance: distance
-                })
-              }
+            FINAL_DATA.map(function (item, index) {
+              var distance = (userLocation !== null) ? parseInt(ymaps.coordSystem.geo.getDistance(userLocation.position, [item.lat, item.lon])) + ' м' : ''
+              // console.log(placemark.geometry.getCoordinates())
+              // Добавляем пункт продажи в таблицу
+              addRowToTable({
+                title: item.name,
+                address: item.address,
+                lat: item.lat,
+                category: item.type,
+                lon: item.lon,
+                distance: distance
+              })
             })
 
             $('.map__btn[data-category]').click(function () {

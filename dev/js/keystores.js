@@ -104,17 +104,22 @@
             return distance.a - distance.b
           }
 
-          data.sort(comparingWay)
+          function filteringWay (item) {
+            return !item.isOff
+          }
 
-          data.map(function (item, index) {
-            if (!item.isOff) {
+          var FINAL_DATA = data.filter(filteringWay)
+          FINAL_DATA = FINAL_DATA.sort(comparingWay)
+
+          console.log(FINAL_DATA)
+
+          FINAL_DATA.map(function (item, index) {
               addRowToTable({
                 title: item.name,
                 address: item.city + ', ' + item.address,
                 worktime: item.worktime,
-                image: item.shortImageUrl
+                image: item.shortImageUrl,
               })
-            }
           })
 
           clusterer.add(placemarks)
