@@ -65,6 +65,15 @@
       image.innerHTML = info.image ? "<a data-fancybox='scheme' data-caption='" + info.title + "' href='" + info.image + "' class='link link--dashed'>Показать схему проезда</a>" : ''
       tr.appendChild(image)
 
+
+      var distance = document.createElement('td')
+      distance.className = 'table__td'
+      distance.dataset.title = 'Расстояние'
+      distance.dataset.lat = info.lat
+      distance.dataset.lon = info.lon
+      distance.innerText = info.distance
+      tr.appendChild(distance)
+
       storesList.appendChild(tr)
     }
 
@@ -114,11 +123,13 @@
           console.log(FINAL_DATA)
 
           FINAL_DATA.map(function (item, index) {
+            var distance = (userLocation !== null) ? parseInt(ymaps.coordSystem.geo.getDistance(userLocation.position, [item.lat, item.lon])) + ' м' : ''
               addRowToTable({
                 title: item.name,
                 address: item.city + ', ' + item.address,
                 worktime: item.worktime,
                 image: item.shortImageUrl,
+                distance: distance
               })
           })
 
