@@ -169,10 +169,6 @@
                   distance: distance
                 })
               }
-
-              if (index === 0) {
-                document.querySelector('.table__row-content').classList.add('table__row-content--red')
-              }
             })
 
             $('.map__btn[data-category]').click(function () {

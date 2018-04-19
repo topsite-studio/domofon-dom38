@@ -115,10 +115,6 @@
                 image: item.shortImageUrl
               })
             }
-
-            if (index === 0) {
-              document.querySelector('.table__row-content').classList.add('table__row-content--red')
-            }
           })
 
           clusterer.add(placemarks)
