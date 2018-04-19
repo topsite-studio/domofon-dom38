@@ -79,13 +79,23 @@
 
       for (var i = 0; i < tableRows.length; i++) {
         var row = tableRows[i]
-        row.hidden = category === 'all' ? false : (row.dataset.category === category)
+        console.log(row.dataset.category === category)
+        row.hidden = category === 'all' ? false : row.dataset.category !== category
       }
+
+      // Скрываем первые 10 строчек
+      var filteredRows = category === 'all' ? tableRows : document.querySelectorAll('.table__row-content[data-category="'+category+'"]')
+      console.log(filteredRows)
+      for (var i = 0; i < filteredRows.length; i++) {
+        console.log(i > tableRowsInPage)
+        filteredRows[i].hidden = i >= tableRowsInPage
+      }
+
+      loadMoreButton.hidden = filteredRows.length <= tableRowsInPage
 
       filteredData = category === 'all' ? data : data.filter(function (item) {
         return (item.type === category)
       })
-      console.log(filteredData)
 
       var filteredPlacemarks = reorderFeeStations(myMap, filteredData)
       var filteredCluster = new ymaps.Clusterer({
@@ -122,7 +132,12 @@
     function pseudoLoadMore (event) {
       event.preventDefault()
       var button = event.target
-      var list = document.querySelectorAll('.table__row-content[hidden]')
+      var filter = ''
+      if (document.querySelector('.map__filter')) {
+        var category = document.querySelector('.map__btn--active') ? document.querySelector('.map__btn--active').dataset.category : 'all'
+        filter = category === 'all' ? '' : '[data-category="' + category + '"]'
+      }
+      var list = document.querySelectorAll('.table__row-content'+filter+'[hidden]')
 
       if (list.length > 0) {
         button.hidden = false
@@ -202,7 +217,7 @@
               if ($(this).hasClass('map__btn--active') === false) {
                 $('.map__btn--active').removeClass('map__btn--active')
                 $(this).toggleClass('map__btn--active')
-                filter($(this).data('category'), stations)
+                filter($(this).data('category'), FINAL_DATA)
               }
             })
 
