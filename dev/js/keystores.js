@@ -107,12 +107,14 @@
           data.sort(comparingWay)
 
           data.map(function (item, index) {
-            addRowToTable({
-              title: item.name,
-              address: item.city + ', ' + item.address,
-              worktime: item.worktime,
-              image: item.shortImageUrl
-            })
+            if (!item.isOff) {
+              addRowToTable({
+                title: item.name,
+                address: item.city + ', ' + item.address,
+                worktime: item.worktime,
+                image: item.shortImageUrl
+              })
+            }
 
             if (index === 0) {
               document.querySelector('.table__row-content').classList.add('table__row-content--red')

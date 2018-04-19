@@ -156,17 +156,19 @@
             stations.sort(comparingWay)
 
             stations.map(function (item, index) {
-              var distance = (userLocation !== null) ? parseInt(ymaps.coordSystem.geo.getDistance(userLocation.position, [item.lat, item.lon])) + ' м' : ''
-              // console.log(placemark.geometry.getCoordinates())
-              // Добавляем пункт продажи в таблицу
-              addRowToTable({
-                title: item.name,
-                address: item.address,
-                lat: item.lat,
-                category: item.type,
-                lon: item.lon,
-                distance: distance
-              })
+              if (item.published) {
+                var distance = (userLocation !== null) ? parseInt(ymaps.coordSystem.geo.getDistance(userLocation.position, [item.lat, item.lon])) + ' м' : ''
+                // console.log(placemark.geometry.getCoordinates())
+                // Добавляем пункт продажи в таблицу
+                addRowToTable({
+                  title: item.name,
+                  address: item.address,
+                  lat: item.lat,
+                  category: item.type,
+                  lon: item.lon,
+                  distance: distance
+                })
+              }
 
               if (index === 0) {
                 document.querySelector('.table__row-content').classList.add('table__row-content--red')
