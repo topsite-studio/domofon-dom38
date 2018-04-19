@@ -5,13 +5,31 @@
     document.addEventListener('DOMContentLoaded', whereToPay)
   }
 
+  /**
+   * Глобальная функция страницы пунктов оплаты
+   */
   function whereToPay () {
     var myMap
     ymaps.ready(init)
 
+    /**
+     * Кнопка подгрузки
+     * @type {HTMLElement}
+     */
     var loadMoreButton = document.getElementById('load-more')
+    /**
+     * Максимальное количество строк в "странице" таблице
+     * @type {number}
+     */
     var tableRowsInPage = 10
 
+    /**
+     * Получение массива геообъектов для карты<br>
+     * <strong>Важное замечание:</strong> Функция не добавляет геообъекты на карту самостоятельно!
+     * @param  {ymaps.Map} map  Объект Яндекс-карты, <code>ymaps.Map</code>
+     * @param  {Array} data Массив с данными о точках, полученный через API
+     * @return {Array}      Массив с геообъектами
+     */
     function reorderFeeStations (map, data) {
       map.geoObjects.removeAll()
       var geoObjects = []
@@ -39,6 +57,11 @@
       return geoObjects
     }
 
+    /**
+     * Добавление строки в таблицу
+     * @param {{ title: string, address: string, lat: string, category: string, lon: string, distance: string,
+     isHidden: boolean }} info Инфа, передаваемая в строку
+     */
     function addRowToTable (info) {
       var storesList = document.querySelector('#stores-list')
       var tr = document.createElement('tr')
@@ -70,6 +93,12 @@
       storesList.appendChild(tr)
     }
 
+    /**
+     * Фильтрация пунктов на карте и в таблице
+     * @param  {string} category Строка, взятая из дата-атрибута кнопки, которой вызвали эту функцию. По ней и происходит фильтрация
+     * @param  {Array} data     Массив, полученный через API
+     * @return {true}
+     */
     function filter (category, data) {
       console.groupCollapsed('filter(button, data)')
       console.log('Фильтруем! Категория: ' + category)
@@ -151,6 +180,9 @@
       return true
     }
 
+    /**
+     * Инициализация Яндекс-карты и запуск всех основных функций
+     */
     function init () {
       var geolocation = ymaps.geolocation
 

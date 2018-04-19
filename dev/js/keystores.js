@@ -6,11 +6,29 @@
     document.addEventListener('DOMContentLoaded', keyretail)
   }
 
+  /**
+   * Глобальная функция страницы пунктов продажи ключей
+   */
   function keyretail () {
     console.log('keyretail()!')
+    /**
+     * Кнопка подгрузки
+     * @type {HTMLElement}
+     */
+    var loadMoreButton = document.getElementById('load-more')
+    /**
+     * Максимальное количество строк в "странице" таблице
+     * @type {number}
+     */
     var tableRowsInPage = 10
     ymaps.ready(init)
 
+    /**
+     * Получение массива геообъектов для карты<br>
+     * <strong>Важное замечание:</strong> Функция не добавляет геообъекты на карту самостоятельно!
+     * @param  {Array} data Массив с данными о точках, полученный через API
+     * @return {Array}      Массив с геообъектами
+     */
     function reorderKeyStores (data) {
       var geoObjects = []
 
@@ -37,6 +55,10 @@
       return geoObjects
     }
 
+    /**
+     * Добавление строки в таблицу
+     * @param {{ title: string, address: string, worktime: string, image: string, distance: string, isHidden: boolean }} info Инфа, передаваемая в строку
+     */
     function addRowToTable (info) {
       var storesList = document.querySelector('#stores-list')
       var tr = document.createElement('tr')
@@ -81,7 +103,7 @@
 
     /**
      * Псевдоподгрузка строчек в таблицу
-     * @param  {[Object]} event Событие клика
+     * @param  {event} event Событие клика
      */
     function pseudoLoadMore (event) {
       event.preventDefault()
@@ -100,6 +122,9 @@
       return true
     }
 
+    /**
+     * Инициализация Яндекс-карты и запуск всех основных функций
+     */
     function init () {
       var geolocation = ymaps.geolocation
 
@@ -157,8 +182,8 @@
               })
           })
 
-          document.getElementById('load-more').hidden = false
-          document.getElementById('load-more').addEventListener('click', pseudoLoadMore)
+          loadMoreButton.hidden = false
+          loadMoreButton.addEventListener('click', pseudoLoadMore)
 
           clusterer.add(placemarks)
           myMap.geoObjects.add(clusterer)
