@@ -6,10 +6,29 @@
     document.addEventListener('DOMContentLoaded', keyretail)
   }
 
+  /**
+   * Глобальная функция страницы пунктов продажи ключей
+   */
   function keyretail () {
     console.log('keyretail()!')
+    /**
+     * Кнопка подгрузки
+     * @type {HTMLElement}
+     */
+    var loadMoreButton = document.getElementById('load-more')
+    /**
+     * Максимальное количество строк в "странице" таблице
+     * @type {number}
+     */
+    var tableRowsInPage = 10
     ymaps.ready(init)
 
+    /**
+     * Получение массива геообъектов для карты<br>
+     * <strong>Важное замечание:</strong> Функция не добавляет геообъекты на карту самостоятельно!
+     * @param  {Array} data Массив с данными о точках, полученный через API
+     * @return {Array}      Массив с геообъектами
+     */
     function reorderKeyStores (data) {
       var geoObjects = []
 
@@ -36,10 +55,15 @@
       return geoObjects
     }
 
+    /**
+     * Добавление строки в таблицу
+     * @param {{ title: string, address: string, worktime: string, image: string, distance: string, isHidden: boolean }} info Инфа, передаваемая в строку
+     */
     function addRowToTable (info) {
       var storesList = document.querySelector('#stores-list')
       var tr = document.createElement('tr')
       tr.className = 'table__row-content'
+      tr.hidden = info.isHidden
 
       var title = document.createElement('td')
       title.className = 'table__td table__td--title'
@@ -65,9 +89,42 @@
       image.innerHTML = info.image ? "<a data-fancybox='scheme' data-caption='" + info.title + "' href='" + info.image + "' class='link link--dashed'>Показать схему проезда</a>" : ''
       tr.appendChild(image)
 
+
+      var distance = document.createElement('td')
+      distance.className = 'table__td'
+      distance.dataset.title = 'Расстояние'
+      distance.dataset.lat = info.lat
+      distance.dataset.lon = info.lon
+      distance.innerText = info.distance
+      tr.appendChild(distance)
+
       storesList.appendChild(tr)
     }
 
+    /**
+     * Псевдоподгрузка строчек в таблицу
+     * @param  {event} event Событие клика
+     */
+    function pseudoLoadMore (event) {
+      event.preventDefault()
+      var button = event.target
+      var list = document.querySelectorAll('.table__row-content[hidden]')
+
+      if (list.length > 0) {
+        button.hidden = false
+        for (var i = 0; i < list.length && i < tableRowsInPage; i++) {
+          list[i].hidden = false
+        }
+      } else {
+        button.hidden = true
+      }
+
+      return true
+    }
+
+    /**
+     * Инициализация Яндекс-карты и запуск всех основных функций
+     */
     function init () {
       var geolocation = ymaps.geolocation
 
@@ -104,20 +161,29 @@
             return distance.a - distance.b
           }
 
-          data.sort(comparingWay)
+          function filteringWay (item) {
+            return !item.isOff
+          }
 
-          data.map(function (item, index) {
-            addRowToTable({
-              title: item.name,
-              address: item.city + ', ' + item.address,
-              worktime: item.worktime,
-              image: item.shortImageUrl
-            })
+          var FINAL_DATA = data.filter(filteringWay)
+          FINAL_DATA = FINAL_DATA.sort(comparingWay)
 
-            if (index === 0) {
-              document.querySelector('.table__row-content').classList.add('table__row-content--red')
-            }
+          console.log(FINAL_DATA)
+
+          FINAL_DATA.map(function (item, index) {
+            var distance = (userLocation !== null) ? parseInt(ymaps.coordSystem.geo.getDistance(userLocation.position, [item.lat, item.lon])) + ' м' : ''
+              addRowToTable({
+                title: item.name,
+                address: item.city + ', ' + item.address,
+                worktime: item.worktime,
+                image: item.shortImageUrl,
+                distance: distance,
+                isHidden: index >= tableRowsInPage
+              })
           })
+
+          loadMoreButton.hidden = false
+          loadMoreButton.addEventListener('click', pseudoLoadMore)
 
           clusterer.add(placemarks)
           myMap.geoObjects.add(clusterer)

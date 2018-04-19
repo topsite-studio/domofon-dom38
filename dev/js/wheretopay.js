@@ -5,10 +5,31 @@
     document.addEventListener('DOMContentLoaded', whereToPay)
   }
 
+  /**
+   * Глобальная функция страницы пунктов оплаты
+   */
   function whereToPay () {
     var myMap
     ymaps.ready(init)
 
+    /**
+     * Кнопка подгрузки
+     * @type {HTMLElement}
+     */
+    var loadMoreButton = document.getElementById('load-more')
+    /**
+     * Максимальное количество строк в "странице" таблице
+     * @type {number}
+     */
+    var tableRowsInPage = 10
+
+    /**
+     * Получение массива геообъектов для карты<br>
+     * <strong>Важное замечание:</strong> Функция не добавляет геообъекты на карту самостоятельно!
+     * @param  {ymaps.Map} map  Объект Яндекс-карты, <code>ymaps.Map</code>
+     * @param  {Array} data Массив с данными о точках, полученный через API
+     * @return {Array}      Массив с геообъектами
+     */
     function reorderFeeStations (map, data) {
       map.geoObjects.removeAll()
       var geoObjects = []
@@ -36,11 +57,17 @@
       return geoObjects
     }
 
+    /**
+     * Добавление строки в таблицу
+     * @param {{ title: string, address: string, lat: string, category: string, lon: string, distance: string,
+     isHidden: boolean }} info Инфа, передаваемая в строку
+     */
     function addRowToTable (info) {
       var storesList = document.querySelector('#stores-list')
       var tr = document.createElement('tr')
       tr.className = 'table__row-content'
       tr.dataset.category = info.category
+      tr.hidden = info.isHidden
 
       var title = document.createElement('td')
       title.className = 'table__td table__td--title'
@@ -66,6 +93,12 @@
       storesList.appendChild(tr)
     }
 
+    /**
+     * Фильтрация пунктов на карте и в таблице
+     * @param  {string} category Строка, взятая из дата-атрибута кнопки, которой вызвали эту функцию. По ней и происходит фильтрация
+     * @param  {Array} data     Массив, полученный через API
+     * @return {true}
+     */
     function filter (category, data) {
       console.groupCollapsed('filter(button, data)')
       console.log('Фильтруем! Категория: ' + category)
@@ -75,13 +108,23 @@
 
       for (var i = 0; i < tableRows.length; i++) {
         var row = tableRows[i]
-        row.hidden = category === 'all' ? false : (row.dataset.category === category)
+        console.log(row.dataset.category === category)
+        row.hidden = category === 'all' ? false : row.dataset.category !== category
       }
+
+      // Скрываем первые 10 строчек
+      var filteredRows = category === 'all' ? tableRows : document.querySelectorAll('.table__row-content[data-category="'+category+'"]')
+      console.log(filteredRows)
+      for (var i = 0; i < filteredRows.length; i++) {
+        console.log(i > tableRowsInPage)
+        filteredRows[i].hidden = i >= tableRowsInPage
+      }
+
+      loadMoreButton.hidden = filteredRows.length <= tableRowsInPage
 
       filteredData = category === 'all' ? data : data.filter(function (item) {
         return (item.type === category)
       })
-      console.log(filteredData)
 
       var filteredPlacemarks = reorderFeeStations(myMap, filteredData)
       var filteredCluster = new ymaps.Clusterer({
@@ -111,6 +154,35 @@
       return true
     }
 
+    /**
+     * Псевдоподгрузка строчек в таблицу
+     * @param  {[object Object]} event Событие клика
+     */
+    function pseudoLoadMore (event) {
+      event.preventDefault()
+      var button = event.target
+      var filter = ''
+      if (document.querySelector('.map__filter')) {
+        var category = document.querySelector('.map__btn--active') ? document.querySelector('.map__btn--active').dataset.category : 'all'
+        filter = category === 'all' ? '' : '[data-category="' + category + '"]'
+      }
+      var list = document.querySelectorAll('.table__row-content'+filter+'[hidden]')
+
+      if (list.length > 0) {
+        button.hidden = false
+        for (var i = 0; i < list.length && i < tableRowsInPage; i++) {
+          list[i].hidden = false
+        }
+      } else {
+        button.hidden = true
+      }
+
+      return true
+    }
+
+    /**
+     * Инициализация Яндекс-карты и запуск всех основных функций
+     */
     function init () {
       var geolocation = ymaps.geolocation
 
@@ -153,9 +225,12 @@
               return distance.a - distance.b
             }
 
-            stations.sort(comparingWay)
+            var FINAL_DATA = stations.filter(function (item) {
+              return item.published
+            })
+            FINAL_DATA = FINAL_DATA.sort(comparingWay)
 
-            stations.map(function (item, index) {
+            FINAL_DATA.map(function (item, index) {
               var distance = (userLocation !== null) ? parseInt(ymaps.coordSystem.geo.getDistance(userLocation.position, [item.lat, item.lon])) + ' м' : ''
               // console.log(placemark.geometry.getCoordinates())
               // Добавляем пункт продажи в таблицу
@@ -165,21 +240,21 @@
                 lat: item.lat,
                 category: item.type,
                 lon: item.lon,
-                distance: distance
+                distance: distance,
+                isHidden: index >= tableRowsInPage
               })
-
-              if (index === 0) {
-                document.querySelector('.table__row-content').classList.add('table__row-content--red')
-              }
             })
 
             $('.map__btn[data-category]').click(function () {
               if ($(this).hasClass('map__btn--active') === false) {
                 $('.map__btn--active').removeClass('map__btn--active')
                 $(this).toggleClass('map__btn--active')
-                filter($(this).data('category'), stations)
+                filter($(this).data('category'), FINAL_DATA)
               }
             })
+
+            loadMoreButton.hidden = document.querySelectorAll('.table__row-content').length <= tableRowsInPage
+            loadMoreButton.addEventListener('click', pseudoLoadMore)
 
             clusterer.add(placemarks)
             myMap.geoObjects.add(clusterer)

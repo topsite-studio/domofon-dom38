@@ -38,6 +38,9 @@
   background-image: url('../img/general/fotorama.png')
   background-repeat: no-repeat
 
+[hidden]
+  display: none !important
+
 body
   background: url(../img/general/bg.jpg)
   background-repeat: no-repeat
@@ -357,6 +360,17 @@ body
 .info-table
   padding-bottom: 20px
 
+  &__btn-container
+    display: flex
+    flex-direction: row
+    justify-content: center
+
+  &__btn
+    padding: 10px 15px
+    border-radius: 4px
+    &:focus
+      color: #fff
+
 .table
   width: 100%
   table-layout: fixed
@@ -382,7 +396,7 @@ body
       margin-bottom: 10px
       border-bottom: 1px solid rgba(0, 0, 0, 0.2)
 
-    &--red
+  &--places &__row-content:first-child
       background-color: rgba(212,51,51,.15)
 
   &__td
@@ -502,6 +516,7 @@ body
 @import "modules/form"
 @import "modules/result"
 @import "modules/qr-code"
+@import "modules/text"
 
 
 /* page style end */
