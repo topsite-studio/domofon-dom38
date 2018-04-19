@@ -8,6 +8,7 @@
 
   function keyretail () {
     console.log('keyretail()!')
+    var tableRowsInPage = 10
     ymaps.ready(init)
 
     function reorderKeyStores (data) {
@@ -40,6 +41,7 @@
       var storesList = document.querySelector('#stores-list')
       var tr = document.createElement('tr')
       tr.className = 'table__row-content'
+      tr.hidden = info.isHidden
 
       var title = document.createElement('td')
       title.className = 'table__td table__td--title'
@@ -75,6 +77,27 @@
       tr.appendChild(distance)
 
       storesList.appendChild(tr)
+    }
+
+    /**
+     * Псевдоподгрузка строчек в таблицу
+     * @param  {[Object]} event Событие клика
+     */
+    function pseudoLoadMore (event) {
+      event.preventDefault()
+      var button = event.target
+      var list = document.querySelectorAll('.table__row-content[hidden]')
+
+      if (list.length > 0) {
+        button.hidden = false
+        for (var i = 0; i < list.length || i < tableRowsInPage; i++) {
+          list[i].hidden = false
+        }
+      } else {
+        button.hidden = true
+      }
+
+      return true
     }
 
     function init () {
@@ -129,9 +152,13 @@
                 address: item.city + ', ' + item.address,
                 worktime: item.worktime,
                 image: item.shortImageUrl,
-                distance: distance
+                distance: distance,
+                isHidden: index >= tableRowsInPage
               })
           })
+
+          document.getElementById('load-more').hidden = false
+          document.getElementById('load-more').addEventListener('click', pseudoLoadMore)
 
           clusterer.add(placemarks)
           myMap.geoObjects.add(clusterer)
