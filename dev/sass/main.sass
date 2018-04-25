@@ -159,6 +159,26 @@ body
   b
     font-weight: 500
 
+  &__inner-wrap
+    p
+      float: left
+      width: calc(100% - 115px)
+      margin-top: 0
+      +media-xs-down()
+        width: 100%
+        margin-bottom: 15px
+
+  &__qr-code
+    float: right
+    width: 100px
+    height: 100px
+    +media-xs-down()
+      max-width: 100%
+      width: 150px
+      height: auto
+      margin: 0 auto
+      float: none
+
 .tooltip-arrow
   position: absolute
   top: 100%
