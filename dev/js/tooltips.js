@@ -3,6 +3,10 @@
 
   var toolTips = $('.tooltips')
   toolTips.each(function (index, el) {
+    el.tabIndex = 0
+    $(el).click(function (event) {
+      event.preventDefault()
+    })
     var toolData = $(this).data('tooltips')
     var tooltipie = new Tooltip(el, {
       title: toolData,
