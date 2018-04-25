@@ -66,67 +66,71 @@ body
 .advantages
   // padding-top: 60px
   // padding-bottom: 60px
-  overflow: hidden
+  +media-sm-up()
+    overflow: hidden
   .subheading
     margin-bottom: 55px
-.advantages__item
-  position: relative
-  +row()
-  +sm-block()
-    margin-bottom: 65px
-    text-align: center
-  align-items: center
-  margin-bottom: 40px
-  &:nth-child(odd)
-    flex-direction: row-reverse
-    .advantages__item-img
-      &::before
-        right: auto
-        left: calc(100% + 35px)
 
-  &::before
-    content: ''
+  &__item
+    position: relative
+    +row()
     +sm-block()
-      position: absolute
+      margin-bottom: 65px
+      text-align: center
+    align-items: center
+    margin-bottom: 40px
+    &:nth-child(odd)
+      flex-direction: row-reverse
+      .advantages__item-img
+        &::before
+          right: auto
+          left: calc(100% + 35px)
 
-      bottom: 0
-      left: 0
-      right: 0
-      margin: auto
-      max-width: 202px
-      width: 100%
-      height: 3px
-      background-color: #e6e5e5
+    &::before
+      content: ''
+      +media-xs-down()
+        position: absolute
+
+        bottom: 0
+        left: 0
+        right: 0
+        margin: auto
+        max-width: 202px
+        width: 100%
+        height: 3px
+        background-color: #e6e5e5
 
 
-.advantages__item-img
-  // position: relative
-  +col()
-  +cols(3)
-  +cols-sm(12)
-  font-size: 0
-  &::before
-    content: ''
-    position: absolute
-    top: 50%
-    right: calc(100% + 35px)
-    width: 10000%
-    height: 2px
-    background-color: #e6e5e5
+  &__item-img
+    // position: relative
+    +col()
+    +cols(3)
+    +cols-sm(12)
+    font-size: 0
+    +media-sm-up()
+      &::before
+        content: ''
+        position: absolute
+        top: 50%
+        right: calc(100% + 35px)
+        width: 10000%
+        height: 2px
+        background-color: #e6e5e5
 
-.advantages__item-desc
-  position: relative
-  +col()
-  +cols(9)
-  +cols-sm(12)
-  +sm-block()
-    margin-top: 25px
-    padding-bottom: 65px
-.advantages__item-content
-  margin-bottom: 0
-  font-size: 18px
-  font-weight: 300
-  line-height: 1.55555
+  &__item-desc
+    position: relative
+    +col()
+    +cols(9)
+    +cols-sm(12)
+    +sm-block()
+      margin-top: 25px
+      padding-bottom: 65px
+
+  &__item-content
+    margin-bottom: 0
+    font-size: 18px
+    font-weight: 300
+    line-height: 1.55555
 
 
 .tooltips
