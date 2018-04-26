@@ -9,8 +9,8 @@ block head
       azu: "Автоматически Запирающие Устройства —&nbsp;комплект оборудования, расположенный на&nbsp;подъездных дверях многоквартирного дома: доводчик, кнопка выхода, магнитный замок, блоки электроники, блоки питания, блок вызова и&nbsp;пр.",
       client: "Клиент &mdash;&nbsp;собственник жилья/наниматель, заключивший договор на&nbsp;техническое обслуживание автоматически запирающих устройств (далее АЗУ)",
       keyActivation: "Ключи, которые продаются в&nbsp;магазинах, работаю ТОЛЬКО при&nbsp;наличии заключенного договора.<br>Для&nbsp;активации ключа достаточно с&nbsp;зарегистрированного телефона на&nbsp;номер 89500532966 отправить СМС с&nbsp;номером этого ключа (или&nbsp;нескольких ключей). Например: AB256DE5, DE8756AB",
-      bots: "Viber, Telegram",
-      app: "<div class='tooltip__inner-wrap'><p>Для&nbsp;загрузки приложения на&nbsp;мобильном телефоне нажмите на&nbsp;QR-код или&nbsp;перейдите по&nbsp;ссылке, сфотографировав его.</p><img class='tooltip__qr-code qr-code' src='"+contacts.apps.androidQR+"' /></div>",
+      bots: "<a href="+contacts.bots.viber+">Viber</a>, <a href="+contacts.bots.telegram+">Telegram</a>",
+      app: "<div class='tooltip__inner-wrap'><p>Для&nbsp;загрузки приложения на&nbsp;мобильном телефоне нажмите на&nbsp;QR-код или&nbsp;перейдите по&nbsp;ссылке, сфотографировав его.</p><!--noindex--><a href="+contacts.apps.android+" rel='nofollow' target='_blank'><img class='tooltip__qr-code qr-code' src='"+contacts.apps.androidQR+"' /></a><!--/noindex--></div>",
       star: "Ведутся работы по&nbsp;внедрению данной технологии. Предполагаемый срок массового внедрения: конец&nbsp;2018&nbsp;года.",
       closer: "Самым качественным типом дверных доводчиков является масляный. Даже в&nbsp;высококачественных доводчиках (например, KING), которые использует наша компания, влияние перепадов уличных температур велико для&nbsp;скорости закрытия двери. Внедрение температурных контроллеров и&nbsp;нагревательных элементов позволило минимизировать это&nbsp;влияние.",
       package: "КОМПЛЕКТ НОВОСЕЛА &mdash;&nbsp;включает в&nbsp;себя КЛЮЧ&nbsp;НОВОСЕЛА, инструкцию пользования системой с&nbsp;информацией о&nbsp;стоимости услуг по&nbsp;договору, комплект платных договорных ключей.",
@@ -78,7 +78,7 @@ block content
           h3.subheading-level-three Дистанционное управление доступом в&nbsp;подъезд
           p.advantages__item-content Наши собственные микроконтроллерные разработки позволяют вам использовать для&nbsp;этого привычные смартфоны. Телефонным звонком на&nbsp;номер 
             a.link(href='tel:'+contacts.phone.bot) #{contacts.phone.bot}
-            | , кнопкой&nbsp;«Open» в&nbsp;Viber и&nbsp;Telegram или&nbsp;Android&#8209;приложением можно открыть подъездную дверь, находясь на&nbsp;любом расстоянии от&nbsp;неё.
+            | , кнопкой&nbsp;«Open» в&nbsp;#[a.link(href=contacts.bots.viber) Viber] и&nbsp;#[a.link(href=contacts.bots.telegram) Telegram] или&nbsp;#[a.link(href=contacts.apps.android) Android&#8209;приложением] можно открыть подъездную дверь, находясь на&nbsp;любом расстоянии от&nbsp;неё.
 
       .advantages__item
         .advantages__item-img
