@@ -6,7 +6,10 @@ mixin head()
   meta(http-equiv='X-UA-Compatible', content='IE=edge')
   meta(name='viewport', content='width=device-width, initial-scale=1, maximum-scale=1')
   meta(property='og:image', content='path/to/image.jpg')
-    
+
+  meta(http-equiv="Cache-Control", content="no-cache, must-revalidate")
+  meta(http-equiv="Pragma", content="no-cache")
+
   base(href="/")
 
   //- favicon block start
