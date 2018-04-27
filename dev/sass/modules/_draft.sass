@@ -4,15 +4,19 @@
     text-align: left
     margin-bottom: 15px !important
     margin-top: 45px
+    +media-xs-down()
+      font-size: 16px
 
   &__list
     display: block
     position: relative
+    font-weight: 300
 
   &__contents
     list-style: none
     padding: 0
     margin: 0
+    font-weight: 300
 
   &__item
     padding: 12px 15px
@@ -21,6 +25,9 @@
 
   &__footer
     font-size: 1.2em
+    font-weight: 300
 
   &__footer &__item
     background: none
+    padding-left: 0
+    padding-right: 0

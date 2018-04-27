@@ -1,0 +1,11 @@
+<ifModule mod_headers.c>
+  <FilesMatch "\.(html|htm|php)$">
+    Header set Cache-Control "max-age=0, public, must-revalidate"
+  </FilesMatch>
+</IfModule>
+
+<ifModule mod_headers.c>
+  <FilesMatch "\.(css|js)$">
+    Header set Cache-Control "max-age=21600, public, must-revalidate"
+  </FilesMatch>
+</IfModule>

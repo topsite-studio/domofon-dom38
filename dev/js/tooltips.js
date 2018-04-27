@@ -3,6 +3,7 @@
 
   var toolTips = $('.tooltips')
   toolTips.each(function (index, el) {
+    // el.tabIndex = 0
     var toolData = $(this).data('tooltips')
     var tooltipie = new Tooltip(el, {
       title: toolData,
@@ -19,6 +20,10 @@
           })
         }
       }
+    })
+    $(el).click(function (event) {
+      console.log(event)
+      event.preventDefault()
     })
   })
 }(window.$, window.Tooltip))
