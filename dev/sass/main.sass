@@ -351,6 +351,9 @@ body
   padding-bottom: 20px
   &__content
     display: none
+    padding: 15px 15px
+    +xs-block()
+      padding: 15px 0
   &__title
     position: relative
     display: flex
@@ -374,8 +377,6 @@ body
     color: #fff
     background: #51abec
     border-bottom: 1px solid #fff
-  &__content
-    padding: 15px 30px
 
 .svg__down
   display: block
