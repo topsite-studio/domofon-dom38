@@ -1,6 +1,9 @@
-.link
+
+%link
   $color: #3292d2
   border-bottom: 1px solid $color
+  font-weight: inherit
+  color: inherit
   &:hover
     color: $color
     transition: .33s ease-in
@@ -16,3 +19,6 @@
     color: $color
   &--bold
     font-weight: 700
+
+.link
+  @extend %link !optional
