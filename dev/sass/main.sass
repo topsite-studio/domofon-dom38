@@ -349,42 +349,39 @@ body
 .accordion
   padding-top: 50px
   padding-bottom: 20px
-// necessary style
-.accordion__content
-  display: none
-.accordion__title
-  position: relative
-  display: flex
-  align-items: center
-  justify-content: space-between
-  cursor: pointer
-  font-size: 18px
-.accordion__svg
-  flex-shrink: 0
-  display: block
-  font-size: 0
-  line-height: 0
-  transition: all .25s linear
+  &__content
+    display: none
+  &__title
+    position: relative
+    display: flex
+    align-items: center
+    justify-content: space-between
+    cursor: pointer
+    font-size: 18px
+  &__svg
+    flex-shrink: 0
+    display: block
+    font-size: 0
+    line-height: 0
+    transition: all .25s linear
+  &__item--active &__svg
+      transform: rotate(180deg)
+  &__item--active &__content
+      display: block
+
+  &__title
+    padding: 10px
+    color: #fff
+    background: #51abec
+    border-bottom: 1px solid #fff
+  &__content
+    padding: 15px 30px
+
 .svg__down
   display: block
   width: 15px
   height: 15px
   fill: #fff
-.accordion__item--active
-  .accordion__svg
-    transform: rotate(180deg)
-  .accordion__content
-    display: block
-// necessary style end
-
-.accordion__title
-  padding: 10px
-  color: #fff
-  background: #51abec
-  border-bottom: 1px solid #fff
-.accordion__content
-  padding: 15px 30px
-
 
 .info-table
   padding-bottom: 20px
