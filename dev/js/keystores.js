@@ -12,6 +12,8 @@
   function keyretail () {
     console.log('keyretail()!')
 
+    var myMap
+
     /**
      * Кнопка подгрузки
      * @type {HTMLElement}
@@ -65,6 +67,8 @@
       var tr = document.createElement('tr')
       tr.className = 'table__row-content'
       tr.hidden = info.isHidden
+      tr.dataset.lat = info.lat
+      tr.dataset.lon = info.lon
 
       var title = document.createElement('td')
       title.className = 'table__td table__td--title'
@@ -94,8 +98,6 @@
       var distance = document.createElement('td')
       distance.className = 'table__td'
       distance.dataset.title = 'Расстояние'
-      distance.dataset.lat = info.lat
-      distance.dataset.lon = info.lon
       distance.innerText = info.distance
       tr.appendChild(distance)
       storesList.appendChild(tr)
@@ -128,7 +130,7 @@
     function init () {
       var geolocation = ymaps.geolocation
 
-      var myMap = new ymaps.Map('map', {
+      myMap = new ymaps.Map('map', {
         center: [52.266407, 104.281374],
         zoom: 11,
         controls: ['zoomControl', 'geolocationControl']
@@ -168,8 +170,6 @@
           var FINAL_DATA = data.filter(filteringWay)
           FINAL_DATA = FINAL_DATA.sort(comparingWay)
 
-          console.log(FINAL_DATA)
-
           FINAL_DATA.map(function (item, index) {
             var distance = (userLocation !== null) ? parseInt(ymaps.coordSystem.geo.getDistance(userLocation.position, [item.lat, item.lon])) + ' м' : ''
               addRowToTable({
@@ -178,15 +178,29 @@
                 worktime: item.worktime,
                 image: item.shortImageUrl,
                 distance: distance,
-                isHidden: index >= tableRowsInPage
+                isHidden: index >= tableRowsInPage,
+                lat: item.lat,
+                lon: item.lon
               })
           })
 
           document.querySelector('#stores-list').addEventListener('click', function (e) {
             console.log(e)
             var condition = (e.target.tagName.toLowerCase() === 'tr' || e.target.parentElement.tagName.toLowerCase() === 'tr')
+            var row = e.target.tagName.toLowerCase() === 'tr' ? e.target : e.target.parentElement
+            console.log(row)
+            var coords = [
+              parseFloat(row.dataset.lat),
+              parseFloat(row.dataset.lon)
+            ]
+            console.log(coords)
             if (condition) {
-              $('html,body').animate({ scrollTop: $('#map').offset().top - 50 }, 750)
+              $('html,body').animate({ scrollTop: $('#map').offset().top - 50 }, 750,
+                function completeAnimation () {
+                  console.log('completeAnimation')
+                  myMap.setCenter(coords, 15)
+                }
+              )
             }
             return condition
           })

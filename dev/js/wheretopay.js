@@ -248,8 +248,20 @@
             document.querySelector('#stores-list').addEventListener('click', function (e) {
               console.log(e)
               var condition = (e.target.tagName.toLowerCase() === 'tr' || e.target.parentElement.tagName.toLowerCase() === 'tr')
+              var row = e.target.tagName.toLowerCase() === 'tr' ? e.target : e.target.parentElement
+              console.log(row)
+              var coords = [
+                parseFloat(row.dataset.lat),
+                parseFloat(row.dataset.lon)
+              ]
+              console.log(coords)
               if (condition) {
-                $('html,body').animate({ scrollTop: $('#map').offset().top - 50 }, 750)
+                $('html,body').animate({ scrollTop: $('#map').offset().top - 50 }, 750,
+                  function completeAnimation () {
+                    console.log('completeAnimation')
+                    myMap.setCenter(coords, 15)
+                  }
+                )
               }
               return condition
             })
