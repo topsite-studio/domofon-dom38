@@ -134,14 +134,16 @@ body
 
 
 .tooltips
-  // position: relative
-  display: inline-block
-  padding-top: 0px
-  color: $blue
-  font-weight: 500
-  border-bottom: 1px dashed $blue
-  +media-sm-down()
-    display: inline
+  // // position: relative
+  // display: inline-block
+  // padding-top: 0px
+  // color: $blue
+  // font-weight: 500
+  // border-bottom: 1px dashed $blue
+  // +media-sm-down()
+  //   display: inline
+  @extend %link !optional
+
 .advantages__item-link
   font-weight: 500
 
