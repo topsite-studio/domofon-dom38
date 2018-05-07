@@ -245,6 +245,15 @@
               })
             })
 
+            document.querySelector('#stores-list').addEventListener('click', function (e) {
+              console.log(e)
+              var condition = (e.target.tagName.toLowerCase() === 'tr' || e.target.parentElement.tagName.toLowerCase() === 'tr')
+              if (condition) {
+                $('html,body').animate({ scrollTop: $('#map').offset().top - 50 }, 750)
+              }
+              return condition
+            })
+
             $('.map__btn[data-category]').click(function () {
               if ($(this).hasClass('map__btn--active') === false) {
                 $('.map__btn--active').removeClass('map__btn--active')

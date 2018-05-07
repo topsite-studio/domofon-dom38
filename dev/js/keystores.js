@@ -11,6 +11,7 @@
    */
   function keyretail () {
     console.log('keyretail()!')
+
     /**
      * Кнопка подгрузки
      * @type {HTMLElement}
@@ -97,7 +98,6 @@
       distance.dataset.lon = info.lon
       distance.innerText = info.distance
       tr.appendChild(distance)
-
       storesList.appendChild(tr)
     }
 
@@ -180,6 +180,15 @@
                 distance: distance,
                 isHidden: index >= tableRowsInPage
               })
+          })
+
+          document.querySelector('#stores-list').addEventListener('click', function (e) {
+            console.log(e)
+            var condition = (e.target.tagName.toLowerCase() === 'tr' || e.target.parentElement.tagName.toLowerCase() === 'tr')
+            if (condition) {
+              $('html,body').animate({ scrollTop: $('#map').offset().top - 50 }, 750)
+            }
+            return condition
           })
 
           loadMoreButton.hidden = false
