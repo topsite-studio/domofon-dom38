@@ -33,7 +33,7 @@
      * @return {Array}      Массив с геообъектами
      */
     function reorderKeyStores (data) {
-      console.groupCollapsed("reorderKeyStores")
+      console.groupCollapsed('reorderKeyStores')
       var geoObjects = []
 
       data.forEach(function (item, index) {
@@ -203,9 +203,28 @@
             checkZoomRange: true
           })
 
-          var closestDot = myMap.geoObjects.get(1).getGeoObjects()[0]        
+          var closestDot = myMap.geoObjects.get(1).getGeoObjects()[0]
           closestDot.options.set('preset', 'islands#redDotIcon')
-
+          
+          if (userLocation) {
+            myMap.events.add('boundschange', function (event) {
+              if (closestDot.getParent() === null) {
+                var allClusters = myMap.geoObjects.get(1).getClusters()
+                if (allClusters.length > 0) {
+                  var closestCluster = allClusters.sort(function (a, b) {
+                    var distance = {
+                      a: (userLocation !== null) ? ymaps.coordSystem.geo.getDistance(userLocation.position, [a.geometry.getCoordinates()[0], a.geometry.getCoordinates()[1]]) : 0,
+                      b: (userLocation !== null) ? ymaps.coordSystem.geo.getDistance(userLocation.position, [b.geometry.getCoordinates()[0], b.geometry.getCoordinates()[1]]) : 0
+                    }
+                    return distance.a - distance.b
+                  })
+                  var cluster = closestCluster[0]
+                  cluster.options.set('preset', 'islands#invertedRedClusterIcons')
+                }
+              }
+            })
+          }
+          
           function comparingWay (a, b) {
             var distance = {
               a: (userLocation !== null) ? ymaps.coordSystem.geo.getDistance(userLocation.position, [a.lat, a.lon]) : 0,
