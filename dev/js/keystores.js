@@ -33,9 +33,11 @@
      * @return {Array}      Массив с геообъектами
      */
     function reorderKeyStores (data) {
+      console.groupCollapsed('reorderKeyStores')
       var geoObjects = []
 
-      data.map(function (item) {
+      data.forEach(function (item, index) {
+        if (index === 0) console.debug(item)
         // Если координаты пункта обнародованы
         if (!item.isOff) {
           // Добавляем пункт продажи на карту
@@ -51,9 +53,11 @@
               closeButton: false
             }
           })
+          if (index === 0) console.debug(placemark)
           geoObjects.push(placemark)
         }
       })
+      console.groupEnd()
 
       return geoObjects
     }
@@ -93,7 +97,6 @@
       image.dataset.title = 'Схема проезда'
       image.innerHTML = info.image ? "<a data-fancybox='scheme' data-caption='" + info.title + "' href='" + info.image + "' class='link link--dashed'>Показать схему проезда</a>" : ''
       tr.appendChild(image)
-
 
       var distance = document.createElement('td')
       distance.className = 'table__td'
@@ -143,45 +146,26 @@
         mapStateAutoApply: false
       }).then(function (result) {
         // Если браузер не поддерживает эту функциональность, метка не будет добавлена на карту.
-        result.geoObjects.options.set('preset', 'islands#redCircleIcon')
+        result.geoObjects.options.set('preset', 'islands#redPersonCircleIcon')
         userLocation = result.geoObjects
         myMap.geoObjects.add(userLocation)
 
         $.getJSON('https://domofon.dom38.ru/api/keystores', function (data) {
-          console.log(data)
-          var placemarks = reorderKeyStores(data)
-          var clusterer = new ymaps.Clusterer({
-            preset: 'islands#invertedBlueClusterIcons',
-            groupByCoordinates: false
-          })
-
-          function comparingWay (a, b) {
-            var distance = {
-              a: (userLocation !== null) ? ymaps.coordSystem.geo.getDistance(userLocation.position, [a.lat, a.lon]) : 0,
-              b: (userLocation !== null) ? ymaps.coordSystem.geo.getDistance(userLocation.position, [b.lat, b.lon]) : 0
-            }
-            return distance.a - distance.b
-          }
-
-          function filteringWay (item) {
-            return !item.isOff
-          }
-
           var FINAL_DATA = data.filter(filteringWay)
           FINAL_DATA = FINAL_DATA.sort(comparingWay)
 
-          FINAL_DATA.map(function (item, index) {
+          FINAL_DATA.forEach(function (item, index) {
             var distance = (userLocation !== null) ? parseInt(ymaps.coordSystem.geo.getDistance(userLocation.position, [item.lat, item.lon])) + ' м' : ''
-              addRowToTable({
-                title: item.name,
-                address: item.city + ', ' + item.address,
-                worktime: item.worktime,
-                image: item.shortImageUrl,
-                distance: distance,
-                isHidden: index >= tableRowsInPage,
-                lat: item.lat,
-                lon: item.lon
-              })
+            addRowToTable({
+              title: item.name,
+              address: item.city + ', ' + item.address,
+              worktime: item.worktime,
+              image: item.shortImageUrl,
+              distance: distance,
+              isHidden: index >= tableRowsInPage,
+              lat: item.lat,
+              lon: item.lon
+            })
           })
 
           document.querySelector('#stores-list').addEventListener('click', function (e) {
@@ -208,11 +192,50 @@
           loadMoreButton.hidden = false
           loadMoreButton.addEventListener('click', pseudoLoadMore)
 
+          var placemarks = reorderKeyStores(FINAL_DATA)
+          var clusterer = new ymaps.Clusterer({
+            preset: 'islands#invertedBlueClusterIcons',
+            groupByCoordinates: false
+          })
           clusterer.add(placemarks)
           myMap.geoObjects.add(clusterer)
           myMap.setBounds(clusterer.getBounds(), {
             checkZoomRange: true
           })
+
+          var closestDot = myMap.geoObjects.get(1).getGeoObjects()[0]
+          closestDot.options.set('preset', 'islands#redDotIcon')
+
+          if (userLocation) {
+            myMap.events.add('boundschange', function (event) {
+              if (closestDot.getParent() === null) {
+                var allClusters = myMap.geoObjects.get(1).getClusters()
+                if (allClusters.length > 0) {
+                  var closestCluster = allClusters.sort(function (a, b) {
+                    var distance = {
+                      a: (userLocation !== null) ? ymaps.coordSystem.geo.getDistance(userLocation.position, [a.geometry.getCoordinates()[0], a.geometry.getCoordinates()[1]]) : 0,
+                      b: (userLocation !== null) ? ymaps.coordSystem.geo.getDistance(userLocation.position, [b.geometry.getCoordinates()[0], b.geometry.getCoordinates()[1]]) : 0
+                    }
+                    return distance.a - distance.b
+                  })
+                  var cluster = closestCluster[0]
+                  cluster.options.set('preset', 'islands#invertedRedClusterIcons')
+                }
+              }
+            })
+          }
+
+          function comparingWay (a, b) {
+            var distance = {
+              a: (userLocation !== null) ? ymaps.coordSystem.geo.getDistance(userLocation.position, [a.lat, a.lon]) : 0,
+              b: (userLocation !== null) ? ymaps.coordSystem.geo.getDistance(userLocation.position, [b.lat, b.lon]) : 0
+            }
+            return distance.a - distance.b
+          }
+
+          function filteringWay (item) {
+            return !item.isOff
+          }
         })
       })
     }

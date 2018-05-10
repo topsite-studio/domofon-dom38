@@ -1,6 +1,6 @@
 # domofon-dom38
 
-https://domofon.dom38.ru/n/
+(https://dev-domofon.dom38.ru)[https://dev-domofon.dom38.ru/]
 
 Чтобы развернуть проект, необходимо:
 

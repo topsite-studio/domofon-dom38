@@ -10,6 +10,7 @@
    */
   function whereToPay () {
     var myMap
+    var userLocation
     ymaps.ready(init)
 
     /**
@@ -31,10 +32,12 @@
      * @return {Array}      Массив с геообъектами
      */
     function reorderFeeStations (map, data) {
-      map.geoObjects.removeAll()
+      if (map.geoObjects.get(1)) {
+        map.geoObjects.get(1).removeAll()
+      }
       var geoObjects = []
 
-      data.map(function (item) {
+      data.forEach(function (item) {
         // Если координаты пункта обнародованы
         if (item.published) {
           // Добавляем пункт продажи на карту
@@ -59,8 +62,7 @@
 
     /**
      * Добавление строки в таблицу
-     * @param {{ title: string, address: string, lat: string, category: string, lon: string, distance: string,
-     isHidden: boolean }} info Инфа, передаваемая в строку
+     * @param {{ title: string, address: string, lat: string, category: string, lon: string, distance: string, isHidden: boolean }} info Инфа, передаваемая в строку
      */
     function addRowToTable (info) {
       var storesList = document.querySelector('#stores-list')
@@ -113,11 +115,11 @@
       }
 
       // Скрываем первые 10 строчек
-      var filteredRows = category === 'all' ? tableRows : document.querySelectorAll('.table__row-content[data-category="'+category+'"]')
+      var filteredRows = category === 'all' ? tableRows : document.querySelectorAll('.table__row-content[data-category="' + category + '"]')
       console.log(filteredRows)
-      for (var i = 0; i < filteredRows.length; i++) {
-        console.log(i > tableRowsInPage)
-        filteredRows[i].hidden = i >= tableRowsInPage
+      for (var k = 0; k < filteredRows.length; k++) {
+        console.log(k > tableRowsInPage)
+        filteredRows[k].hidden = k >= tableRowsInPage
       }
 
       loadMoreButton.hidden = filteredRows.length <= tableRowsInPage
@@ -127,9 +129,7 @@
       })
 
       var filteredPlacemarks = reorderFeeStations(myMap, filteredData)
-      var filteredCluster = new ymaps.Clusterer({
-        groupByCoordinates: false
-      })
+      var filteredCluster = myMap.geoObjects.get(1)
       switch (category) {
         case 'sberbank':
           filteredCluster.options.set({
@@ -148,7 +148,7 @@
           break
       }
       filteredCluster.add(filteredPlacemarks)
-      myMap.geoObjects.add(filteredCluster)
+      findClosestPlace(userLocation)
 
       console.groupEnd()
       return true
@@ -166,7 +166,7 @@
         var category = document.querySelector('.map__btn--active') ? document.querySelector('.map__btn--active').dataset.category : 'all'
         filter = category === 'all' ? '' : '[data-category="' + category + '"]'
       }
-      var list = document.querySelectorAll('.table__row-content'+filter+'[hidden]')
+      var list = document.querySelectorAll('.table__row-content' + filter + '[hidden]')
 
       if (list.length > 0) {
         button.hidden = false
@@ -178,6 +178,41 @@
       }
 
       return true
+    }
+
+    /**
+     * Поиск ближайшей к пользователю точки
+     * @param {object Object} userLocation Геообъект местоположения пользователя. Если он равен null или не передан в функцию, то функция не сработает
+     */
+    function findClosestPlace (userLocation) {
+      var closestDot
+      if (userLocation) {
+        closestDot = myMap.geoObjects.get(1).getGeoObjects()[0]
+        closestDot.options.set('preset', 'islands#redDotIcon')
+
+        markAsClosest()
+        console.log(myMap.events.group())
+
+        if (!myMap.events.group().events.types.boundschange[20]) {
+          myMap.events.add('boundschange', markAsClosest)
+        }
+      }
+      function markAsClosest () {
+        if (closestDot.getParent() === null) {
+          var allClusters = myMap.geoObjects.get(1).getClusters()
+          if (allClusters.length > 0) {
+            var closestCluster = allClusters.sort(function (a, b) {
+              var distance = {
+                a: (userLocation !== null) ? ymaps.coordSystem.geo.getDistance(userLocation.position, [a.geometry.getCoordinates()[0], a.geometry.getCoordinates()[1]]) : 0,
+                b: (userLocation !== null) ? ymaps.coordSystem.geo.getDistance(userLocation.position, [b.geometry.getCoordinates()[0], b.geometry.getCoordinates()[1]]) : 0
+              }
+              return distance.a - distance.b
+            })
+            var cluster = closestCluster[0]
+            cluster.options.set('preset', 'islands#invertedRedClusterIcons')
+          }
+        }
+      }
     }
 
     /**
@@ -193,14 +228,13 @@
       })
 
       var stations = []
-      var userLocation
 
       geolocation.get({
         provider: 'browser',
         mapStateAutoApply: false
       }).then(function (result) {
         // Если браузер не поддерживает эту функциональность, метка не будет добавлена на карту.
-        result.geoObjects.options.set('preset', 'islands#redCircleIcon')
+        result.geoObjects.options.set('preset', 'islands#redPersonCircleIcon')
         userLocation = result.geoObjects
         myMap.geoObjects.add(userLocation)
 
@@ -211,10 +245,20 @@
 
             document.querySelector('.map__filter').hidden = false
 
-            var placemarks = reorderFeeStations(myMap, stations)
+            var FINAL_DATA = stations.filter(function (item) {
+              return item.published
+            })
+            FINAL_DATA = FINAL_DATA.sort(comparingWay)
+
+            var placemarks = reorderFeeStations(myMap, FINAL_DATA)
             var clusterer = new ymaps.Clusterer({
               preset: 'islands#invertedBlueClusterIcons',
               groupByCoordinates: false
+            })
+            clusterer.add(placemarks)
+            myMap.geoObjects.add(clusterer)
+            myMap.setBounds(clusterer.getBounds(), {
+              checkZoomRange: true
             })
 
             function comparingWay (a, b) {
@@ -225,12 +269,9 @@
               return distance.a - distance.b
             }
 
-            var FINAL_DATA = stations.filter(function (item) {
-              return item.published
-            })
-            FINAL_DATA = FINAL_DATA.sort(comparingWay)
+            findClosestPlace(userLocation)
 
-            FINAL_DATA.map(function (item, index) {
+            FINAL_DATA.forEach(function (item, index) {
               var distance = (userLocation !== null) ? parseInt(ymaps.coordSystem.geo.getDistance(userLocation.position, [item.lat, item.lon])) + ' м' : ''
               // console.log(placemark.geometry.getCoordinates())
               // Добавляем пункт продажи в таблицу
@@ -276,12 +317,6 @@
 
             loadMoreButton.hidden = document.querySelectorAll('.table__row-content').length <= tableRowsInPage
             loadMoreButton.addEventListener('click', pseudoLoadMore)
-
-            clusterer.add(placemarks)
-            myMap.geoObjects.add(clusterer)
-            myMap.setBounds(clusterer.getBounds(), {
-              checkZoomRange: true
-            })
           })
         })
       })
