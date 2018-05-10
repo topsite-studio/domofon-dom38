@@ -211,7 +211,12 @@
 
             document.querySelector('.map__filter').hidden = false
 
-            var placemarks = reorderFeeStations(myMap, stations)
+            var FINAL_DATA = stations.filter(function (item) {
+              return item.published
+            })
+            FINAL_DATA = FINAL_DATA.sort(comparingWay)
+
+            var placemarks = reorderFeeStations(myMap, FINAL_DATA)
             var clusterer = new ymaps.Clusterer({
               preset: 'islands#invertedBlueClusterIcons',
               groupByCoordinates: false
@@ -225,10 +230,6 @@
               return distance.a - distance.b
             }
 
-            var FINAL_DATA = stations.filter(function (item) {
-              return item.published
-            })
-            FINAL_DATA = FINAL_DATA.sort(comparingWay)
 
             FINAL_DATA.map(function (item, index) {
               var distance = (userLocation !== null) ? parseInt(ymaps.coordSystem.geo.getDistance(userLocation.position, [item.lat, item.lon])) + ' м' : ''
