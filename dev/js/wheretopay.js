@@ -115,11 +115,11 @@
       }
 
       // Скрываем первые 10 строчек
-      var filteredRows = category === 'all' ? tableRows : document.querySelectorAll('.table__row-content[data-category="'+category+'"]')
+      var filteredRows = category === 'all' ? tableRows : document.querySelectorAll('.table__row-content[data-category="' + category + '"]')
       console.log(filteredRows)
-      for (var i = 0; i < filteredRows.length; i++) {
-        console.log(i > tableRowsInPage)
-        filteredRows[i].hidden = i >= tableRowsInPage
+      for (var k = 0; k < filteredRows.length; k++) {
+        console.log(k > tableRowsInPage)
+        filteredRows[k].hidden = k >= tableRowsInPage
       }
 
       loadMoreButton.hidden = filteredRows.length <= tableRowsInPage
@@ -166,7 +166,7 @@
         var category = document.querySelector('.map__btn--active') ? document.querySelector('.map__btn--active').dataset.category : 'all'
         filter = category === 'all' ? '' : '[data-category="' + category + '"]'
       }
-      var list = document.querySelectorAll('.table__row-content'+filter+'[hidden]')
+      var list = document.querySelectorAll('.table__row-content' + filter + '[hidden]')
 
       if (list.length > 0) {
         button.hidden = false
@@ -197,7 +197,6 @@
           myMap.events.add('boundschange', markAsClosest)
         }
       }
-
       function markAsClosest () {
         if (closestDot.getParent() === null) {
           var allClusters = myMap.geoObjects.get(1).getClusters()
@@ -214,8 +213,6 @@
           }
         }
       }
-
-      return true
     }
 
     /**
@@ -231,7 +228,6 @@
       })
 
       var stations = []
-      userLocation
 
       geolocation.get({
         provider: 'browser',

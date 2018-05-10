@@ -1,4 +1,4 @@
-(function(w, d, $) {
+(function (w, d, $) {
   'use strict'
 
   $('.accordion__title').click(function (e) {
@@ -20,4 +20,4 @@
     e.preventDefault()
     return false
   })
-})(window, document, window.$);
+})(window, document, window.$)

@@ -131,7 +131,7 @@ module.exports = function () {
       }))
       .on('error', $.gp.notify.onError({
         title: 'Error in JS:',
-        message: '\n Error in: <%= error.cause.filename %>\n Error text: <%= error.cause.message %> \n Error in line: <%= error.cause.line %>'
+        message: '\n Error in: <%= error.cause.filename %>\n Error text: <%= error.cause.message %> \n Error in line: <%= error.cause.line %>\n<%= error.cause %>'
       }))
       .pipe($.gp.sourcemaps.write())
       .pipe($.gulp.dest('build/js/'))
@@ -160,7 +160,7 @@ module.exports = function () {
       }))
       .on('error', $.gp.notify.onError({
         title: 'Error in JS:',
-        message: '\n Error in: <%= error.cause.filename %>\n Error text: <%= error.cause.message %> \n Error in line: <%= error.cause.line %>'
+        message: '\n Error in: <%= error.cause.filename %>\n Error text: <%= error.cause.message %> \n Error in line: <%= error.cause.line %>\n<%= error.message %>'
       }))
       .pipe($.gulp.dest('build/js/'))
   })
@@ -176,7 +176,7 @@ module.exports = function () {
       }))
       .on('error', $.gp.notify.onError({
         title: 'Error in JS:',
-        message: '\n Error in: <%= error.cause.filename %>\n Error text: <%= error.cause.message %> \n Error in line: <%= error.cause.line %>'
+        message: '\n Error in: <%= error.cause.filename %>\n Error text: <%= error.cause.message %> \n Error in line: <%= error.cause.line %>\n<%= error.message %>'
       }))
       .pipe($.gulp.dest('build/js/'))
   })
@@ -192,7 +192,7 @@ module.exports = function () {
       }))
       .on('error', $.gp.notify.onError({
         title: 'Error in JS:',
-        message: '\n Error in: <%= error.cause.filename %>\n Error text: <%= error.cause.message %> \n Error in line: <%= error.cause.line %>'
+        message: '\n Error in: <%= error.cause.filename %>\n Error text: <%= error.cause.message %> \n Error in line: <%= error.cause.line %>\n<%= error.message %>'
       }))
       .pipe($.gulp.dest('build/js/'))
   })

@@ -30,7 +30,7 @@
         }
       },
       error: function (xhr, ajaxOptions, thrownError) {
-        alert('Произошла ошибка сервера! Номер ошибки: ' + xhr.status)
+        window.alert('Произошла ошибка сервера! Номер ошибки: ' + xhr.status)
         console.error({
           xhr: xhr,
           ajax: ajaxOptions,

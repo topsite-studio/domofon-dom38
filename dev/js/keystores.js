@@ -205,7 +205,7 @@
 
           var closestDot = myMap.geoObjects.get(1).getGeoObjects()[0]
           closestDot.options.set('preset', 'islands#redDotIcon')
-          
+
           if (userLocation) {
             myMap.events.add('boundschange', function (event) {
               if (closestDot.getParent() === null) {
@@ -224,7 +224,7 @@
               }
             })
           }
-          
+
           function comparingWay (a, b) {
             var distance = {
               a: (userLocation !== null) ? ymaps.coordSystem.geo.getDistance(userLocation.position, [a.lat, a.lon]) : 0,
