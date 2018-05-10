@@ -184,9 +184,10 @@
      * Поиск ближайшей к пользователю точки
      * @param {object Object} userLocation Геообъект местоположения пользователя. Если он равен null или не передан в функцию, то функция не сработает
      */
-    function findClosestPlace (userLocation = null) {
+    function findClosestPlace (userLocation) {
+      var closestDot
       if (userLocation) {
-        var closestDot = myMap.geoObjects.get(1).getGeoObjects()[0]
+        closestDot = myMap.geoObjects.get(1).getGeoObjects()[0]
         closestDot.options.set('preset', 'islands#redDotIcon')
 
         markAsClosest()
