@@ -182,7 +182,7 @@
               $('html,body').animate({ scrollTop: $('#map').offset().top - 50 }, 750,
                 function completeAnimation () {
                   console.log('completeAnimation')
-                  myMap.setCenter(coords, 15)
+                  myMap.setCenter(coords, 13)
                 }
               )
             }
