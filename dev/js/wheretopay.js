@@ -225,7 +225,7 @@
 
       myMap = new ymaps.Map('map', {
         center: [52.266407, 104.281374],
-        zoom: 11,
+        zoom: 12,
         controls: ['zoomControl', 'geolocationControl']
       })
 
@@ -235,7 +235,6 @@
         provider: 'auto',
         mapStateAutoApply: false
       }).then(function (result) {
-        // Если браузер не поддерживает эту функциональность, метка не будет добавлена на карту.
         result.geoObjects.options.set('preset', 'islands#redPersonCircleIcon')
         userLocation = result.geoObjects
         myMap.geoObjects.add(userLocation)
@@ -259,9 +258,9 @@
             })
             clusterer.add(placemarks)
             myMap.geoObjects.add(clusterer)
-            myMap.setBounds(clusterer.getBounds(), {
-              checkZoomRange: true
-            })
+            // myMap.setBounds(clusterer.getBounds(), {
+            //   checkZoomRange: true
+            // })
 
             function comparingWay (a, b) {
               var distance = {
