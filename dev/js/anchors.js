@@ -1,23 +1,22 @@
+
 (function ($, $html) {
   'use strict'
+
+  var animationSpeed = 750
+
+  if (window.hashName) {
+    window.addEventListener('load', function (event) {
+      event.preventDefault()
+      scrollTo(window.hashName)
+    })
+  }
 
   $('[data-anchor]').click(function (e) {
     e.preventDefault()
 
     var source = $(this)[0]
     var initialWindowOffset = $html.scrollTop
-
-    console.log({
-      'Исходная точка': source,
-      'initialWindowOffset': initialWindowOffset
-    })
-
-    var target = $($(this).attr('href'))
-    var animationSpeed = 750
-    var offsetTop = (window.matchMedia('(min-width: 641px)').matches) ? $html.clientHeight / 4 : 50
-    var destination = target.offset().top - offsetTop
-
-    $('html,body').animate({ scrollTop: destination }, animationSpeed)
+    scrollTo($(this).attr('href'))
 
     if (window.matchMedia('(max-width: 767px)').matches) {
       setTimeout(function () {
@@ -28,7 +27,7 @@
         backButton.style.position = 'fixed'
         backButton.style.display = 'none'
         backButton.addEventListener('click', function (event) {
-          $('html,body').animate({ scrollTop: initialWindowOffset }, animationSpeed)
+          scrollTo(initialWindowOffset)
           source.style.backgroundColor = '#3292d2'
           source.style.color = '#fff'
           $(this).fadeOut(animationSpeed, function () {
@@ -43,7 +42,18 @@
         $(backButton).fadeIn(animationSpeed)
       }, 500)
     }
-
-    return false
   })
+
+  function scrollTo (selector) {
+    var destination
+    var offsetTop = (window.matchMedia('(min-width: 641px)').matches) ? $html.clientHeight / 4 : 50
+    if (typeof selector === 'number') {
+      destination = selector
+    } else {
+      var target = $(selector)
+      destination = target.offset().top - offsetTop
+    }
+    $('html,body').animate({ scrollTop: destination }, animationSpeed)
+    return false
+  }
 }(window.$, document.documentElement))
