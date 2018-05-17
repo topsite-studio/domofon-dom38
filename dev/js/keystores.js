@@ -142,7 +142,7 @@
       var userLocation
 
       geolocation.get({
-        provider: 'browser',
+        provider: 'auto',
         mapStateAutoApply: false
       }).then(function (result) {
         // Если браузер не поддерживает эту функциональность, метка не будет добавлена на карту.
