@@ -70,6 +70,8 @@
       tr.className = 'table__row-content'
       tr.dataset.category = info.category
       tr.hidden = info.isHidden
+      tr.dataset.lat = info.lat
+      tr.dataset.lon = info.lon
 
       var title = document.createElement('td')
       title.className = 'table__td table__td--title'
@@ -223,17 +225,16 @@
 
       myMap = new ymaps.Map('map', {
         center: [52.266407, 104.281374],
-        zoom: 11,
+        zoom: 12,
         controls: ['zoomControl', 'geolocationControl']
       })
 
       var stations = []
 
       geolocation.get({
-        provider: 'browser',
+        provider: 'auto',
         mapStateAutoApply: false
       }).then(function (result) {
-        // Если браузер не поддерживает эту функциональность, метка не будет добавлена на карту.
         result.geoObjects.options.set('preset', 'islands#redPersonCircleIcon')
         userLocation = result.geoObjects
         myMap.geoObjects.add(userLocation)
@@ -257,9 +258,9 @@
             })
             clusterer.add(placemarks)
             myMap.geoObjects.add(clusterer)
-            myMap.setBounds(clusterer.getBounds(), {
-              checkZoomRange: true
-            })
+            // myMap.setBounds(clusterer.getBounds(), {
+            //   checkZoomRange: true
+            // })
 
             function comparingWay (a, b) {
               var distance = {

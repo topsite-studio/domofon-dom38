@@ -18,6 +18,12 @@ block head
       androidApp: 'В&nbsp;разделе «Ключи» приложения есть удобный сервис управления ключами, в&nbsp;том&nbsp;числе их добавления.',
       acquiring: 'Собственникам помещения и&nbsp;лицам, совместно с&nbsp;ними проживающим, (согласно ст.&nbsp;31&nbsp;ЖК&nbsp;РФ) бездоговорные ключи-карты предоставляются бесплатно. При&nbsp;отсутствии документов, подтверждающих факт совместного проживания по&nbsp;интересующему адресу, дополнительные бездоговорные ключи собственник может приобрести в&nbsp;офисе компании.'
     }
+
+append head
+  script.
+    window.hashName = window.location.hash
+    window.location.hash = ''
+
 block content  
   +header_min()
 
@@ -84,7 +90,7 @@ block content
             b.instruction__desc-title Как начать пользоваться?
             | Под&nbsp;защитной полосой располагается Код&nbsp;Доступа, набрав который, Вы сможете войти в&nbsp;подъезд вашего дома.
             br
-            | #[em.instruction__desc-alert ВНИМАНИЕ:] #[span.tooltips(data-tooltips=snoska.beforeGetIn) Перед&nbsp;входом в&nbsp;подъезд] по&nbsp;этому коду #[em.instruction__desc-alert ОБЯЗАТЕЛЬНО] необходимо отправить СМС-сообщение на&nbsp;номер #[a.link(href="tel:"+contacts.phone.bot)= contacts.phone.bot] с&nbsp;содержанием:
+            | #[em.instruction__desc-alert ВНИМАНИЕ:] #[span.tooltips(data-tooltips=snoska.beforeGetIn) Перед&nbsp;входом в&nbsp;подъезд] по&nbsp;этому коду #[em.instruction__desc-alert ОБЯЗАТЕЛЬНО] необходимо отправить СМС-сообщение на&nbsp;номер #[a.link(href="sms:"+contacts.phone.bot)= contacts.phone.bot] с&nbsp;содержанием:
             code.instruction__code КодДоступа [пробел] НомерКвартиры
 
         .instruction__part.instruction__figure
@@ -99,7 +105,7 @@ block content
 
           p.instruction__desc 
             b.instruction__desc-title Как начать пользоваться?
-            | Перед&nbsp;входом в&nbsp;подъезд с&nbsp;использование КЛЮЧА&nbsp;НОВОСЕЛА или&nbsp;КодаДоступа отправьте СМС-сообщение на&nbsp;номер #[a.link(href="tel:"+contacts.phone.bot)= contacts.phone.bot] с&nbsp;содержанием: 
+            | Перед&nbsp;входом в&nbsp;подъезд с&nbsp;использование КЛЮЧА&nbsp;НОВОСЕЛА или&nbsp;КодаДоступа отправьте СМС-сообщение на&nbsp;номер #[a.link(href="sms:"+contacts.phone.bot)= contacts.phone.bot] с&nbsp;содержанием: 
             code.instruction__code КодДоступа [пробел] НомерКвартиры
 
         .instruction__part.instruction__figure
@@ -113,8 +119,8 @@ block content
             li Интернет-платеж на&nbsp;сайте &mdash;&nbsp;мгновенная оплата по&nbsp;реквизитам пластиковой банковской карты. Перейдите #[a.link(href='payment.html', target='_blank') по&nbsp;ссылке], введите номер договора, проверьте адрес и&nbsp;проведите платеж.
             li Банкоматы и&nbsp;отделения СБЕРБАНКА &mdash;&nbsp;по&nbsp;ИНН, указанному в&nbsp;разделе «Реквизиты для&nbsp;оплаты» КЛЮЧА&nbsp;НОВОСЕЛА, найдите домофонную компанию, следуйте указаниям системы.
               br
-              em.instruction__desc-alert ВНИМАНИЕ! При&nbsp;оплате через&nbsp;Сбербанк, в&nbsp;том&nbsp;числе «Сбербанк&nbsp;Онлайн» &mdash;&nbsp;срок зачисления средств 3&nbsp;РАБОЧИХ дней!
-            li Система «ГОРОД». Через терминалы и&nbsp;кассы системы, а&nbsp;также через&nbsp;сайт <!--noindex--><a href='//uplati.ru/' target='_blank' rel='nofollow'>uplati.ru</a><!--/noindex-->. Все необходимые реквизиты указаны на&nbsp;КЛЮЧЕ&nbsp;НОВОСЕЛА в&nbsp;разделе «Реквизиты для&nbsp;оплаты».
+              em.instruction__desc-alert ВНИМАНИЕ! При&nbsp;оплате через&nbsp;Сбербанк, в&nbsp;том&nbsp;числе «Сбербанк&nbsp;Онлайн» &mdash;&nbsp;срок зачисления средств до&nbsp;3&nbsp;РАБОЧИХ дней!
+            li Система «ГОРОД». Через терминалы и&nbsp;кассы системы, а&nbsp;также через&nbsp;сайт #[a.link(href='http://uplati.ru/', target='_blank', rel='nofollow') uplati.ru]. Все необходимые реквизиты указаны на&nbsp;КЛЮЧЕ&nbsp;НОВОСЕЛА в&nbsp;разделе «Реквизиты для&nbsp;оплаты».
 
           p.instruction__desc
             b.instruction__desc-title Как заключить договор?
@@ -187,9 +193,9 @@ block content
             ///noindex
 
           p.instruction__desc
-            b.instruction__desc-title Управление приложением
+            b.instruction__desc-title Возможности
             | Управляйте договором, оплачивайте услуги, заказывайте техническую поддержку и&nbsp;ремонт, управляйте доступом в&nbsp;подъезд с&nbsp;виджета программы.
-          p.instruction__desc
+          //-p.instruction__desc
             img(src=contacts.apps.androidQR, alt="image").qr-code
 
         .instruction__part.instruction__figure
@@ -203,7 +209,7 @@ block content
           h4.h4.instruction__title Список доступных СМС-команд
           p.instruction__desc
             b.instruction__desc-title Проверка баланса и&nbsp;другие команды
-            | Чтобы&nbsp;проверить баланс договора, заказать установку/подключение трубки и&nbsp;получить прочую информацию &mdash;&nbsp;в&nbsp;ответ на&nbsp;любое сообщение нашей системы отправьте знак вопроса &mdash; «?». В&nbsp;ответ система отправит список доступных команд.
+            | Чтобы&nbsp;проверить баланс договора, заказать установку/подключение трубки и&nbsp;получить прочую информацию &mdash;&nbsp;в&nbsp;ответ на&nbsp;любое сообщение нашей системы отправьте знак вопроса &mdash; «?» по номеру #[a.link(href="sms:"+contacts.phone.bot+"?body=?")= contacts.phone.bot]. В&nbsp;ответ система отправит список доступных команд.
 
         .instruction__part.instruction__figure
           .instruction__img 
@@ -224,7 +230,8 @@ block content
           p.instruction__desc
             b.instruction__desc-title Сделать заявку на&nbsp;вызов мастера
             | При&nbsp;неверной работе домофона Вы можете сделать с&nbsp;кнопок управления чата&nbsp;#[a.link(href=contacts.bots.viber) Viber], Android-приложения или&nbsp;просто позвонив по&nbsp;телефонам 
-            a.link(href="tel:"+contacts.phone.support1) #{contacts.phone.support1}, 
+            a.link(href="tel:"+contacts.phone.support1) #{contacts.phone.support1}
+            | ,  
             a.link(href="tel:"+contacts.phone.support2) #{contacts.phone.support2}
 
         .instruction__part.instruction__figure
