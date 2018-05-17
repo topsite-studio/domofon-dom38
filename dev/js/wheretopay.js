@@ -70,6 +70,8 @@
       tr.className = 'table__row-content'
       tr.dataset.category = info.category
       tr.hidden = info.isHidden
+      tr.dataset.lat = info.lat
+      tr.dataset.lon = info.lon
 
       var title = document.createElement('td')
       title.className = 'table__td table__td--title'
