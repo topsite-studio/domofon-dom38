@@ -2,7 +2,7 @@ include ../accordion/lib
 
 mixin faq()
   mixin question(question)
-    +item(question)
+    +item(question)&attributes(attributes)
       if block
         block
   

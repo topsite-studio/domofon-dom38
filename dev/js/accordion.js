@@ -20,4 +20,9 @@
     e.preventDefault()
     return false
   })
+
+  $('[data-accordion]').click(function () {
+    var target = $($(this).data('accordion'))
+    target.find('.accordion__title').trigger('click')
+  })
 })(window, document, window.$)
