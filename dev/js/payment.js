@@ -2,12 +2,21 @@
   'use strict'
 
   /**
+   * Изображение стрелки внутри кнопки
+   * @type {Image}
+   */
+  var arrowImage = new Image()
+  arrowImage.src = '/img/svg/refresh-white.svg'
+  arrowImage.className = 'btn__icon btn__icon--loading'
+
+  /**
   * Функция для отправки POST-запрос к API домофона
   */
   function contractLogin (event) {
     event.preventDefault()
     var form = $(this)[0]
     var submitButton = form.elements.submit
+
 
     $.ajax({
       type: 'POST',
@@ -19,7 +28,7 @@
       dataType: 'json',
       beforeSend: function () {
         // В кнопке меняем текст на анимированную иконку
-        submitButton.innerHTML = "<img class='btn__icon btn__icon--loading' src='img/svg/refresh-white.svg' alt='Loading' />"
+        submitButton.innerHTML = arrowImage.outerHTML
         submitButton.style.pointerEvents = 'none'
       },
       success: function (data, textStatus) {
