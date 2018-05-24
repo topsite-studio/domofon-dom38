@@ -189,7 +189,7 @@ block content
           p.instruction__desc
             //noindex
             b.instruction__desc-title Установка Android-приложения
-            | Для&nbsp;установки приложения перейдите #[a.link(href=contacts.apps.android, target='_blank') по&nbsp;ссылке], воспользуйтесь QR-кодом или&nbsp;привычно скачайте приложение с&nbsp;«Play&nbsp;Market».
+            | Для&nbsp;установки приложения перейдите #[a.link(href=contacts.apps.android, target='_blank') по&nbsp;ссылке].
             ///noindex
 
           p.instruction__desc
@@ -209,7 +209,27 @@ block content
           h4.h4.instruction__title Список доступных СМС-команд
           p.instruction__desc
             b.instruction__desc-title Проверка баланса и&nbsp;другие команды
-            | Чтобы&nbsp;проверить баланс договора, заказать установку/подключение трубки и&nbsp;получить прочую информацию &mdash;&nbsp;в&nbsp;ответ на&nbsp;любое сообщение нашей системы отправьте знак вопроса &mdash; «?» по номеру #[a.link(href="sms:"+contacts.phone.bot+"?body=?")= contacts.phone.bot]. В&nbsp;ответ система отправит список доступных команд.
+            | Чтобы&nbsp;проверить баланс договора, заказать установку/подключение трубки и&nbsp;получить прочую информацию &mdash;&nbsp;в&nbsp;ответ на&nbsp;любое сообщение нашей системы отправьте знак вопроса &mdash; «?» по номеру #[a.link(href="sms:"+contacts.phone.bot+"?body=?")= contacts.phone.bot]. В&nbsp;ответ система отправит список доступных команд: 
+            br
+            | #[strong ?] &mdash;&nbsp;получить список доступных команд
+            br
+            | #[strong *0] &mdash;&nbsp;проверить текущий баланс и&nbsp;узнать параметры договора
+            br
+            | #[strong *3] &mdash;&nbsp;получить реквизиты для&nbsp;внесения аванса
+            br
+            | #[strong *4] &mdash;&nbsp;вызвать мастера для&nbsp;становки или&nbsp;подключения ранее установленной трубки
+            br
+            | #[strong *5 Номер] &mdash;&nbsp;изменить вызывной номер квартиры
+            br
+            | #[strong *6] &mdash;&nbsp;получить однодневный пароль (2&nbsp;руб./сутки)
+            br
+            | #[strong *7] &mdash;&nbsp;открыть подъездную дверь
+            br
+            | #[strong *8] &mdash;&nbsp;привязать к&nbsp;договору телефоны членов семьи (до&nbsp;3 на&nbsp;договор)
+            br
+            | #[strong *800] &mdash;&nbsp;подключить Viber или&nbsp;Telegram взамен СМС
+            br
+            | #[strong *911 ОписаниеНеисправности] &mdash;&nbsp;подать заявку на&nbsp;ремонт
 
         .instruction__part.instruction__figure
           .instruction__img 
