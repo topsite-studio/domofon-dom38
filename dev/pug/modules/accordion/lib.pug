@@ -1,6 +1,6 @@
 mixin accordion()
   mixin item(title)
-    .accordion__item
+    .accordion__item&attributes(attributes)
       .accordion__title!= title
         .accordion__svg
           +svg('down')
