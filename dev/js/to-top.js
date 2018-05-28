@@ -20,7 +20,7 @@
       'Кнопка закреплена': pinnedToViewport
     }
 
-    console.log(offset)
+    //console.log(offset)
 
     if ($html.scrollTop > $html.clientWidth) {
       $(button).fadeIn('500')
