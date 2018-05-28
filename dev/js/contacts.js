@@ -16,6 +16,8 @@
 
       var placemark = new ymaps.Placemark(mark)
       myMap.geoObjects.add(placemark)
+
+      if (document.body.clientWidth <= 767) myMap.setZoom(15)
     }
   }
 })(window.ymaps)
