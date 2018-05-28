@@ -239,6 +239,8 @@
         userLocation = result.geoObjects
         myMap.geoObjects.add(userLocation)
 
+        document.body.clientWidth <= 767 ? myMap.setCenter(userLocation.position, 14) : myMap.setCenter(userLocation.position)
+
         $.getJSON('https://domofon.dom38.ru/api/fee-stations/sberbank', function (sberbank) {
           stations = stations.concat(sberbank)
           $.getJSON('https://domofon.dom38.ru/api/fee-stations/uplati', function (uplati) {
