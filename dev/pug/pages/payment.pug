@@ -29,8 +29,8 @@ block content
       pre#preprepre
       form(class='form', data-form='payment')#contract-input
         .form__item 
-          label.form__label Договор:
-            input(type='text', name='contract', required).form__input.form__input--num
+          label.form__label(for='contract') Договор:
+          input#contract(type='text', name='contract', required).form__input.form__input--num
 
         .form__item.form__item--captcha
           +gcaptcha('6LflygQTAAAAAMZ9uYeT3vLGEbgx-pcGgm4phTrS', 'recaptchaCallback')
