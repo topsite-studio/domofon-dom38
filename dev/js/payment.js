@@ -8,10 +8,52 @@
   var arrowImage = new Image()
   arrowImage.src = '/img/svg/refresh-white.svg'
   arrowImage.className = 'btn__icon btn__icon--loading'
-
+  var url_string = window.location.href;
+/*  var url = new URL(url_string);
+  var hash = url.searchParams.get('hash');
+  var number = url.searchParams.get('number');*/
   /**
   * Функция для отправки POST-запрос к API домофона
   */
+  function ieWorstThing(str1, str2)
+  {
+    tmp=substr(str1.indexOf(str2),str1.length).indexOf('&');
+    if(tmp!=-1){}
+
+  }
+  function ieWorstestThing(str1,str2, int)
+  {
+    return str1.substr(str1.indexOf(str2)+ str2.length + 1, str1.indexOf(str2) + str2.length + int)
+  }
+   /*$('document').ready( function() {
+    if(hash!=null&&number!=null)
+    {
+      $.ajax({
+      type: 'POST',
+      url: 'https://domofon.dom38.ru/api/contracts/find-for-pay/',
+      data: {
+        "number" : number,
+        "hash" : hash,
+        "response" : ''
+      },
+      dataType: 'json',
+      success: function (data, textStatus) {
+        if (textStatus === 'success') {
+          showContractInfo(data);
+        } else {
+          console.log('error!');
+        }
+      },
+      error: function (xhr, ajaxOptions, thrownError) {
+        showContractInfo(data);
+        window.alert('Произошла ошибка сервера! Номер ошибки: ' + xhr.status)
+      }
+    })
+    }
+  });*/
+
+  var number=ieWorstestThing(url_string, 'hash', 0)
+  console.log(number)
   function contractLogin (event) {
     event.preventDefault()
     var form = $(this)[0]
@@ -81,7 +123,7 @@
     }
 
     // Удаляем форму ввода номера договора
-    contract.login.remove()
+    contract.login.hidden=true
 
     // Выводим все данные в блок показа данных (пока только сам номер договора)
     contract.num.innerText = scope.contract.number
