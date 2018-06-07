@@ -87,11 +87,6 @@
       },
       error: function (xhr, ajaxOptions, thrownError) {
         window.alert('Произошла ошибка сервера! Номер ошибки: ' + xhr.status)
-        console.error({
-          xhr: xhr,
-          ajax: ajaxOptions,
-          error: thrownError
-        })
       }
     })
     // var contractData = $.getJSON('//domofon.dom38.ru/api/contracts/find-for-pay', {
