@@ -87,6 +87,9 @@
       },
       error: function (xhr, ajaxOptions, thrownError) {
         window.alert('Произошла ошибка сервера! Номер ошибки: ' + xhr.status)
+        submitButton.innerHTML = 'Вход';
+        submitButton.style.pointerEvents = 'auto';
+        grecaptcha.reset();
       }
     })
     // var contractData = $.getJSON('//domofon.dom38.ru/api/contracts/find-for-pay', {
