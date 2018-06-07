@@ -168,6 +168,9 @@
     $scope.services.forEach(function (service) {
       $scope.total += service.amount
     })
+    /**
+    *Если пользователь - яблочник, то костыль, иначе - модалка
+    */
     if(window.navigator.vendor.indexOf('Apple')>-1)
     {
     var form = $('<form>', {name: "form", method: "POST", action: "https://vp.ru/common-modal/", target: "_blank"});
