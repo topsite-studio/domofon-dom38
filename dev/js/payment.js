@@ -8,24 +8,28 @@
   var arrowImage = new Image()
   arrowImage.src = '/img/svg/refresh-white.svg'
   arrowImage.className = 'btn__icon btn__icon--loading'
-  var url_string = window.location.href;
-/*  var url = new URL(url_string);
-  var hash = url.searchParams.get('hash');
-  var number = url.searchParams.get('number');*/
-  /**
-  * Функция для отправки POST-запрос к API домофона
-  */
-  function ieWorstThing(str1, str2)
-  {
-    tmp=substr(str1.indexOf(str2),str1.length).indexOf('&');
-    if(tmp!=-1){}
 
-  }
-  function ieWorstestThing(str1,str2, int)
-  {
-    return str1.substr(str1.indexOf(str2)+ str2.length + 1, str1.indexOf(str2) + str2.length + int)
-  }
-   /*$('document').ready( function() {
+  /**
+   * Парсинг строки,
+   * поиск содержания переменной в адресной строке. IE не поддерживает встроенную функцию
+   */
+  function varParser(str, name) {
+    function findingAmp(s) {
+      return s.indexOf('&')===-1 ? s.length : s.indexOf('&');
+    }
+    if(str.indexOf(name)!==-1)
+      return str.substr(str.indexOf(name)+name.length+1,findingAmp(str.substr(str.indexOf(name)+name.length+1, str.length)));
+    else
+      return null;
+    }
+  /**
+  * Автоматический сабмит по гет-запросу
+  */
+  var url_string = window.location.href;
+  var hash = varParser(url_string, 'hash');
+  var number = varParser(url_string, 'number');
+  console.log(hash, number);
+  $('document').ready( function() {
     if(hash!=null&&number!=null)
     {
       $.ajax({
@@ -50,10 +54,11 @@
       }
     })
     }
-  });*/
+  });
 
-  var number=ieWorstestThing(url_string, 'hash', 0)
-  console.log(number)
+  /**
+  * Функция для отправки POST-запрос к API домофона
+  */
   function contractLogin (event) {
     event.preventDefault()
     var form = $(this)[0]
