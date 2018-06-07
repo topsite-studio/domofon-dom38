@@ -170,18 +170,36 @@
     $scope.services.forEach(function (service) {
       $scope.total += service.amount
     })
+    if(window.navigator.vendor.indexOf('Apple')>-1)
+    {
+    var form = $('<form>', {name: "form", method: "POST", action: "https://vp.ru/common-modal/", target: "_blank"});
+    var div1 = $('<div/>', {class: "hidden", id: "safari-1"});
+    var input1 = $('<input>', {type: "text", name: "guid", value: ($scope.company.guid || 'scel')});
+    var input2 = $('<input>', {type: "text", name: "action", value: 'provider'});
+    var input3 = $('<input>', {type: "text", name: "service", value: '1'});
+    var input4 = $('<input>', {type: "text", name: "acc", value: $scope.contract.number});
+    var input5 = $('<input>', {type: "text", name: "amount", value: '500'});
+    var input6 = $('<input>', {type: "number", autocomplete: "off", value: ''});
+    var input7 = $('<input>', {type: "submit", value: "Оплатить", id: "mySub"});
 
-    VP.widget.modal({
-      url: '//vp.ru/common-modal/' +
-        '?action=provider' +
-        '&guid=' + ($scope.company.guid || 'scel') +
-        '&acc=' + $scope.contract.number +
-        '&amount=500' +
-        '&service=1' +
-        '&utm_source=widget' +
-        '&utm_medium=' + (($scope.company.guid || 'scel')) + '_full' +
-        '&utm_campaign=domofon.dom38.ru'
-    })
+    $("#app").append(form);
+    $("[name=form]").append(div1);
+    $("#safari-1").append(input1).append(input2).append(input3).append(input4).append(input5).append(input6).append(input7);
+    $("#mySub").click();    
+    } else
+    {
+      VP.widget.modal({
+        url: '//vp.ru/common-modal/' +
+          '?action=provider' +
+          '&guid=' + ($scope.company.guid || 'scel') +
+          '&acc=' + $scope.contract.number +
+          '&amount=500' +
+          '&service=1' +
+          '&utm_source=widget' +
+          '&utm_medium=' + (($scope.company.guid || 'scel')) + '_full' +
+          '&utm_campaign=domofon.dom38.ru' 
+       })
+   }
   }
 
   if ($('[data-form=payment]')[0]) {
