@@ -35,7 +35,7 @@ block content
           +gcaptcha('6LflygQTAAAAAMZ9uYeT3vLGEbgx-pcGgm4phTrS', 'recaptchaCallback')
  
         .form__item.form__item--btn
-          button(type='submit', disabled, name='submit')#check-contract.btn.btn--lg Вход
+          button(type='submit', disabled, name='submit')#check-contract.btn.btn--lg.btn--alert Вход
 
       // Раздел просмотра данных по договору находится в разработке!
       section.contract#contract-info(hidden)
@@ -56,4 +56,4 @@ block content
             footer.draft__footer
               p.draft__item #[strong Итого:] #[span#result-value 0] руб.
 
-          button(type='button').btn.btn--lg#pay-button Оплатить
+          button(type='button').btn.btn--lg.btn--alert#pay-button Оплатить
