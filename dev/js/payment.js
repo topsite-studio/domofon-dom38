@@ -86,7 +86,7 @@
         }
       },
       error: function (xhr, ajaxOptions, thrownError) {
-        window.alert('Произошла ошибка сервера! Номер ошибки: ' + xhr.status)
+        window.alert('Произошла ошибка сервера! Неверный номер договора! Номер ошибки: ' + xhr.status)
         submitButton.innerHTML = 'Вход';
         submitButton.style.pointerEvents = 'auto';
         grecaptcha.reset();
