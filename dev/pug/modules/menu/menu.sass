@@ -5,7 +5,7 @@
 .header__nav-wrap
   width: 100%
   padding-left: 70px
-  +lg-block()
+  @media only screen and (max-width: 1580px)
     text-align: right
     display: flex
     justify-content: center
@@ -79,8 +79,6 @@
 .header__list-item--cust
   margin-left: auto
   padding-right: 25px
-  +lg-block()
-    padding-right: 0
 .header__list-item--active
   .header__list-link
     color: #3293d4
@@ -104,20 +102,19 @@
       display: block
 
 .header__list
-  +lg-block()
-    padding: 0 10px
-    padding-bottom: 10px
   +sm-block()
     max-width: 100%
 
 
-@media only screen and (max-width: 1440px)
+@media only screen and (max-width: 1580px)
   .header__list-open
     display: inline-flex
     align-items: center
     justify-content: flex-end
   .header__list
     display: none
+    padding: 0 10px
+    padding-bottom: 10px
     position: absolute
     top: 100%
     right: 0
@@ -137,6 +134,8 @@
     &:hover
       .header__list-sublist-wrap
         display: none
+  .header__list-item--cust
+    padding-right: 0
   .header__list-link
     padding-top: 5px
     padding-bottom: 5px
