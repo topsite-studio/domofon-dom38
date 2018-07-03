@@ -62,15 +62,15 @@
   function contractLogin (event) {
     event.preventDefault()
     var form = $(this)[0]
-    var submitButton = form.elements.submit
-
+    var submitButton = document.getElementById('check-contract')
 
     $.ajax({
       type: 'POST',
       url: 'https://domofon.dom38.ru/api/contracts/find-for-pay/',
       data: {
-        'response': form.elements['g-recaptcha-response'].value,
-        'number': form.elements.contract.value
+        'response': grecaptcha.getResponse(),
+        'number': form.elements.contract.value,
+        'invisible': true
       },
       dataType: 'json',
       beforeSend: function () {
@@ -127,6 +127,7 @@
 
     // Удаляем форму ввода номера договора
     contract.login.hidden=true
+    $('#check-contract').css("display", "none")
 
     // Выводим все данные в блок показа данных (пока только сам номер договора)
     contract.num.innerText = scope.contract.number
