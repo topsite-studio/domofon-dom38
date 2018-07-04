@@ -12,7 +12,7 @@ block head-script
   script.
      var onSubmit = function(token) {
           console.log('success!')
-          $('#check-contract--sub').click()
+          $('[data-form="payment"]').submit()
         };
 
       var onloadCallback = function() {
@@ -40,8 +40,6 @@ block content
         .form__item.form__item--captcha
           +gcaptcha('6LflygQTAAAAAMZ9uYeT3vLGEbgx-pcGgm4phTrS', 'recaptchaCallback')
  
-        
-        button(type='submit', style='display: none;')#check-contract--sub.btn.btn--lg
       .form__item.form__item--btn
         button(type='submit', name='submit')#check-contract.btn.btn--lg Вход
       // Раздел просмотра данных по договору находится в разработке!
