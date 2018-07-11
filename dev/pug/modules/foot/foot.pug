@@ -8,7 +8,7 @@ mixin foot()
         a(href=docs.confidence).police-link Политика конфиденциальности
       .foot__item.foot__item--media
         //noindex
-        a(href=contacts.bots.viberText).media__link.media__link--vb
+        a(href=contacts.bots.viberText, target='_blank').media__link.media__link--vb
           picture.media__link-image
             source(srcset='img/general/vb_l.png', media='(max-width: 768px)')
             source(srcset='img/general/vb.png')
@@ -16,11 +16,11 @@ mixin foot()
 
           //- img(src="img/general/vb.png", alt="image").media__mobile-ico.media__mobile-ico--def
           //- img(src="img/general/vb_l.png", alt="image").media__mobile-ico.media__mobile-ico--mob
-          span.media__mobile-title Бот Viber 
+          //-span.media__mobile-title Бот Viber 
         ///noindex
 
         //noindex
-        a(href=contacts.bots.telegram).media__link.media__link--tg
+        a(href=contacts.bots.telegram, target='_blank').media__link.media__link--tg
           picture.media__link-image
             source(srcset='img/general/tg_l.png', media='(max-width: 768px)')
             source(srcset='img/general/tg.png')
@@ -28,7 +28,19 @@ mixin foot()
 
           //- img(src="img/general/tg.png", alt="image").media__mobile-ico.media__mobile-ico--def
           //- img(src="img/general/tg_l.png", alt="image").media__mobile-ico.media__mobile-ico--mob
-          span.media__mobile-title Бот Telegram
+          //-span.media__mobile-title Бот Telegram
+        ///noindex
+
+        //noindex
+        a(href=contacts.apps.android, target='_blank').media__link.media__link--tg
+          picture.media__link-image
+            source(srcset='img/general/android_l.png', media='(max-width: 768px)')
+            source(srcset='img/general/android.png')
+            img(src="img/general/android.png", alt="image")
+
+          //- img(src="img/general/android.png", alt="image").media__mobile-ico.media__mobile-ico--def
+          //- img(src="img/general/android_l.png", alt="image").media__mobile-ico.media__mobile-ico--mob
+          //-span.media__mobile-title Android-приложение
         ///noindex
       .foot__item.foot__item--develop
         //noindex
