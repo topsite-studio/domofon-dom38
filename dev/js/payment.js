@@ -109,7 +109,7 @@
     var scope = {
       contract: result.contract,
       services: {
-        total: 0,
+        total: 500,//0
         items: result.services
       }
     }
