@@ -207,7 +207,7 @@
     var input2 = $('<input>', {type: "text", name: "action", value: 'provider'});
     var input3 = $('<input>', {type: "text", name: "service", value: '1'});
     var input4 = $('<input>', {type: "text", name: "acc", value: $scope.contract.number});
-    var input5 = $('<input>', {type: "text", name: "amount", value: '500'});
+    var input5 = $('<input>', {type: "text", name: "amount", value: $scope.total});
     var input6 = $('<input>', {type: "number", autocomplete: "off", value: ''});
     var input7 = $('<input>', {type: "submit", value: "Оплатить", id: "mySub"});
 
@@ -222,7 +222,7 @@
           '?action=provider' +
           '&guid=' + ($scope.company.guid || 'scel') +
           '&acc=' + $scope.contract.number +
-          '&amount=500' +
+          '&amount=' + $scope.total +
           '&service=1' +
           '&utm_source=widget' +
           '&utm_medium=' + (($scope.company.guid || 'scel')) + '_full' +
