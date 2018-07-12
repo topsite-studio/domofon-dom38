@@ -186,16 +186,16 @@
   function openPaymentModal (data) {
     // var $scope = ,data
     var $scope = {
-      total: 0,
+      total: data.contract.balance<0 ? 500-data.contract.balance : 500,
       contract: data.contract,
       company: data.company,
       services: data.services.filter(function (service) {
         return !service.includable
       })
     }
-    $scope.services.forEach(function (service) {
+    /*$scope.services.forEach(function (service) {
       $scope.total += service.amount
-    })
+    })*/
     /**
     *Если пользователь - яблочник, то костыль, иначе - модалка
     */
