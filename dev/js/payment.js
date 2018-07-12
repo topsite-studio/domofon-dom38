@@ -115,7 +115,6 @@
       balance: result.contract.balance,
       id: result.contract.deviceId
     }
-
     // Обьявляем переменные всех объектов, куда будем выводить данные
     var contract = {
       login: document.querySelector('#contract-input'),
@@ -124,7 +123,9 @@
       address: document.querySelector('#address'),
       services: document.querySelector('#contract-services'),
       resultValue: document.querySelector('#result-value'),
-      payButton: document.querySelector('#pay-button')
+      payButton: document.querySelector('#pay-button'),
+      formHeader: document.querySelector('.draft__heading'),
+      formFooter: document.querySelector('.draft__footer')
     }
 
     // Удаляем форму ввода номера договора
