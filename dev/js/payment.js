@@ -111,7 +111,9 @@
       services: {
         total: 500,//0
         items: result.services
-      }
+      },
+      balance: result.contract.balance,
+      id: result.contract.deviceId
     }
 
     // Обьявляем переменные всех объектов, куда будем выводить данные
