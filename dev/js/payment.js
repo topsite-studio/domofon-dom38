@@ -144,16 +144,39 @@
       contract.services.appendChild(draftItem)
       scope.services.total += service.amount
     }*/
+    if(scope.id){
+      if(scope.balance < 0) {
+        scope.total -= scope.balance;
+        var draftItem = document.createElement('li')
+        draftItem.className = 'draft__item'
+        draftItem.innerText = '1. Задолженность: ' + scope.balance + ' руб.'
+        contract.services.appendChild(draftItem)
+        var draftItem = document.createElement('li')
+        draftItem.className = 'draft__item'
+        draftItem.innerText = '2. Рекомендованный аванс: 500 руб.'
+        contract.services.appendChild(draftItem)
+      }
+      else {
+        var draftItem = document.createElement('li')
+        draftItem.className = 'draft__item'
+        draftItem.innerText = 'Рекомендованный аванс: 500 руб.'
+        contract.services.appendChild(draftItem)
+      }
+      contract.resultValue.innerText = scope.services.total
+      // Показываем блок показа данных
+      contract.info.hidden = false
+      contract.payButton.addEventListener('click', function () {
+        openPaymentModal(result)
+      })
     }
-
-    contract.resultValue.innerText = scope.services.total
-
-    // Показываем блок показа данных
-    contract.info.hidden = false
-
-    contract.payButton.addEventListener('click', function () {
-      openPaymentModal(result)
-    })
+    else {
+      contract.address.innerHTML = 'Активируйте КАРТУ-КЛЮЧ НОВОСЕЛА! Для этого войдите с помощью неё в подъезд'
+      contract.address.style.color = 'red'
+      contract.formFooter.hidden = true
+      contract.formHeader.hidden = true
+      contract.payButton.hidden = true
+      contract.info.hidden = false
+    }
   }
 
   /**
