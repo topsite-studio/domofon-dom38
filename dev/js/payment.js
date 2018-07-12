@@ -136,13 +136,14 @@
     contract.num.innerText = scope.contract.number
     contract.address.innerHTML = scope.contract.address + ', кв. ' + scope.contract.flat
 
-    for (var i = 0; i < scope.services.items.length; i++) {
+    /*for (var i = 0; i < scope.services.items.length; i++) {
       var service = scope.services.items[i]
       var draftItem = document.createElement('li')
       draftItem.className = 'draft__item'
       draftItem.innerText = service.name + ': ' + service.amount + ' руб.'
       contract.services.appendChild(draftItem)
       scope.services.total += service.amount
+    }*/
     }
 
     contract.resultValue.innerText = scope.services.total
