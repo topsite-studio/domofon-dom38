@@ -12,7 +12,7 @@ block head-script
   script.
      var onSubmit = function(token) {
           console.log('success!')
-          $('[data-form="payment"]').submit()
+          $('#contract-input').submit()
         };
 
       var onloadCallback = function() {
@@ -36,9 +36,6 @@ block content
         .form__item 
           label.form__label(for='contract') Договор:
           input#contract(type='text', name='contract', required).form__input.form__input--num
-
-        .form__item.form__item--captcha
-          +gcaptcha('6LflygQTAAAAAMZ9uYeT3vLGEbgx-pcGgm4phTrS', 'recaptchaCallback')
  
       .form__item.form__item--btn
         button(type='submit', name='submit')#check-contract.btn.btn--lg Вход
