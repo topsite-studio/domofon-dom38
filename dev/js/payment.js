@@ -151,7 +151,11 @@
         contract.services.appendChild(draftItem)
         var draftItem = document.createElement('li')
         draftItem.className = 'draft__item'
+<<<<<<< HEAD
         draftItem.innerText = '2. Рекомендованный аванс: '+ (500-scope.balance) + ' руб.'
+=======
+        draftItem.innerText = '2. Рекомендованный аванс:  500 руб.'
+>>>>>>> dev
         contract.services.appendChild(draftItem)
       }
       else {
