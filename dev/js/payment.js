@@ -28,7 +28,6 @@
   var url_string = window.location.href;
   var hash = varParser(url_string, 'hash');
   var number = varParser(url_string, 'number');
-  console.log(hash, number);
   $('document').ready( function() {
     if(hash!=null&&number!=null)
     {
@@ -145,7 +144,7 @@
     }*/
     if(scope.id){
       if(scope.balance < 0) {
-        scope.total -= scope.balance;
+        scope.services.total -= scope.balance;
         var draftItem = document.createElement('li')
         draftItem.className = 'draft__item'
         draftItem.innerText = '1. Задолженность: ' + scope.balance + ' руб.'
