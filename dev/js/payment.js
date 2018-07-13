@@ -151,7 +151,7 @@
         contract.services.appendChild(draftItem)
         var draftItem = document.createElement('li')
         draftItem.className = 'draft__item'
-        draftItem.innerText = '2. Рекомендованный аванс:  500 руб.'
+        draftItem.innerText = '2. Рекомендованный аванс: 500 руб.'
         contract.services.appendChild(draftItem)
       }
       else {
