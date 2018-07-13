@@ -124,7 +124,6 @@
       services: document.querySelector('#contract-services'),
       resultValue: document.querySelector('#result-value'),
       payButton: document.querySelector('#pay-button'),
-      formHeader: document.querySelector('.draft__heading'),
       formFooter: document.querySelector('.draft__footer')
     }
 
@@ -173,7 +172,6 @@
       contract.address.innerHTML = 'Активируйте КАРТУ-КЛЮЧ НОВОСЕЛА! Для этого войдите с помощью неё в подъезд'
       contract.address.style.color = 'red'
       contract.formFooter.hidden = true
-      contract.formHeader.hidden = true
       contract.payButton.hidden = true
       contract.info.hidden = false
     }
