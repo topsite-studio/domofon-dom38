@@ -28,7 +28,6 @@
   var url_string = window.location.href;
   var hash = varParser(url_string, 'hash');
   var number = varParser(url_string, 'number');
-  console.log(hash, number);
   $('document').ready( function() {
     if(hash!=null&&number!=null)
     {
@@ -124,7 +123,6 @@
       services: document.querySelector('#contract-services'),
       resultValue: document.querySelector('#result-value'),
       payButton: document.querySelector('#pay-button'),
-      formHeader: document.querySelector('.draft__heading'),
       formFooter: document.querySelector('.draft__footer')
     }
 
@@ -146,7 +144,7 @@
     }*/
     if(scope.id){
       if(scope.balance < 0) {
-        scope.total -= scope.balance;
+        scope.services.total -= scope.balance;
         var draftItem = document.createElement('li')
         draftItem.className = 'draft__item'
         draftItem.innerText = '1. Задолженность: ' + scope.balance + ' руб.'
@@ -173,7 +171,6 @@
       contract.address.innerHTML = 'Активируйте КАРТУ-КЛЮЧ НОВОСЕЛА! Для этого войдите с помощью неё в подъезд'
       contract.address.style.color = 'red'
       contract.formFooter.hidden = true
-      contract.formHeader.hidden = true
       contract.payButton.hidden = true
       contract.info.hidden = false
     }
