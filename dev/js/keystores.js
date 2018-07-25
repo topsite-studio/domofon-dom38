@@ -195,7 +195,6 @@
         return data;
       })
       .then(function (data) {
-        console.log(userLocation.position);
         var FINAL_DATA = data.filter(filteringWay)
         FINAL_DATA = FINAL_DATA.sort(comparingWay)
 
