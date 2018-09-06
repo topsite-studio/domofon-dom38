@@ -7,14 +7,20 @@ block head
 
 block head-script
   //- Тут по инструкции был GET-параметр onload=vcRecaptchaApiLoaded и render=explicit
-  script(src="//www.google.com/recaptcha/api.js", async, defer)  
+  script(src="//www.google.com/recaptcha/api.js?onload=onloadCallback&render=explicit", async, defer)  
   script(src="//widget.vp.ru/vpjs1.1/common.js")
   script.
-    function recaptchaCallback () {
-      var forma = document.querySelector("[data-form='payment']")
-      forma.elements.submit.disabled = false
-      return false
-    }
+     var onSubmit = function(token) {
+          console.log('success!')
+          $('#contract-input').submit()
+        };
+
+      var onloadCallback = function() {
+        grecaptcha.render('check-contract', {
+          'sitekey' : '6LeQql0UAAAAAKgNgo79CJFasRkl6II9dDnUMfnV',
+          'callback' : onSubmit
+        });
+      };
 
 block content  
   +header_min()
@@ -23,21 +29,16 @@ block content
     .row
       .col
         h2.subheading Договор
-  
   section.connection
     .container#app
       pre#preprepre
       form(class='form', data-form='payment')#contract-input
         .form__item 
-          label.form__label Договор:
-            input(type='text', name='contract', required).form__input.form__input--num
-
-        .form__item.form__item--captcha
-          +gcaptcha('6LflygQTAAAAAMZ9uYeT3vLGEbgx-pcGgm4phTrS', 'recaptchaCallback')
+          label.form__label(for='contract') Договор:
+          input#contract(type='text', name='contract', required).form__input.form__input--num
  
-        .form__item.form__item--btn
-          button(type='submit', disabled, name='submit')#check-contract.btn.btn--lg.btn--alert Вход
-
+      .form__item.form__item--btn
+        button(type='submit', name='submit')#check-contract.btn.btn--lg Вход
       // Раздел просмотра данных по договору находится в разработке!
       section.contract#contract-info(hidden)
         .contract-info
@@ -51,10 +52,10 @@ block content
           
           // Этот блок ещё в разработке
           .draft
-            h3.subheading.draft__heading Стоимость ежемесячного тех. обслуживания
+            //h3.subheading.draft__heading Стоимость ежемесячного тех. обслуживания
             ul.draft__contents#contract-services
               //- содержимое чека будет здесь
             footer.draft__footer
               p.draft__item #[strong Итого:] #[span#result-value 0] руб.
 
-          button(type='button').btn.btn--lg.btn--alert#pay-button Оплатить
+          button(type='button').btn.btn--lg#pay-button Оплатить
