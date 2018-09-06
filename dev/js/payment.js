@@ -8,6 +8,29 @@
   var arrowImage = new Image()
   arrowImage.src = '/img/svg/refresh-white.svg'
   arrowImage.className = 'btn__icon btn__icon--loading'
+  
+  /**
+   * /payment.html?hash=blablabla&number=1234
+   */ 
+  var hashInUrl = getParameterByName('hash')
+  var contractNumber = getParameterByName('number')
+  
+  /**
+   * Get value by name from url 
+   * honestly stolen from here: https://stackoverflow.com/a/901144/4501610
+   * 
+   * @param name of parameter in url
+   * @param url by default is current
+   */ 
+  function getParameterByName(name, url) {
+    if (!url) url = window.location.href;
+    name = name.replace(/[\[\]]/g, "\\$&");
+    var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
+        results = regex.exec(url);
+    if (!results) return null;
+    if (!results[2]) return '';
+    return decodeURIComponent(results[2].replace(/\+/g, " "));
+  }
 
   /**
    * Парсинг строки,
@@ -59,7 +82,7 @@
   * Функция для отправки POST-запрос к API домофона
   */
   function contractLogin (event) {
-    event.preventDefault()
+    event && event.preventDefault()
     var form = $(this)[0]
     var submitButton = document.getElementById('check-contract')
 
@@ -67,9 +90,9 @@
       type: 'POST',
       url: 'https://domofon.dom38.ru/api/contracts/find-for-pay/',
       data: {
-        'response': grecaptcha.getResponse(),
+        'response': form.elements['g-recaptcha-response'].value,
         'number': form.elements.contract.value,
-        'invisible': true
+        'hash': hashInUrl ? hashInUrl : undefined
       },
       dataType: 'json',
       beforeSend: function () {
@@ -85,10 +108,13 @@
         }
       },
       error: function (xhr, ajaxOptions, thrownError) {
-        window.alert('Произошла ошибка сервера! Неверный номер договора! Номер ошибки: ' + xhr.status)
-        submitButton.innerHTML = 'Вход';
-        submitButton.style.pointerEvents = 'auto';
-        grecaptcha.reset();
+        hashInUrl = undefined;
+        //window.alert('Произошла ошибка сервера! Номер ошибки: ' + xhr.status)
+        console.error({
+          xhr: xhr,
+          ajax: ajaxOptions,
+          error: thrownError
+        })
       }
     })
     // var contractData = $.getJSON('//domofon.dom38.ru/api/contracts/find-for-pay', {
@@ -227,8 +253,17 @@
        })
    }
   }
+ 
 
   if ($('[data-form=payment]')[0]) {
     $('[data-form=payment]').submit(contractLogin)
+    
+    // autocompletion number of contract from url
+    $('[data-form=payment] input[name=contract]').val(contractNumber || '')
+    
+    if(hashInUrl != null) {
+      // submitting form, no need to show captcha
+      $('[data-form=payment]').submit()
+    }
   }
 }(window.$, window.VP))
