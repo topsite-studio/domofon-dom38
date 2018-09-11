@@ -10,7 +10,7 @@
    * Глобальная функция страницы пунктов продажи ключей
    */
   function keyretail () {
-    console.log('keyretail()!')
+    console.groupCollapsed('Запуск функции keyretail()')
 
     var myMap
 
@@ -31,6 +31,7 @@
      * поиск содержания переменной в адресной строке. IE не поддерживает встроенную функцию
      */
     function varParser(str, name) {
+      console.groupCollapsed('Запуск функции varParser()')
       function findingAmp(s) {
         return s.indexOf('&') === -1 ? s.length : s.indexOf('&');
       }
@@ -45,7 +46,7 @@
     * Автоматический сабмит по гет-запросу
     */
     var url_string = window.location.href;
-    var houseId = varParser(url_string, 'house');
+    var houseId = varParser(url_string, 'house')
 
 
     /**
@@ -55,7 +56,7 @@
      * @return {Array}      Массив с геообъектами
      */
     function reorderKeyStores (data) {
-      console.groupCollapsed('reorderKeyStores')
+      console.groupCollapsed('Запуск функции reorderKeyStores()')
       var geoObjects = []
 
       data.forEach(function (item, index) {
@@ -153,6 +154,7 @@
      * Инициализация Яндекс-карты и запуск всех основных функций
      */
     function init () {
+      console.groupCollapsed('Запуск функции init()')
       var geolocation = ymaps.geolocation
 
       myMap = new ymaps.Map('map', {
@@ -168,38 +170,35 @@
         mapStateAutoApply: false
       })
       .then(function(result){
-        // Если браузер не поддерживает эту функциональность, метка не будет добавлена на карту.
-        result.geoObjects.options.set('preset', 'islands#redPersonCircleIcon')
-        userLocation = result.geoObjects
-        myMap.geoObjects.add(userLocation)
-
-        return $.getJSON('//domofon.dom38.ru/api/keystores')
-      })
-      .then(function(data){
         if(houseId){
+          console.groupCollapsed('Проверка номера дома из хэша')
           return $.getJSON('//domofon.dom38.ru/api/houses/coords/' + houseId)
             .then(function(coords){
+              console.groupCollapsed('Создание метки')
               if(coords){
-                userLocation = {
-                  position: [
-                    coords.lat,
-                    coords.lon
-                  ]
-                };
+                userLocation = new ymaps.Placemark([coords.lat,coords.lon])
+                userLocation.options.set('preset', 'islands#redPersonCircleIcon')
+                myMap.geoObjects.add(userLocation)
               }
-
-              return data;
-            });
+              return $.getJSON('//domofon.dom38.ru/api/keystores')
+            })
+        } else {
+          console.groupCollapsed('Получение местоположения пользователя')
+          // Если браузер не поддерживает эту функциональность, метка не будет добавлена на карту.
+          userLocation = new ymaps.Placemark([result.geoObjects.position[0],result.geoObjects.position[1]])
+          userLocation.options.set('preset', 'islands#redPersonCircleIcon')
         }
 
-        return data;
+        myMap.geoObjects.add(userLocation)
+        return $.getJSON('//domofon.dom38.ru/api/keystores')
       })
       .then(function (data) {
+        console.groupCollapsed('Сортировка и вывод точек магазинов')
         var FINAL_DATA = data.filter(filteringWay)
         FINAL_DATA = FINAL_DATA.sort(comparingWay)
 
         FINAL_DATA.forEach(function (item, index) {
-          var distance = (userLocation !== null) ? parseInt(ymaps.coordSystem.geo.getDistance(userLocation.position, [item.lat, item.lon])) + ' м' : ''
+          var distance = (userLocation !== null) ? parseInt(ymaps.coordSystem.geo.getDistance(userLocation.geometry.getCoordinates(), [item.lat, item.lon])) + ' м' : ''
           addRowToTable({
             title: item.name,
             address: item.city + ', ' + item.address,
@@ -220,8 +219,7 @@
           var coords = [
             parseFloat(row.dataset.lat),
             parseFloat(row.dataset.lon)
-          ]
-          console.log(coords)
+          ] 
           if (condition) {
             $('html,body').animate({ scrollTop: $('#map').offset().top - 50 }, 750,
               function completeAnimation () {
@@ -257,8 +255,8 @@
               if (allClusters.length > 0) {
                 var closestCluster = allClusters.sort(function (a, b) {
                   var distance = {
-                    a: (userLocation !== null) ? ymaps.coordSystem.geo.getDistance(userLocation.position, [a.geometry.getCoordinates()[0], a.geometry.getCoordinates()[1]]) : 0,
-                    b: (userLocation !== null) ? ymaps.coordSystem.geo.getDistance(userLocation.position, [b.geometry.getCoordinates()[0], b.geometry.getCoordinates()[1]]) : 0
+                    a: (userLocation !== null) ? ymaps.coordSystem.geo.getDistance(userLocation.geometry.getCoordinates(), a.geometry.getCoordinates()) : 0,
+                    b: (userLocation !== null) ? ymaps.coordSystem.geo.getDistance(userLocation.geometry.getCoordinates(), b.geometry.getCoordinates()) : 0
                   }
                   return distance.a - distance.b
                 })
@@ -271,8 +269,8 @@
 
         function comparingWay (a, b) {
           var distance = {
-            a: (userLocation !== null) ? ymaps.coordSystem.geo.getDistance(userLocation.position, [a.lat, a.lon]) : 0,
-            b: (userLocation !== null) ? ymaps.coordSystem.geo.getDistance(userLocation.position, [b.lat, b.lon]) : 0
+            a: (userLocation !== null) ? ymaps.coordSystem.geo.getDistance(userLocation.geometry.getCoordinates(), [a.lat, a.lon]) : 0,
+            b: (userLocation !== null) ? ymaps.coordSystem.geo.getDistance(userLocation.geometry.getCoordinates(), [b.lat, b.lon]) : 0
           }
           return distance.a - distance.b
         }
