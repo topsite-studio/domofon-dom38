@@ -26,32 +26,31 @@
   * Автоматический сабмит по гет-запросу
   */
   var url_string = window.location.href;
-  var hash = varParser(url_string, 'hash');
-  var number = varParser(url_string, 'number');
+  var hashInUrl = varParser(url_string, 'hash');
+  var contractNumber = varParser(url_string, 'number');
   $('document').ready( function() {
-    if(hash!=null&&number!=null)
-    {
+    if ( hashInUrl !== null && contractNumber !== null ) {
       $.ajax({
-      type: 'POST',
-      url: 'https://domofon.dom38.ru/api/contracts/find-for-pay/',
-      data: {
-        "number" : number,
-        "hash" : hash,
-        "response" : ''
-      },
-      dataType: 'json',
-      success: function (data, textStatus) {
-        if (textStatus === 'success') {
-          showContractInfo(data);
-        } else {
-          console.log('error!');
+        type: 'POST',
+        url: 'https://domofon.dom38.ru/api/contracts/find-for-pay/',
+        data: {
+          "number" : contractNumber,
+          "hash" : hashInUrl,
+          "response" : ''
+        },
+        dataType: 'json',
+        success: function (data, textStatus) {
+          if (textStatus === 'success') {
+            showContractInfo(data);
+          } else {
+            console.log('error!');
+          }
+        },
+        error: function (xhr, ajaxOptions, thrownError) {
+          showContractInfo(data)
+          window.alert('Произошла ошибка сервера! Номер ошибки: ' + xhr.status)
         }
-      },
-      error: function (xhr, ajaxOptions, thrownError) {
-        showContractInfo(data);
-        window.alert('Произошла ошибка сервера! Номер ошибки: ' + xhr.status)
-      }
-    })
+      })
     }
   });
 
@@ -59,7 +58,7 @@
   * Функция для отправки POST-запрос к API домофона
   */
   function contractLogin (event) {
-    event.preventDefault()
+    event && event.preventDefault()
     var form = $(this)[0]
     var submitButton = document.getElementById('check-contract')
 
@@ -230,5 +229,8 @@
 
   if ($('[data-form=payment]')[0]) {
     $('[data-form=payment]').submit(contractLogin)
+
+    // autocompletion number of contract from url
+    $('[data-form=payment] input[name=contract]').val(contractNumber || '')
   }
 }(window.$, window.VP))
