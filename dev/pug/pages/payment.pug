@@ -36,9 +36,9 @@ block content
         .form__item 
           label.form__label(for='contract') Договор:
           input#contract(type='text', name='contract', required).form__input.form__input--num
+        .form__item.form__item--btn
+          button(type='submit', name='submit')#check-contract.btn.btn--lg Вход
  
-      .form__item.form__item--btn
-        button(type='submit', name='submit')#check-contract.btn.btn--lg Вход
       // Раздел просмотра данных по договору находится в разработке!
       section.contract#contract-info(hidden)
         .contract-info
@@ -56,6 +56,6 @@ block content
             ul.draft__contents#contract-services
               //- содержимое чека будет здесь
             footer.draft__footer
-              p.draft__item #[strong Итого:] #[span#result-value 0] руб.
+              p.draft__result #[strong Итого:] #[input#result-value(type='text', name='contract', required).form__input.form__input--num.draft__sum] руб.
 
           button(type='button').btn.btn--lg#pay-button Оплатить

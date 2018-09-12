@@ -17,11 +17,12 @@
     function findingAmp(s) {
       return s.indexOf('&')===-1 ? s.length : s.indexOf('&');
     }
-    if(str.indexOf(name)!==-1)
-      return str.substr(str.indexOf(name)+name.length+1,findingAmp(str.substr(str.indexOf(name)+name.length+1, str.length)));
-    else
-      return null;
+    if ( str.indexOf(name) !== -1 ) {
+      return str.substr(str.indexOf(name)+name.length+1,findingAmp(str.substr(str.indexOf(name)+name.length+1, str.length)))
+    } else {
+      return null
     }
+  }
   /**
   * Автоматический сабмит по гет-запросу
   */
@@ -141,7 +142,7 @@
       contract.services.appendChild(draftItem)
       scope.services.total += service.amount
     }*/
-    if(scope.id){
+    if (scope.id) {
       if(scope.balance < 0) {
         scope.services.total -= scope.balance;
         var draftItem = document.createElement('li')
@@ -152,21 +153,19 @@
         draftItem.className = 'draft__item'
         draftItem.innerText = '2. Рекомендованный аванс: 500 руб.'
         contract.services.appendChild(draftItem)
-      }
-      else {
+      } else {
         var draftItem = document.createElement('li')
         draftItem.className = 'draft__item'
         draftItem.innerText = 'Рекомендованный аванс: 500 руб.'
         contract.services.appendChild(draftItem)
       }
-      contract.resultValue.innerText = scope.services.total
+      contract.resultValue.value = scope.services.total
       // Показываем блок показа данных
       contract.info.hidden = false
       contract.payButton.addEventListener('click', function () {
         openPaymentModal(result)
       })
-    }
-    else {
+    } else {
       contract.address.innerHTML = 'Активируйте КАРТУ-КЛЮЧ НОВОСЕЛА! Для этого войдите с помощью неё в подъезд'
       contract.address.style.color = 'red'
       contract.formFooter.hidden = true
@@ -182,7 +181,7 @@
   function openPaymentModal (data) {
     // var $scope = ,data
     var $scope = {
-      total: data.contract.balance<0 ? 500-data.contract.balance : 500,
+      total: document.querySelector('#result-value').value,
       contract: data.contract,
       company: data.company,
       services: data.services.filter(function (service) {
@@ -195,24 +194,22 @@
     /**
     *Если пользователь - яблочник, то костыль, иначе - модалка
     */
-    if(window.navigator.vendor.indexOf('Apple')>-1)
-    {
-    var form = $('<form>', {name: "form", method: "POST", action: "https://vp.ru/common-modal/", target: "_blank"});
-    var div1 = $('<div/>', {class: "hidden", id: "safari-1"});
-    var input1 = $('<input>', {type: "text", name: "guid", value: ($scope.company.guid || 'scel')});
-    var input2 = $('<input>', {type: "text", name: "action", value: 'provider'});
-    var input3 = $('<input>', {type: "text", name: "service", value: '1'});
-    var input4 = $('<input>', {type: "text", name: "acc", value: $scope.contract.number});
-    var input5 = $('<input>', {type: "text", name: "amount", value: $scope.total});
-    var input6 = $('<input>', {type: "number", autocomplete: "off", value: ''});
-    var input7 = $('<input>', {type: "submit", value: "Оплатить", id: "mySub"});
+    if(window.navigator.vendor.indexOf('Apple')>-1) {
+      var form = $('<form>', {name: "form", method: "POST", action: "https://vp.ru/common-modal/", target: "_blank"});
+      var div1 = $('<div/>', {class: "hidden", id: "safari-1"});
+      var input1 = $('<input>', {type: "text", name: "guid", value: ($scope.company.guid || 'scel')});
+      var input2 = $('<input>', {type: "text", name: "action", value: 'provider'});
+      var input3 = $('<input>', {type: "text", name: "service", value: '1'});
+      var input4 = $('<input>', {type: "text", name: "acc", value: $scope.contract.number});
+      var input5 = $('<input>', {type: "text", name: "amount", value: $scope.total});
+      var input6 = $('<input>', {type: "number", autocomplete: "off", value: ''});
+      var input7 = $('<input>', {type: "submit", value: "Оплатить", id: "mySub"});
 
-    $("#app").append(form);
-    $("[name=form]").append(div1);
-    $("#safari-1").append(input1).append(input2).append(input3).append(input4).append(input5).append(input6).append(input7);
-    $("#mySub").click();    
-    } else
-    {
+      $("#app").append(form);
+      $("[name=form]").append(div1);
+      $("#safari-1").append(input1).append(input2).append(input3).append(input4).append(input5).append(input6).append(input7);
+      $("#mySub").click();    
+    } else {
       VP.widget.modal({
         url: '//vp.ru/common-modal/' +
           '?action=provider' +
